@@ -1,4 +1,4 @@
-# Awesome App - Projektplan
+﻿# Awesome App - Projektplan
 
 ## Problemanalyse
 
@@ -30,6 +30,20 @@ Matthias & Dommi
 
 ## Testplan
 Adrian
+- normales Ziehen -> Feld nur belegbar mit richtiger Zahl?
+- nur diagonal, waagerecht, senkrecht gewinnt kasten, spielfeld
+- Sonderregeln:
+  - 12 überall setzen
+  - 7 mittleres Feld setzen
+  - 2 Pin entfernen (nur Feind/keine eigenen)
+  - Zahl würfeln -> können alle Felder im nummerierten Kästchen belegt werden?
+- 2 würfeln -> schon gewonnenes Kästchen gesichert? (Feind/Eigene)
+- Feld schon belegt, kann nochmal belegt werden? (Feind/Eigene)
+- gewonnen/verloren/unentschieden -> wirklich beendet mit letztem Zug den der Gewinner macht?
+- Spielernamen variabel?
+- zufallsprinzip des ersten Zuges (gerecht?)
+- funktioniert der Spielerwechsel
+
 
 ## Zeitplan
 
