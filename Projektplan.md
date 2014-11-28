@@ -1,4 +1,4 @@
-# Awesome App - Projektplan
+﻿# Awesome App - Projektplan
 
 ## Softwareentwurf
 
@@ -28,18 +28,18 @@ Matthias & Dommi
 
 ## Testplan
 - normales Ziehen -> Feld nur belegbar mit richtiger Zahl?
-- nur diagonal, waagerecht oder senkrecht gewinnt Kasten / Spielfeld
+- nur diagonal, waagerecht oder senkrecht (mit eigenen Pins) gewinnt Kasten / Spielfeld
 - Sonderregeln:
   - 12: überall setzen
   - 7: mittleres Feld setzen
   - 2: Pin entfernen (nur Feind, keine eigenen)
-  - Zahl würfeln -> können alle Felder im nummerierten Kästchen belegt werden?
-- 2 würfeln -> schon gewonnenes Kästchen gesichert? (Feind/Eigene)
+  - Zahl würfeln -> können alle(mit Ausnahme des Mittleren) Felder im nummerierten Kästchen belegt werden?/ in andere verboten!
+- Pins aus bereits gesicherten(gewonnenen) Kästchen dürfen nicht entfernt werden (Feind/Eigene)
 - Feld schon belegt -> darf nicht nochmal belegt werden (Feind/Eigene)
 - gewonnen/verloren/unentschieden -> wirklich beendet mit letztem Zug den der Gewinner macht?
 - Spielernamen variabel?
 - Zufallsprinzip des ersten Zuges (gerecht?)
-- funktioniert der Spielerwechsel (2 würfeln)
+- funktioniert der Spielerwechsel (besonders mit 2*würfeln)
 
 ## Zeitplanung
 
