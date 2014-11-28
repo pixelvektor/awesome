@@ -45,7 +45,21 @@ Adrian
 - funktioniert der Spielerwechsel
 
 
-## Zeitplan
+## Zeitplanung
+
+### Milestones
+
+1. Klassendiagramm
+2. Projektplan
+3. Pseudocode
+4. Testcode
+5. Ausbau Datenschicht
+6. Ausbau Controllerschicht
+7. Ausbau View (später GUI)
+8. Design GUI
+9. Verknüpfung GUI & Controller
+
+### Zeitplan
 
 |KW|Aktion|
 |:----:|:----|
