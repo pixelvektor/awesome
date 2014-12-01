@@ -9,14 +9,14 @@
 - gültiges Feld setzen
 - gegnerische Felder frei räumen
 
-### Ablaufplan
-![Ablaufplan](Awesome_PAP.pdf)
-
 ### Programmteile
 Pin, Farbe, Feld, Kästchen, Spielfeld, Würfel, würfeln, Spieler, Name, Regeln, Felder shuffeln, Feld belegen, Feld entfernen, Kästchen belegen, Gewinnen, Verlieren, Unentschieden, Spielende
 
+### Ablaufplan
+![Ablaufplan](PAP.png)
+
 ### Klassendiagramm
-![Klassendiagram](Awesome Klassendiagramm.png)
+![Klassendiagram](Klassendiagramm.png)
 
 ### Relevante Daten
 - Namen der Spieler
@@ -24,7 +24,7 @@ Pin, Farbe, Feld, Kästchen, Spielfeld, Würfel, würfeln, Spieler, Name, Regeln
 - Position eines Pins
 
 ### Oberflächenentwurf
-![Oberflächenentwurf](Concept_Awesome.png)
+![Oberflächenentwurf](Concept.png)
 
 ## Testplan
 - normales Ziehen -> Feld nur belegbar mit richtiger Zahl?
