@@ -1,4 +1,4 @@
-﻿# Awesome App - Projektplan
+# Awesome App - Projektplan
 
 ## Softwareentwurf
 
@@ -10,13 +10,13 @@
 - gegnerische Felder frei räumen
 
 ### Ablaufplan
-Matthias
+![Ablaufplan](Awesome_PAP.pdf)
 
 ### Programmteile
 Pin, Farbe, Feld, Kästchen, Spielfeld, Würfel, würfeln, Spieler, Name, Regeln, Felder shuffeln, Feld belegen, Feld entfernen, Kästchen belegen, Gewinnen, Verlieren, Unentschieden, Spielende
 
 ### Klassendiagramm
-Matthias
+![Klassendiagram](Awesome Klassendiagramm.png)
 
 ### Relevante Daten
 - Namen der Spieler
@@ -24,7 +24,7 @@ Matthias
 - Position eines Pins
 
 ### Oberflächenentwurf
-Matthias & Dommi
+![Oberflächenentwurf](Concept_Awesome.png)
 
 ## Testplan
 - normales Ziehen -> Feld nur belegbar mit richtiger Zahl?
