@@ -14,15 +14,18 @@ public class Pin {
 	private int feld;
 	private int kasten;
 	
-	public Pin(Spieler spieler) {
+	public Pin(Spieler spieler)
+	{
 		this.spieler = spieler;
 	}
 
-	public Spieler getSpieler() {
+	public Spieler getSpieler()
+	{
 		return spieler;
 	}
 
-	public void setSpieler(Spieler spieler) {
+	public void setSpieler(Spieler spieler)
+	{
 		this.spieler = spieler;
 	}
 	
