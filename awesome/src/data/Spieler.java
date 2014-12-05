@@ -9,30 +9,7 @@ package data;
  * @author
  *
  */
-public class Spieler {
+public class Spieler 
+{
 	
-	public static void main (String[] args)
-	{
-		
-	}
-	
-	private void initialisiereSpiel()
-	{
-		
-	}
-	
-	private void spielStarten()
-	{
-		
-	}
-	
-	private void spielBeenden()
-	{
-		
-	}
-	
-	private int generateRandoms(int min, int max)
-	{
-		return 0;
-	}
 }
