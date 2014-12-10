@@ -44,7 +44,7 @@ public class Spieler
 	
 	public void verringerePunkte()
 	{
-		//TODO
+		//TODO STUFF
 	}
 	
 	public int getPunkte()
