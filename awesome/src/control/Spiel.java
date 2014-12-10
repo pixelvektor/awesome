@@ -18,9 +18,12 @@ public class Spiel
 	private Kasten[] kaesten = new Kasten[9];
 	private Spieler[] spieler = new Spieler[2];
 	
-	private void initialisiereSpiel()
+	public void initialisiereSpiel()
 	{
-		
+		for (int x = 3; x < 12; x++)
+		{
+			kaesten[x-3] = new Kasten(x);		//erzeugt die 3 kaesten mit den jeweiligen Nummern von 3 bis 11
+		}
 	}
 	
 	private void spielStarten()
