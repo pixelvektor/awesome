@@ -9,10 +9,9 @@ package data;
  * @author
  *
  */
-public class Pin {
+public class Pin 
+{
 	private Spieler spieler;
-	private int feld;
-	private int kasten;
 	
 	public Pin(Spieler spieler)
 	{

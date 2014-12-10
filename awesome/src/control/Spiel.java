@@ -5,6 +5,7 @@
  */
 package control;
 
+import data.Kasten;
 import data.Pin;
 import data.Spieler;
 
@@ -12,6 +13,28 @@ import data.Spieler;
  * @author 
  *
  */
-public class Spiel {
-
+public class Spiel 
+{	
+	private Kasten[] kaesten = new Kasten[9];
+	private Spieler[] spieler = new Spieler[2];
+	
+	private void initialisiereSpiel()
+	{
+		
+	}
+	
+	private void spielStarten()
+	{
+		
+	}
+	
+	private void spielBeenden()
+	{
+		
+	}
+	
+	private int generateRandoms(int min, int max)
+	{
+		return 0;
+	}
 }
