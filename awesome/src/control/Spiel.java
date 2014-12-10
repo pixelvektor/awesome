@@ -22,7 +22,10 @@ public class Spiel
 	{
 		for (int x = 3; x < 12; x++)
 		{
-			kaesten[x-3] = new Kasten(x);		//erzeugt die 3 kaesten mit den jeweiligen Nummern von 3 bis 11
+			kaesten[x-3] = new Kasten(x);		//erzeugt die 9 kaesten mit den jeweiligen Nummern von 3 bis 11
+			
+			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());
+			
 		}
 	}
 	
@@ -36,8 +39,9 @@ public class Spiel
 		
 	}
 	
-	private int generateRandoms(int min, int max)
+	public static int generateRandoms(int min, int max)
 	{
-		return 0;
+		double random = (Math.random() * (max + 1 - min) + min);
+		return (int) random;
 	}
 }

@@ -4,6 +4,9 @@
  * 10.12.2014
  */
 package data;
+
+import control.Spiel;
+import java.util.*;
 /**
  * @author
  *
@@ -33,6 +36,40 @@ public class Kasten
 		{
 			this.felder = felder;
 		}
+	}
+	
+	public Feld[] erzeugeFeld()
+	{
+		int random;
+		Feld[] feld = new Feld[9];
+		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
+		
+		
+		feld[4] = new Feld(7);
+		pruefListe.add(7);
+		
+		for (int x = 0; x < 9; x++)
+		{
+			if (x != 4)
+			{
+				do
+				{
+					random = Spiel.generateRandoms(3, 11);
+				}
+				while (pruefListe.contains(random));
+				
+				feld[x] = new Feld(random);
+				pruefListe.add(random);
+				System.out.println(x + ".: " + random);
+			}
+			else 
+			{
+				System.out.println(x + ".: " + feld[x].getFeldNummer());
+			}
+		}
+		System.out.println();
+		
+		return feld;
 	}
 	
 	public int getKastenNummer()
