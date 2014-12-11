@@ -16,10 +16,6 @@ public class Kasten
 	private Feld[] felder = new Feld[9];
 	private int kastenNummer;
 	
-	public Kasten()
-	{
-	}
-	
 	public Kasten(int kastenNummer)
 	{
 		this.kastenNummer = kastenNummer;
@@ -40,26 +36,25 @@ public class Kasten
 	
 	public Feld[] erzeugeFeld()
 	{
-		int random;
-		Feld[] feld = new Feld[9];
-		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
+		int random;	//in diese Variable kommt die Zufallszahl
+		Feld[] feld = new Feld[9];	//die Rückgabevariable
+		ArrayList<Integer> pruefListe = new ArrayList<Integer>();	/*eine Liste, die nach und nach mit den
+																	bereits verwendeten Zahlen gefüllt wird*/
 		
+		feld[4] = new Feld(7);	//in die Mitte des Feldes wird die Zahl 7 geschrieben
+		pruefListe.add(7);		//und danach zur Prüfliste hinzugefügt
 		
-		feld[4] = new Feld(7);
-		pruefListe.add(7);
-		
-		for (int x = 0; x < 9; x++)
+		for (int x = 0; x < feld.length; x++)		//diese Schleife durchläuft das gesamte Feld
 		{
 			if (x != 4)
 			{
 				do
 				{
-					random = Spiel.generateRandoms(3, 11);
-				}
-				while (pruefListe.contains(random));
+					random = Spiel.generateRandoms(3, 11);	//hier wird eine neue Zufallszahl generiert...
+				} while (pruefListe.contains(random));	//...immer, wenn die Zahl bereits in der Liste ist
 				
-				feld[x] = new Feld(random);
-				pruefListe.add(random);
+				feld[x] = new Feld(random);		//Zufallszahl zum Feld hinzufügen...
+				pruefListe.add(random);			//...und auch zur Prüfliste hinzufügen
 				System.out.println(x + ".: " + random);
 			}
 			else 
