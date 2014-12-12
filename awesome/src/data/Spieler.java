@@ -32,22 +32,42 @@ public class Spieler
 	
 	public void pinSetzen()
 	{
-		//TODO
+		/*
+		  getFeld[]
+		  getWuerfel
+		  pruefeErgebnis
+		     wenn (Ergebnis=2)
+		      dann oeffne pinLoeschen()
+		     alles andere 
+		       bieteFelderAn
+		       übergebeAusgewaehltesFeldAnFeld
+		  */
 	}
 	
 	public void pinLoeschen()
 	{
-		//TODO
+		/*
+		  bieteFelderZumLoeschenAn
+		  uebergebeAusgewaehltesFeldAnFeld
+		 */
 	}
 	
 	public void erhoehePunkte()
 	{
-		//TODO
+		/*
+		  bei jedem gesetzten Pin Counter+1
+		  wenn Kasten gewonnen 
+		       dann entferne gegnerische Pins
+		            Counter+dazugewonneneFelder
+		 */
 	}
 	
 	public void verringerePunkte()
 	{
-		//TODO STUFF
+		/*
+		  wenn (pin geloescht)
+		   dann Counter-1
+		 */
 	}
 	
 	public int getPunkte()
