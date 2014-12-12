@@ -9,8 +9,11 @@ package control;
  * @author 
  *
  */
-public abstract class Wuerfel {
-	protected int wuerfeln() {
-		return -1;
+public abstract class Wuerfel 
+{
+	public int wuerfeln() 
+	{
+		double random = ((Math.random() * 10) + 2);
+		return (int) random;
 	}
 }

@@ -5,6 +5,8 @@
  */
 package data;
 
+import control.Spiel;
+import control.Wuerfel;
 /**
  * @author
  *
@@ -13,6 +15,7 @@ public class Spieler
 {
 	private String name;
 	private int punkte;
+	private int wuerfelErgebnis;
 	
 	public String getName()
 	{
@@ -50,5 +53,12 @@ public class Spieler
 	public int getPunkte()
 	{
 		return punkte;
+	}
+	
+	public int wuerfeln()
+	{
+		wuerfelErgebnis = Spiel.generateRandoms(2, 12);
+		
+		return wuerfelErgebnis;
 	}
 }

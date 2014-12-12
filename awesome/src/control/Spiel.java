@@ -54,11 +54,30 @@ public class Spiel
 		
 		System.out.println("Name Spieler 1: " + spieler[0].getName());
 		System.out.println("Name Spieler 2: " + spieler[1].getName());
+		
+		System.out.println();
+		
+		spielStarten();
 	}
 	
 	private void spielStarten()
 	{
+		int e1, e2;
 		
+		System.out.println("Das Spiel beginnt!\r\nEs wird jetzt ausgewürfelt welcher Spieler anfängt.");
+		
+		do
+		{
+			e1 = spieler[0].wuerfeln();
+			e2 = spieler[1].wuerfeln();
+		} while (e1 == e2);
+		
+		System.out.println(spieler[0].getName() + ": " + e1 + ", " + spieler[1].getName() + ": " + e2);
+		
+		if (e1 > e2)
+			System.out.println(spieler[0].getName() + " fängt an!");
+		else
+			System.out.println(spieler[1].getName() + " fängt an!");
 	}
 	
 	private void spielBeenden()
