@@ -60,7 +60,7 @@ public class Spiel
 		
 		System.out.println();
 		
-		spielStarten();
+		gameStart();
 	}
 	
 	private void gameStart()

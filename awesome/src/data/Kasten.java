@@ -36,31 +36,27 @@ public class Kasten
 	
 	public Feld[] erzeugeFeld()
 	{
-		int random;	//in diese Variable kommt die Zufallszahl
 		Feld[] feld = new Feld[9];	//die Rueckgabevariable
-		ArrayList<Integer> pruefListe = new ArrayList<Integer>();	/* eine Liste, die nach und nach mit den
+		ArrayList<Integer> shuffleListe = new ArrayList<Integer>();	/* eine Liste, die nach und nach mit den
 																	bereits verwendeten Zahlen gefaellt wird */
 		
-		feld[4] = new Feld(7);	//in die Mitte des Feldes wird die Zahl 7 geschrieben
-		pruefListe.add(7);		//und danach zur Pruefliste hinzugefuegt
-		
-		for (int x = 0; x < feld.length; x++)		//diese Schleife durchlueuft das gesamte Feld
+		for (int x = 3; x < 12; x++)
 		{
-			if (x != 4)
-			{
-				do
-				{
-					random = Spiel.generateRandoms(3, 11);	//hier wird eine neue Zufallszahl generiert...
-				} while (pruefListe.contains(random));	//...immer, wenn die Zahl bereits in der Liste ist
-				
-				feld[x] = new Feld(random);		//Zufallszahl zum Feld hinzufuegen...
-				pruefListe.add(random);			//...und auch zur Pruefliste hinzufuegen
-				System.out.println(x + ".: " + random);
-			}
-			else 
-			{
-				System.out.println(x + ".: " + feld[x].getFeldNummer());
-			}
+			if (x != 7)
+				shuffleListe.add(x);
+		}
+		
+		Collections.shuffle(shuffleListe);
+		shuffleListe.add(4, 7);
+		
+		for (int y = 0; y < 9; y++)
+		{
+				feld[y] = new Feld(shuffleListe.get(y));
+		}
+		
+		for (int z = 0; z < 9; z++)
+		{
+			System.out.println(z + ".: " + feld[z].getFeldNummer());
 		}
 		System.out.println();
 		
