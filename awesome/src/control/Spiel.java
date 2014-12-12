@@ -18,22 +18,25 @@ import data.Spieler;
  */
 public class Spiel 
 {	
+	/** Spielfeld mit 9 Kaesten. */
 	private Kasten[] kaesten = new Kasten[9];
-	private Spieler[] spieler = new Spieler[2];
+	/** Die Spieler eines Spiels. */
+	private final Spieler[] spieler = new Spieler[2];
 	
-	public void initialisiereSpiel()
+	/**
+	 * Erstellt ein Spiel mit einem Spielfeld.
+	 */
+	public Spiel()
 	{
 		for (int x = 3; x < 12; x++)
 		{
-			kaesten[x-3] = new Kasten(x);	//erzeugt die 9 Kästen mit den jeweiligen Nummern von 3 bis 11
-			
-			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	//erzeugt die Felder in den Kästen
+			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
+			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 			
 		}
 		
 		for (int y = 0; y < spieler.length; y++)
 		{
-			spieler[y] = new Spieler();
 			String eingabe;
 			
 			do
@@ -42,11 +45,11 @@ public class Spiel
 				
 				if (!(eingabe.length() == 0))
 				{
-					spieler[y].setName(eingabe);
+					spieler[y] = new Spieler(eingabe);
 				}
 				else
 				{
-					System.out.println("Sie müssen einen Namen eingeben!");
+					System.out.println("Sie muessen einen Namen eingeben!");
 				}
 			} while ((eingabe.length() == 0));
 			System.out.println();
@@ -60,7 +63,7 @@ public class Spiel
 		spielStarten();
 	}
 	
-	private void spielStarten()
+	private void gameStart()
 	{
 		int e1, e2;
 		
@@ -80,7 +83,7 @@ public class Spiel
 			System.out.println(spieler[1].getName() + " fängt an!");
 	}
 	
-	private void spielBeenden()
+	private void gameEnd()
 	{
 		
 	}

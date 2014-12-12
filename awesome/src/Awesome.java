@@ -10,12 +10,16 @@ import control.Spiel;
  */
 public class Awesome 
 {
+	private static Spiel spiel;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args)
 	{
-		Spiel s = new Spiel();
-		s.initialisiereSpiel();
+		spiel = new Spiel();
+	}
+	
+	private void showThisShit() {
+		
 	}
 }

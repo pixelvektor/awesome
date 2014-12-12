@@ -13,21 +13,21 @@ import control.Wuerfel;
  */
 public class Spieler 
 {
-	private String name;
+	private final String name;
 	private int punkte;
 	private int wuerfelErgebnis;
 	
+	/**
+	 * @param name
+	 */
+	public Spieler(String name)
+	{
+		this.name = name;
+	}
+
 	public String getName()
 	{
 		return name;
-	}
-	
-	public void setName(String name)
-	{	
-		if (!name.equals("") || (!name.equals(null)))
-		{
-			this.name = name;
-		}
 	}
 	
 	public void pinSetzen()
