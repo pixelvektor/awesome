@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class Kasten
 {
+	/** 9 Felder pro Kasten. */
 	private Feld[] felder = new Feld[9];
+	/** Die ID-Nummer des Kastens zur leichteren Adressierung. */
 	private int kastenNummer;
 	
 	public Kasten(int kastenNummer)
@@ -33,7 +35,9 @@ public class Kasten
 			this.felder = felder;
 		}
 	}
-	
+	/**
+	 * Erzeugt ein Feld[] mit Zufallszahlen und gibt es zurueck
+	 */
 	public Feld[] erzeugeFeld()
 	{
 		Feld[] feld = new Feld[9];	//die Rueckgabevariable
@@ -56,7 +60,7 @@ public class Kasten
 		
 		for (int z = 0; z < 9; z++)
 		{
-			System.out.println(z + ".: " + feld[z].getFeldNummer());
+			System.out.println("Feld " + z + ": " + feld[z].getFeldNummer());
 		}
 		System.out.println();
 		
