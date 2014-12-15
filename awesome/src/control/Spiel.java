@@ -29,7 +29,7 @@ public class Spiel
 	 * Erstellt ein Spiel mit einem Spielfeld.
 	 */
 	public Spiel()
-	{
+	{	
 		for (int x = 3; x < 12; x++)
 		{
 			System.out.println("Kasten " + (x-3) + ":");
@@ -111,16 +111,22 @@ public class Spiel
 			System.out.println("Ergebnis: " + spieler[aktiverSpieler].getWuerfelErgebnis() + "\r\n");
 			
 			spieler[aktiverSpieler].pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
+									
+			if ((loopCount >= 1) && (spieler[aktiverSpieler].getWuerfelErgebnis() != 2))
+				spielBeenden = true;	// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.
 			
-			if (aktiverSpieler == 0)	// Hier wird der Spieler gewechselt, nachdem sein Zug abschlossen ist.
+			if (spieler[aktiverSpieler].getWuerfelErgebnis() != 2)
+				loopCount++;	// Ein Zaehler der zu Testzwecken die Durchlaeufe zaehlt und das Spiel beendet.
+			
+			if ((aktiverSpieler == 0) && (spieler[aktiverSpieler].getWuerfelErgebnis() != 2))	/* Hier werden die Spieler gewechselt und geprueft, 
+																								   ob ein Spieler nochmal an der Reihe ist.*/
 				aktiverSpieler = 1;
-			else
+			else if ((aktiverSpieler == 1) && (spieler[aktiverSpieler].getWuerfelErgebnis() != 2))
 				aktiverSpieler = 0;
+			else
+				System.out.println(spieler[aktiverSpieler].getName() + " ist nochmal an der Reihe.");
 			
-			if (loopCount >= 1)			// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.
-				spielBeenden = true;
-			
-			loopCount++;
+			System.out.println("Durchlauf " + loopCount);
 			
 		} while (spielBeenden == false);	// Das Spiel laeuft, solange die Variable spielBeenden auf false steht.
 		

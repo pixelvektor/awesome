@@ -17,7 +17,7 @@ public class Wuerfel
 	 */
 	public static int wuerfeln() 
 	{
-		double random = ((Math.random() * 10) + 2);
+		double random = ((Math.random() * 11) + 2);
 		return (int) random;
 	}
 }

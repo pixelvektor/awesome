@@ -38,10 +38,16 @@ public class Spieler
 	 */
 	public void pinSetzen(Kasten[] kaesten)
 	{
-		ArrayList<String> angebote = new ArrayList<String>();
-		angebote = bieteFelderAn(kaesten);
+		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
+		{
+			ArrayList<String> angebote = new ArrayList<String>();	// ArrayList erstellen, die die angebotenen Felder enthalten soll.
+			
+			angebote = bieteFelderAn(kaesten);	// Angegbote durch die Methode einholen.
+			System.out.println(angebote);
+		}
+		else
+			pinLoeschen();
 		
-		System.out.println(angebote);
 		/*
 		  getFeld[]
 		  getWuerfel
@@ -56,6 +62,7 @@ public class Spieler
 	
 	public void pinLoeschen()
 	{
+		System.out.println("pinLoeschen wurde aufgerufen.");
 		/*
 		  bieteFelderZumLoeschenAn
 		  uebergebeAusgewaehltesFeldAnFeld
