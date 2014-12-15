@@ -128,12 +128,26 @@ public class Spieler
 			
 			for (Feld feld : felder)	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
 			{
-				if ((wuerfelErgebnis == feld.getFeldNummer()) && (feld.getPin() == null))	/* Wenn das Feld frei ist und dieselbe Nummer hat
-				 																			wie die gewuerfelt Zahl wird es der Liste hinzugefügt.*/
+				if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
 				{
 					angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
 					System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 				}
+				else if ((wuerfelErgebnis == feld.getFeldNummer()) || ((wuerfelErgebnis) == k.getKastenNummer()) && (feld.getPin() == null))	
+				// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer übereinstimmt und das Feld frei ist wird es vorgeschlagen.
+				{
+					if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
+					{
+						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+					}
+					else if ((wuerfelErgebnis == 7) && (feld.getFeldNummer() == 7))	// ...es sei denn es wurde die 7 gewuerfelt.
+					{
+						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+					}
+				}
+				
 				feldIndex++;
 			}
 			kastenIndex++;
