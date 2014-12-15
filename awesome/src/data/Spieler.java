@@ -43,7 +43,7 @@ public class Spieler
 			ArrayList<String> angebote = new ArrayList<String>();	// ArrayList erstellen, die die angebotenen Felder enthalten soll.
 			
 			angebote = bieteFelderAn(kaesten);	// Angegbote durch die Methode einholen.
-			System.out.println(angebote);
+			System.out.println(angebote.size() + " Elemente: " + angebote);
 		}
 		else
 			pinLoeschen();
@@ -147,12 +147,10 @@ public class Spieler
 						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 					}
 				}
-				
 				feldIndex++;
 			}
 			kastenIndex++;
 		}
-		
 		return angebote;
 	}
 }
