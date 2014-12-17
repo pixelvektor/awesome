@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.util.ArrayList;
+
 import control.Spiel;
 import control.Wuerfel;
 /**
@@ -30,8 +32,22 @@ public class Spieler
 		return name;
 	}
 	
-	public void pinSetzen()
+	/** Die Methode setzt einen Pin auf ein freies Feld
+	 * 
+	 * @param kaesten Das Spielfeld
+	 */
+	public void pinSetzen(Kasten[] kaesten)
 	{
+		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
+		{
+			ArrayList<String> angebote = new ArrayList<String>();	// ArrayList erstellen, die die angebotenen Felder enthalten soll.
+			
+			angebote = bieteFelderAn(kaesten);	// Angegbote durch die Methode einholen.
+			System.out.println(angebote.size() + " Elemente: " + angebote);
+		}
+		else
+			pinLoeschen();
+		
 		/*
 		  getFeld[]
 		  getWuerfel
@@ -46,6 +62,7 @@ public class Spieler
 	
 	public void pinLoeschen()
 	{
+		System.out.println("pinLoeschen wurde aufgerufen.");
 		/*
 		  bieteFelderZumLoeschenAn
 		  uebergebeAusgewaehltesFeldAnFeld
@@ -75,10 +92,65 @@ public class Spieler
 		return punkte;
 	}
 	
+	/**
+	 * Wuerfelt für den Spieler eine Zufallszahl und 
+	 * speichert diese in der Instanzvariable wuerfelErgebnis
+	 * @return Das Wuerfelergebnis als Integer
+	 */
 	public int wuerfeln()
 	{
-		wuerfelErgebnis = Spiel.generateRandoms(2, 12);
+		wuerfelErgebnis = Wuerfel.wuerfeln();
 		
 		return wuerfelErgebnis;
+	}
+	
+	public int getWuerfelErgebnis()
+	{
+		return wuerfelErgebnis;
+	}
+	
+	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis
+	 * und gibt die Indizes der Kaesten und der dazugehörigen Felder zurück
+	 * @param kaesten Das Spielfeld
+	 * @return String-ArrayList mit den Indizes der freien Felder
+	 */
+	private ArrayList<String> bieteFelderAn(Kasten[] kaesten)
+	{
+		ArrayList<String> angebote = new ArrayList<String>();	// Diese Liste wird spaeter mit den Indizes gefuellt und ist der Rueckgabewert.
+		int kastenIndex = 0;
+		
+		System.out.println("Freie Felder mit der Zahl " + wuerfelErgebnis + ":");
+		
+		for (Kasten k : kaesten)	// Eine Schleife durch alle Kaesten des Spielfeldes.
+		{
+			int feldIndex = 0;
+			Feld[] felder = k.getFelder();	// Die Methode holt sich alle Felder aus dem aktuellen Kasten. 
+			
+			for (Feld feld : felder)	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
+			{
+				if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
+				{
+					angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+					System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+				}
+				else if ((wuerfelErgebnis == feld.getFeldNummer()) || ((wuerfelErgebnis) == k.getKastenNummer()) && (feld.getPin() == null))	
+				// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer übereinstimmt und das Feld frei ist wird es vorgeschlagen.
+				{
+					if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
+					{
+						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+					}
+					else if ((wuerfelErgebnis == 7) && (feld.getFeldNummer() == 7))	// ...es sei denn es wurde die 7 gewuerfelt.
+					{
+						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+					}
+				}
+				feldIndex++;
+			}
+			kastenIndex++;
+		}
+		return angebote;
 	}
 }

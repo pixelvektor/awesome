@@ -9,11 +9,15 @@ package control;
  * @author 
  *
  */
-public abstract class Wuerfel 
+public class Wuerfel 
 {
-	public int wuerfeln() 
+	/**
+	 * Erzeugt eine Zufallszahl zwischen 2 und 12
+	 * @return Die Zufallszahl als Integer
+	 */
+	public static int wuerfeln() 
 	{
-		double random = ((Math.random() * 10) + 2);
+		double random = ((Math.random() * 11) + 2);
 		return (int) random;
 	}
 }

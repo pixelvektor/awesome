@@ -34,15 +34,16 @@ public class Spiel
 	public Spiel(final View view)
 	{
 		this.view = view;
-		
 		for (int x = 3; x < 12; x++)
 		{
+			System.out.println("Kasten " + (x-3) + ":");
+			System.out.println("---------");
+			
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
-			
 		}
 		
-		for (int y = 0; y < spieler.length; y++)
+		for (int y = 0; y < spieler.length; y++) // Alle Spieler sollen einen Namen eingeben.
 		{
 			String eingabe;
 			
@@ -50,57 +51,92 @@ public class Spiel
 			{
 				eingabe = input("Geben Sie bitte Ihren Namen ein Spieler " + (y+1) + ": ");
 				
-				if (!(eingabe.length() == 0))
+				if (!(eingabe.length() == 0))	// Eine leere Eingabe wird nicht akzeptiert.
 				{
-					spieler[y] = new Spieler(eingabe);
+					spieler[y] = new Spieler(eingabe);	// Der Spieler wird erzeugt und bekommt den eingegebenen Namen als Parameter mit.
 				}
 				else
 				{
-					System.out.println("Sie muessen einen Namen eingeben!");
+					System.out.println("Sie muessen einen Namen eingeben!");	// Fehlerausgabe, wenn kein Name eingegeben wurde.
 				}
-			} while ((eingabe.length() == 0));
+			} while ((eingabe.length() == 0));	// Wenn ein Spieler keinen Namen eingegeben hat, dann wird er nochmal dazu aufgefordert.
 			System.out.println();
 		}
 		
-		System.out.println("Name Spieler 1: " + spieler[0].getName());
+		System.out.println("Name Spieler 1: " + spieler[0].getName());	// Die Namen werden ausgegeben.
 		System.out.println("Name Spieler 2: " + spieler[1].getName());
 		
 		System.out.println();
 		
-		gameStart();
+		gameStart();	// Das Spiel wird gestartet.
 	}
 	
 	private void gameStart()
 	{
-		int e1, e2;
 		
 		System.out.println("Das Spiel beginnt!\r\nEs wird jetzt ausgewuerfelt welcher Spieler anfaengt.");
 		
-		do
+		do	// Beide Spieler wuerfeln solange, bis beide unterschiedliche Ergebnisse haben.
 		{
-			e1 = spieler[0].wuerfeln();
-			e2 = spieler[1].wuerfeln();
-		} while (e1 == e2);
+			spieler[0].wuerfeln();
+			spieler[1].wuerfeln();
+		} while (spieler[0].getWuerfelErgebnis() == spieler[1].getWuerfelErgebnis());
 		
-		System.out.println(spieler[0].getName() + ": " + e1 + ", " + spieler[1].getName() + ": " + e2);
+		System.out.println(spieler[0].getName() + ": " + spieler[0].getWuerfelErgebnis() + ", " + spieler[1].getName() + ": " + spieler[1].getWuerfelErgebnis());
 		
 		// Umbau fuer die View
-		activePlayer = e1 > e2 ? spieler[0] : spieler[1];
+		activePlayer = spieler[0].getWuerfelErgebnis() > spieler[1].getWuerfelErgebnis() ? spieler[0] : spieler[1];
 		System.out.println(activePlayer.getName() + " faengt an!");
 		
 		// Testaufruf der View
 		view.show(activePlayer.getName(),activePlayer.wuerfeln());
+		
+		gameLoop();		// Die Hauptschleife des Spiels wird aufgerufen.
+	}
+	
+	/** Die Hauptschleife des Spiels.
+	 *  Hier laeuft der ueberwiegende Teil der Spiellogik ab.
+	 */
+	private void gameLoop()
+	{
+		
+		boolean spielBeenden = false;	// Wird erst auf true gesetzt, wenn ein Spieler gewonnen hat.
+		int loopCount = 0;				// Zaehlt die Schleifendurchlaeufe (nur zu Testzwecken)
+		
+		do
+		{
+			System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
+			
+			activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
+			
+			System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
+			
+			activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
+									
+			if ((loopCount >= 1) && (activePlayer.getWuerfelErgebnis() != 2))
+				spielBeenden = true;	// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.
+			
+			if (activePlayer.getWuerfelErgebnis() != 2)
+				loopCount++;	// Ein Zaehler der zu Testzwecken die Durchlaeufe zaehlt und das Spiel beendet.
+			
+			if ((activePlayer.equals(spieler[0])) && (activePlayer.getWuerfelErgebnis() != 2))	/* Hier werden die Spieler gewechselt und geprueft, 
+																								   ob ein Spieler nochmal an der Reihe ist.*/
+				activePlayer = spieler[1];
+			else if ((activePlayer.equals(spieler[1])) && (activePlayer.getWuerfelErgebnis() != 2))
+				activePlayer = spieler[0];
+			else
+				System.out.println(activePlayer.getName() + " ist nochmal an der Reihe.");
+			
+			System.out.println("Durchlauf " + loopCount);
+			
+		} while (spielBeenden == false);	// Das Spiel laeuft, solange die Variable spielBeenden auf false steht.
+		
+		System.out.println("\r\nDas Spiel ist aus!");
 	}
 	
 	private void gameEnd()
 	{
 		
-	}
-	
-	public static int generateRandoms(int min, int max)
-	{
-		double random = (Math.random() * (max + 1 - min) + min);
-		return (int) random;
 	}
 	
 	private String input(String ausgabe)
