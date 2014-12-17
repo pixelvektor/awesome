@@ -7,11 +7,9 @@ package control;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
-import data.Kasten;
-import data.Pin;
-import data.Spieler;
 import view.View;
+import data.Kasten;
+import data.Spieler;
 
 /**
  * @author 

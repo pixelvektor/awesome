@@ -5,8 +5,8 @@
  */
 package data;
 
-import control.Spiel;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 /**
  * @author
  *

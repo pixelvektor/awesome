@@ -11,7 +11,6 @@ import view.View;
  */
 public class Awesome 
 {
-	private static Spiel spiel;
 	/**
 	 * @param args
 	 */

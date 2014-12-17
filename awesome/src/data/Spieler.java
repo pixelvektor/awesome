@@ -6,9 +6,8 @@
 package data;
 
 import java.util.ArrayList;
-
-import control.Spiel;
 import control.Wuerfel;
+
 /**
  * @author
  *
@@ -56,7 +55,7 @@ public class Spieler
 		      dann oeffne pinLoeschen()
 		     alles andere 
 		       bieteFelderAn
-		       übergebeAusgewaehltesFeldAnFeld
+		       ï¿½bergebeAusgewaehltesFeldAnFeld
 		  */
 	}
 	
@@ -93,7 +92,7 @@ public class Spieler
 	}
 	
 	/**
-	 * Wuerfelt für den Spieler eine Zufallszahl und 
+	 * Wuerfelt fï¿½r den Spieler eine Zufallszahl und 
 	 * speichert diese in der Instanzvariable wuerfelErgebnis
 	 * @return Das Wuerfelergebnis als Integer
 	 */
@@ -110,7 +109,7 @@ public class Spieler
 	}
 	
 	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis
-	 * und gibt die Indizes der Kaesten und der dazugehörigen Felder zurück
+	 * und gibt die Indizes der Kaesten und der dazugehï¿½rigen Felder zurï¿½ck
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
@@ -134,7 +133,7 @@ public class Spieler
 					System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 				}
 				else if ((wuerfelErgebnis == feld.getFeldNummer()) || ((wuerfelErgebnis) == k.getKastenNummer()) && (feld.getPin() == null))	
-				// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer übereinstimmt und das Feld frei ist wird es vorgeschlagen.
+				// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer ï¿½bereinstimmt und das Feld frei ist wird es vorgeschlagen.
 				{
 					if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
 					{
