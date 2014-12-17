@@ -39,13 +39,34 @@ public class Spieler
 	{
 		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
 		{
+			String eingabe = null;
+			boolean falscheEingabe = false;			
 			ArrayList<String> angebote = new ArrayList<String>();	// ArrayList erstellen, die die angebotenen Felder enthalten soll.
 			
 			angebote = bieteFelderAn(kaesten);	// Angegbote durch die Methode einholen.
 			System.out.println(angebote.size() + " Elemente: " + angebote);
+			
+			do
+			{
+				falscheEingabe = false;
+				eingabe = Spiel.input("Bitte wählen Sie ein freies Feld aus, in das Sie Ihren Pin setzen wollen. ('Kastennummer','Feldnummer'): ");
+				
+				if (!angebote.contains(eingabe))
+				{
+					falscheEingabe = true;
+					System.out.println("Bitte überprüfen Sie Ihre Eingabe");
+				}
+			} while (falscheEingabe == true);
+			
+			String[] koordinaten = eingabe.split(",");
+			int kastenIndex = Integer.parseInt(koordinaten[0]);
+			int feldIndex = Integer.parseInt(koordinaten[1]);
+			System.out.println("Kasten: " + kastenIndex + ", Feld: " + feldIndex);
+			Feld[] zielFeld = kaesten[kastenIndex].getFelder();
+			zielFeld[feldIndex].setPin(new Pin(this));
 		}
 		else
-			pinLoeschen();
+			pinLoeschen(kaesten);
 		
 		/*
 		  getFeld[]
@@ -59,13 +80,58 @@ public class Spieler
 		  */
 	}
 	
-	public void pinLoeschen()
+	public void pinLoeschen(Kasten[] kaesten)
 	{
-		System.out.println("pinLoeschen wurde aufgerufen.");
-		/*
-		  bieteFelderZumLoeschenAn
-		  uebergebeAusgewaehltesFeldAnFeld
-		 */
+		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
+		
+		ArrayList<String> angebote = new ArrayList<String>();
+		int kastenIndex = 0;
+		
+		for (Kasten k : kaesten)
+		{
+			int feldIndex = 0;
+			
+			for (Feld f : k.getFelder())
+			{
+				if ((f.getPin() != null) && (f.getPin().getSpieler() != this))
+				{
+					System.out.println("Kasten: " + kastenIndex + ", Feld: " + feldIndex + ", Spieler: " + f.getPin().getSpieler().getName());
+					
+					angebote.add(kastenIndex + "," + feldIndex);
+				}
+				feldIndex++;
+			}
+			kastenIndex++;
+		}
+		
+		if (angebote.size() == 0)
+			System.out.println("Es sind leider keine gegnerischen Pins auf dem Feld.");
+		else
+		{
+			boolean falscheEingabe;
+			String eingabe = null;
+			System.out.println("\r\n" + angebote.size() + " Elemente: " + angebote);
+			
+			do
+			{
+				falscheEingabe = false;
+				eingabe = Spiel.input("Bitte wählen Sie ein Feld aus, dass Sie löschen möchten('Kastennummer','Feldnummer'): ");
+				
+				if (!angebote.contains(eingabe))
+				{
+					falscheEingabe = true;
+					System.out.println("Bitte überprüfen Sie Ihre Eingabe.");
+				}
+			} while (falscheEingabe == true);
+			
+			String[] koordinaten = eingabe.split(",");
+			int kastenIndex1 = Integer.parseInt(koordinaten[0]);
+			int feldIndex = Integer.parseInt(koordinaten[1]);
+			System.out.println("Kasten: " + kastenIndex1 + ", Feld: " + feldIndex);
+			Feld[] zielFeld = kaesten[kastenIndex1].getFelder();
+			zielFeld[feldIndex].setPin(null);
+		}
+			
 	}
 	
 	public void erhoehePunkte()
@@ -123,9 +189,8 @@ public class Spieler
 		for (Kasten k : kaesten)	// Eine Schleife durch alle Kaesten des Spielfeldes.
 		{
 			int feldIndex = 0;
-			Feld[] felder = k.getFelder();	// Die Methode holt sich alle Felder aus dem aktuellen Kasten. 
 			
-			for (Feld feld : felder)	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
+			for (Feld feld : k.getFelder())	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
 			{
 				if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
 				{

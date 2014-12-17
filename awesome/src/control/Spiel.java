@@ -111,7 +111,7 @@ public class Spiel
 			
 			activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
 									
-			if ((loopCount >= 1) && (activePlayer.getWuerfelErgebnis() != 2))
+			if ((loopCount >= 3) && (activePlayer.getWuerfelErgebnis() != 2))
 				spielBeenden = true;	// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.
 			
 			if (activePlayer.getWuerfelErgebnis() != 2)
@@ -129,6 +129,9 @@ public class Spiel
 			
 		} while (spielBeenden == false);	// Das Spiel laeuft, solange die Variable spielBeenden auf false steht.
 		
+		activePlayer.pinLoeschen(kaesten);
+		activePlayer.pinLoeschen(kaesten);
+		
 		System.out.println("\r\nDas Spiel ist aus!");
 	}
 	
@@ -137,7 +140,7 @@ public class Spiel
 		
 	}
 	
-	private String input(String ausgabe)
+	public static String input(String ausgabe)
     {
         System.out.print(ausgabe);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
