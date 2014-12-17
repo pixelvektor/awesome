@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import data.Kasten;
 import data.Pin;
 import data.Spieler;
+import view.View;
 
 /**
  * @author 
@@ -22,12 +23,18 @@ public class Spiel
 	private Kasten[] kaesten = new Kasten[9];
 	/** Die Spieler eines Spiels. */
 	private final Spieler[] spieler = new Spieler[2];
+	/** Fuer den Zug aktiver Spieler. */
+	private Spieler activePlayer;
+	/** Speichert die View. */
+	private final View view;
 	
 	/**
 	 * Erstellt ein Spiel mit einem Spielfeld.
 	 */
-	public Spiel()
+	public Spiel(final View view)
 	{
+		this.view = view;
+		
 		for (int x = 3; x < 12; x++)
 		{
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
@@ -67,7 +74,7 @@ public class Spiel
 	{
 		int e1, e2;
 		
-		System.out.println("Das Spiel beginnt!\r\nEs wird jetzt ausgewürfelt welcher Spieler anfängt.");
+		System.out.println("Das Spiel beginnt!\r\nEs wird jetzt ausgewuerfelt welcher Spieler anfaengt.");
 		
 		do
 		{
@@ -77,10 +84,12 @@ public class Spiel
 		
 		System.out.println(spieler[0].getName() + ": " + e1 + ", " + spieler[1].getName() + ": " + e2);
 		
-		if (e1 > e2)
-			System.out.println(spieler[0].getName() + " fängt an!");
-		else
-			System.out.println(spieler[1].getName() + " fängt an!");
+		// Umbau fuer die View
+		activePlayer = e1 > e2 ? spieler[0] : spieler[1];
+		System.out.println(activePlayer.getName() + " faengt an!");
+		
+		// Testaufruf der View
+		view.show(activePlayer.getName(),activePlayer.wuerfeln());
 	}
 	
 	private void gameEnd()
@@ -94,7 +103,7 @@ public class Spiel
 		return (int) random;
 	}
 	
-	public static String input(String ausgabe)
+	private String input(String ausgabe)
     {
         System.out.print(ausgabe);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -4,6 +4,7 @@
  * 04.12.2014
  */
 import control.Spiel;
+import view.View;
 /**
  * @author 
  *
@@ -16,10 +17,7 @@ public class Awesome
 	 */
 	public static void main(String[] args)
 	{
-		spiel = new Spiel();
-	}
-	
-	private void showThisShit() {
-		
+		View view = new View();
+		new Spiel(view);
 	}
 }
