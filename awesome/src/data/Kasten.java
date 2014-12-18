@@ -17,6 +17,8 @@ public class Kasten
 	private Feld[] felder = new Feld[9];
 	/** Die ID-Nummer des Kastens zur leichteren Adressierung. */
 	private int kastenNummer;
+	/** Diese Variable wird gesetzt sobald ein Spieler einen Kasten für sich entschieden hat. */
+	private Spieler spieler = null;
 	
 	public Kasten(int kastenNummer)
 	{
@@ -28,7 +30,7 @@ public class Kasten
 		return felder;
 	}
 	
-	public void setFelder(Feld[] felder)
+	public void setFelder(final Feld[] felder)
 	{
 		if (felder.length == 9)
 		{
@@ -70,5 +72,21 @@ public class Kasten
 	public int getKastenNummer()
 	{
 		return kastenNummer;
+	}
+
+	/**
+	 * @return Den spieler
+	 */
+	public Spieler getSpieler()
+	{
+		return spieler;
+	}
+
+	/**
+	 * @param spieler Der Spieler, der den Kasten gewonnen hat.
+	 */
+	public void setSpieler(final Spieler spieler)
+	{
+		this.spieler = spieler;
 	}
 }

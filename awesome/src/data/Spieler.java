@@ -6,7 +6,8 @@
 package data;
 
 import java.util.ArrayList;
-import control.Wuerfel;
+
+import control.Spiel;
 
 /**
  * @author
@@ -21,7 +22,7 @@ public class Spieler
 	/**
 	 * @param name
 	 */
-	public Spieler(String name)
+	public Spieler(final String name)
 	{
 		this.name = name;
 	}
@@ -35,7 +36,7 @@ public class Spieler
 	 * 
 	 * @param kaesten Das Spielfeld
 	 */
-	public void pinSetzen(Kasten[] kaesten)
+	public void pinSetzen(final Kasten[] kaesten)
 	{
 		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
 		{
@@ -49,12 +50,12 @@ public class Spieler
 			do
 			{
 				falscheEingabe = false;
-				eingabe = Spiel.input("Bitte wählen Sie ein freies Feld aus, in das Sie Ihren Pin setzen wollen. ('Kastennummer','Feldnummer'): ");
+				eingabe = Spiel.input("Bitte wÃ¤hlen Sie ein freies Feld aus, in das Sie Ihren Pin setzen wollen. ('Kastennummer','Feldnummer'): ");
 				
 				if (!angebote.contains(eingabe))
 				{
 					falscheEingabe = true;
-					System.out.println("Bitte überprüfen Sie Ihre Eingabe");
+					System.out.println("Bitte Ã¼berprÃ¼fen Sie Ihre Eingabe");
 				}
 			} while (falscheEingabe == true);
 			
@@ -67,20 +68,9 @@ public class Spieler
 		}
 		else
 			pinLoeschen(kaesten);
-		
-		/*
-		  getFeld[]
-		  getWuerfel
-		  pruefeErgebnis
-		     wenn (Ergebnis=2)
-		      dann oeffne pinLoeschen()
-		     alles andere 
-		       bieteFelderAn
-		       ï¿½bergebeAusgewaehltesFeldAnFeld
-		  */
 	}
 	
-	public void pinLoeschen(Kasten[] kaesten)
+	public void pinLoeschen(final Kasten[] kaesten)
 	{
 		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
 		
@@ -115,12 +105,12 @@ public class Spieler
 			do
 			{
 				falscheEingabe = false;
-				eingabe = Spiel.input("Bitte wählen Sie ein Feld aus, dass Sie löschen möchten('Kastennummer','Feldnummer'): ");
+				eingabe = Spiel.input("Bitte wÃ¤hlen Sie ein Feld aus, dass Sie lÃ¶schen mÃ¶chten('Kastennummer','Feldnummer'): ");
 				
 				if (!angebote.contains(eingabe))
 				{
 					falscheEingabe = true;
-					System.out.println("Bitte überprüfen Sie Ihre Eingabe.");
+					System.out.println("Bitte Ã¼berprÃ¼fen Sie Ihre Eingabe.");
 				}
 			} while (falscheEingabe == true);
 			
@@ -164,9 +154,9 @@ public class Spieler
 	 */
 	public int wuerfeln()
 	{
-		wuerfelErgebnis = Wuerfel.wuerfeln();
-		
-		return wuerfelErgebnis;
+		double random = ((Math.random() * 11) + 2);
+		wuerfelErgebnis = (int) random;
+		return (int) random;
 	}
 	
 	public int getWuerfelErgebnis()
@@ -175,11 +165,11 @@ public class Spieler
 	}
 	
 	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis
-	 * und gibt die Indizes der Kaesten und der dazugehï¿½rigen Felder zurï¿½ck
+	 * und gibt die Indizes der Kaesten und der dazugehoerigen Felder zurï¿½ck
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
-	private ArrayList<String> bieteFelderAn(Kasten[] kaesten)
+	private ArrayList<String> bieteFelderAn(final Kasten[] kaesten)
 	{
 		ArrayList<String> angebote = new ArrayList<String>();	// Diese Liste wird spaeter mit den Indizes gefuellt und ist der Rueckgabewert.
 		int kastenIndex = 0;

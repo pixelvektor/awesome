@@ -13,7 +13,7 @@ public class Pin
 {
 	private Spieler spieler;
 	
-	public Pin(Spieler spieler)
+	public Pin(final Spieler spieler)
 	{
 		this.spieler = spieler;
 	}
@@ -22,10 +22,4 @@ public class Pin
 	{
 		return spieler;
 	}
-
-	public void setSpieler(Spieler spieler)
-	{
-		this.spieler = spieler;
-	}
-	
 }
