@@ -129,9 +129,6 @@ public class Spiel
 			
 		} while (spielBeenden == false);	// Das Spiel laeuft, solange die Variable spielBeenden auf false steht.
 		
-		activePlayer.pinLoeschen(kaesten);
-		activePlayer.pinLoeschen(kaesten);
-		
 		System.out.println("\r\nDas Spiel ist aus!");
 	}
 	

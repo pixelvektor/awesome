@@ -35,7 +35,7 @@ public class Spieler
 	 * 
 	 * @param kaesten Das Spielfeld
 	 */
-	public void pinSetzen(final Kasten[] kaesten)
+	public void pinSetzen(Kasten[] kaesten)
 	{
 		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
 		{
@@ -65,12 +65,14 @@ public class Spieler
 			System.out.println("Kasten: " + kastenIndex + ", Feld: " + feldIndex);
 			Feld[] zielFeld = kaesten[kastenIndex].getFelder();
 			zielFeld[feldIndex].setPin(new Pin(this));
+			
+			pruefeKasten(kaesten[kastenIndex]);
 		}
 		else
 			pinLoeschen(kaesten);
 	}
 	
-	public void pinLoeschen(final Kasten[] kaesten)
+	public void pinLoeschen(Kasten[] kaesten)
 	{
 		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
 		
@@ -173,7 +175,7 @@ public class Spieler
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
-	private ArrayList<String> bieteFelderAn(final Kasten[] kaesten)
+	private ArrayList<String> bieteFelderAn(Kasten[] kaesten)
 	{
 		ArrayList<String> angebote = new ArrayList<String>();	// Diese Liste wird spaeter mit den Indizes gefuellt und ist der Rueckgabewert.
 		int kastenIndex = 0;
@@ -184,31 +186,180 @@ public class Spieler
 		{
 			int feldIndex = 0;
 			
-			for (Feld feld : k.getFelder())	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
+			if (k.getSpieler() == null)
 			{
-				if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
+				for (Feld feld : k.getFelder())	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
 				{
-					angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
-					System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
-				}
-				else if ((wuerfelErgebnis == feld.getFeldNummer()) || ((wuerfelErgebnis) == k.getKastenNummer()) && (feld.getPin() == null))	
-				// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer �bereinstimmt und das Feld frei ist wird es vorgeschlagen.
-				{
-					if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
+					if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
 					{
 						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
 						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 					}
-					else if ((wuerfelErgebnis == 7) && (feld.getFeldNummer() == 7))	// ...es sei denn es wurde die 7 gewuerfelt.
+					else if ((wuerfelErgebnis == feld.getFeldNummer()) && (feld.getPin() == null) || ((wuerfelErgebnis == k.getKastenNummer()) && (feld.getPin() == null)))
+					// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer �bereinstimmt und das Feld frei ist wird es vorgeschlagen.
 					{
-						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
-						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+						if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
+						{
+							angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+						}
+						else if ((wuerfelErgebnis == 7) && (feld.getFeldNummer() == 7))	// ...es sei denn es wurde die 7 gewuerfelt.
+						{
+							angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+						}
 					}
+					feldIndex++;
 				}
-				feldIndex++;
 			}
 			kastenIndex++;
 		}
 		return angebote;
+	}
+	
+	private void pruefeKasten(Kasten k)
+	{
+		System.out.println("pruefeKasten wurde für den Kasten " + k.getKastenNummer() + " aufgerufen.");
+		
+		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
+		int pruefIndex = 0;
+		boolean kastenGewonnen = false;
+		
+		for (Feld f : k.getFelder())
+		{
+			if (f.getPin() != null)
+			{
+				if (f.getPin().getSpieler() == this)
+				{
+					pruefListe.add(pruefIndex);
+				}
+			}
+			pruefIndex++;
+		}
+		
+		for (int i = 0; i <= 8; i++)
+		{
+			switch (i)
+			{
+				case 0:
+				{
+					int x1, x2, x3;
+					x1 = 0;
+					x2 = x1++;
+					x3 = x2++;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 1:
+				{
+					int x1, x2, x3;
+					x1 = 3;
+					x2 = x1++;
+					x3 = x2++;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 2:
+				{
+					int x1, x2, x3;
+					x1 = 0;
+					x2 = x1++;
+					x3 = x2++;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 3:
+				{
+					int x1, x2, x3;
+					x1 = 0;
+					x2 = x1+3;
+					x3 = x2+3;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 4:
+				{
+					int x1, x2, x3;
+					x1 = 1;
+					x2 = x1+3;
+					x3 = x2+3;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 5:
+				{
+					int x1, x2, x3;
+					x1 = 2;
+					x2 = x1+3;
+					x3 = x2+3;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 6:
+				{
+					int x1, x2, x3;
+					x1 = 0;
+					x2 = x1+4;
+					x3 = x2+4;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+				case 7:
+				{
+					int x1, x2, x3;
+					x1 = 2;
+					x2 = x1+2;
+					x3 = x2+2;
+					
+					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+					{
+						k.setSpieler(this);
+						kastenGewonnen = true;
+					}
+					break;
+				}
+			}
+			
+			if (kastenGewonnen == true)
+			{
+				System.out.println("Herzlichen Glückwunsch "  + this.getName() + "! Sie haben Kasten " + k.getKastenNummer() + " gewonnen!");
+				break;
+			}
+		}
 	}
 }
