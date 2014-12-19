@@ -163,6 +163,10 @@ public class Spieler
 	{
 		return wuerfelErgebnis;
 	}
+	public void setWuerfelErgebnis(int wuerfelErgebnis) //fuer die testmethoden, kann spaeter geloescht werden
+	{
+		this.wuerfelErgebnis=wuerfelErgebnis;
+	}
 	
 	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis
 	 * und gibt die Indizes der Kaesten und der dazugehörigen Felder zurück
