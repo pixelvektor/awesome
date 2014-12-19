@@ -6,7 +6,6 @@
 package data;
 
 import java.util.ArrayList;
-
 import control.Spiel;
 
 /**
@@ -50,12 +49,13 @@ public class Spieler
 			do
 			{
 				falscheEingabe = false;
-				eingabe = Spiel.input("Bitte wählen Sie ein freies Feld aus, in das Sie Ihren Pin setzen wollen. ('Kastennummer','Feldnummer'): ");
+
+				eingabe = Spiel.input("Bitte w�hlen Sie ein freies Feld aus, in das Sie Ihren Pin setzen wollen. ('Kastennummer','Feldnummer'): ");
 				
 				if (!angebote.contains(eingabe))
 				{
 					falscheEingabe = true;
-					System.out.println("Bitte überprüfen Sie Ihre Eingabe");
+					System.out.println("Bitte �berpr�fen Sie Ihre Eingabe");
 				}
 			} while (falscheEingabe == true);
 			
@@ -105,12 +105,12 @@ public class Spieler
 			do
 			{
 				falscheEingabe = false;
-				eingabe = Spiel.input("Bitte wählen Sie ein Feld aus, dass Sie löschen möchten('Kastennummer','Feldnummer'): ");
+				eingabe = Spiel.input("Bitte w�hlen Sie ein Feld aus, dass Sie l�schen m�chten('Kastennummer','Feldnummer'): ");
 				
 				if (!angebote.contains(eingabe))
 				{
 					falscheEingabe = true;
-					System.out.println("Bitte überprüfen Sie Ihre Eingabe.");
+					System.out.println("Bitte �berpr�fen Sie Ihre Eingabe.");
 				}
 			} while (falscheEingabe == true);
 			
@@ -165,7 +165,7 @@ public class Spieler
 	}
 	
 	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis
-	 * und gibt die Indizes der Kaesten und der dazugehoerigen Felder zur�ck
+	 * und gibt die Indizes der Kaesten und der dazugehörigen Felder zurück
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
