@@ -4,17 +4,22 @@ package test;
 import data.Kasten;
 import data.Spieler;
 
-public class wuerfel2
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+public class normWuerfeln
 {
 	public static void main(String[] args)
 	{
-		new wuerfel2();
+		new normWuerfeln();
 	}
- public wuerfel2()
+ public normWuerfeln()
  {
 	 String name;
-	 //String name2;
-		
+	 int zaehler = 0;
+	
+	while(zaehler < 20){
+		String eingabe = input("Geben sie die Zahl ein die sie testen wollen:");
+		int tipp=Integer.parseInt(eingabe);
 	 final Spieler[] spieler = new Spieler[2];
 	  Kasten[] kaesten = new Kasten[9];
 	  for (int x = 3; x < 12; x++)
@@ -26,14 +31,28 @@ public class wuerfel2
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
 		    name = "Erika";
-			//name2 = "Klaus";
+			
 			spieler[0] = new Spieler(name);
-			//spieler[1] = new Spieler(name2);
+			
 			System.out.println("Name Spieler 1: " + spieler[0].getName());
-			//System.out.println("Name Spieler 2: " + spieler[1].getName());
-	spieler[0].setWuerfelErgebnis(2);
+			
+	spieler[0].setWuerfelErgebnis(tipp);
 	System.out.println(spieler[0].getWuerfelErgebnis());
 	spieler[0].pinSetzen(kaesten);
-	 
+	zaehler++;
+	} 
+ }
+ public static String input(String ausgabe)
+ {
+     System.out.print(ausgabe);
+     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     try 
+     {
+         return br.readLine();            
+     } 
+     catch (Exception e)
+     {
+         return "";
+     }
  }
 }
