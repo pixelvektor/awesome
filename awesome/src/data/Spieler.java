@@ -35,8 +35,11 @@ public class Spieler
 	 * 
 	 * @param kaesten Das Spielfeld
 	 */
-	public void pinSetzen(Kasten[] kaesten)
+	public boolean pinSetzen(Kasten[] kaesten)
 	{
+		boolean kastenGewonnen = false;
+		boolean spielGewonnen = false;
+		
 		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
 		{
 			String eingabe = null;
@@ -66,12 +69,17 @@ public class Spieler
 			Feld[] zielFeld = kaesten[kastenIndex].getFelder();
 			zielFeld[feldIndex].setPin(new Pin(this));
 			
-			pruefeKasten(kaesten[kastenIndex]);
+			kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
 		}
 		else
 			pinLoeschen(kaesten);
+		
+		if (kastenGewonnen == true)
+			spielGewonnen = pruefeSpielfeld(kaesten);
+		
+		return spielGewonnen;
 	}
-	
+
 	public void pinLoeschen(Kasten[] kaesten)
 	{
 		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
@@ -217,7 +225,7 @@ public class Spieler
 		return angebote;
 	}
 	
-	private void pruefeKasten(Kasten k)
+	private boolean pruefeKasten(Kasten k)
 	{
 		System.out.println("pruefeKasten wurde für den Kasten " + k.getKastenNummer() + " aufgerufen.");
 		
@@ -237,13 +245,14 @@ public class Spieler
 			pruefIndex++;
 		}
 		
-		for (int i = 0; i <= 8; i++)
+		for (int i = 0; i <= 7; i++)
 		{
+			int x1,x2,x3;
+			
 			switch (i)
 			{
 				case 0:
 				{
-					int x1, x2, x3;
 					x1 = 0;
 					x2 = x1++;
 					x3 = x2++;
@@ -257,7 +266,6 @@ public class Spieler
 				}
 				case 1:
 				{
-					int x1, x2, x3;
 					x1 = 3;
 					x2 = x1++;
 					x3 = x2++;
@@ -271,7 +279,6 @@ public class Spieler
 				}
 				case 2:
 				{
-					int x1, x2, x3;
 					x1 = 0;
 					x2 = x1++;
 					x3 = x2++;
@@ -285,7 +292,6 @@ public class Spieler
 				}
 				case 3:
 				{
-					int x1, x2, x3;
 					x1 = 0;
 					x2 = x1+3;
 					x3 = x2+3;
@@ -299,7 +305,6 @@ public class Spieler
 				}
 				case 4:
 				{
-					int x1, x2, x3;
 					x1 = 1;
 					x2 = x1+3;
 					x3 = x2+3;
@@ -313,7 +318,6 @@ public class Spieler
 				}
 				case 5:
 				{
-					int x1, x2, x3;
 					x1 = 2;
 					x2 = x1+3;
 					x3 = x2+3;
@@ -327,7 +331,6 @@ public class Spieler
 				}
 				case 6:
 				{
-					int x1, x2, x3;
 					x1 = 0;
 					x2 = x1+4;
 					x3 = x2+4;
@@ -341,7 +344,6 @@ public class Spieler
 				}
 				case 7:
 				{
-					int x1, x2, x3;
 					x1 = 2;
 					x2 = x1+2;
 					x3 = x2+2;
@@ -361,5 +363,67 @@ public class Spieler
 				break;
 			}
 		}
+		
+		return kastenGewonnen;
+	}
+	
+	private boolean pruefeSpielfeld(Kasten[] kaesten)
+	{
+		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
+		boolean spielGewonnen = false;
+		
+		for (Kasten k : kaesten)
+		{
+			if (k.getSpieler() == this)
+				pruefListe.add(k.getKastenNummer());
+		}
+		
+		for (int i = 0; i <= 7; i++)
+		{
+			switch (i)
+			{
+				case 0:
+				{
+					if (pruefListe.contains(3) && pruefListe.contains(4) && pruefListe.contains(5))
+						spielGewonnen = true;
+				}
+				case 1:
+				{
+					if (pruefListe.contains(6) && pruefListe.contains(7) && pruefListe.contains(8))
+						spielGewonnen = true;
+				}
+				case 2:
+				{
+					if (pruefListe.contains(9) && pruefListe.contains(10) && pruefListe.contains(11))
+						spielGewonnen = true;
+				}
+				case 3:
+				{
+					if (pruefListe.contains(3) && pruefListe.contains(6) && pruefListe.contains(9))
+						spielGewonnen = true;
+				}
+				case 4:
+				{
+					if (pruefListe.contains(4) && pruefListe.contains(7) && pruefListe.contains(10))
+						spielGewonnen = true;
+				}
+				case 5:
+				{
+					if (pruefListe.contains(5) && pruefListe.contains(8) && pruefListe.contains(11))
+						spielGewonnen = true;
+				}
+				case 6:
+				{
+					if (pruefListe.contains(3) && pruefListe.contains(7) && pruefListe.contains(11))
+						spielGewonnen = true;
+				}
+				case 7:
+				{
+					if (pruefListe.contains(5) && pruefListe.contains(7) && pruefListe.contains(9))
+						spielGewonnen = true;
+				}
+			}
+		}
+		return spielGewonnen;
 	}
 }

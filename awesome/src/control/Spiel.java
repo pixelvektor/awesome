@@ -109,7 +109,7 @@ public class Spiel
 			
 			System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
 			
-			activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
+			spielBeenden = activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
 									
 			if ((loopCount >= 3) && (activePlayer.getWuerfelErgebnis() != 2))
 				spielBeenden = true;	// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.
