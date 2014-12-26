@@ -32,6 +32,7 @@ public class Spiel
 	public Spiel(final View view)
 	{
 		this.view = view;
+		
 		for (int x = 3; x < 12; x++)
 		{
 			System.out.println("Kasten " + (x-3) + ":");
@@ -40,6 +41,8 @@ public class Spiel
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
+		
+		view.showWindow(kaesten);	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		for (int y = 0; y < spieler.length; y++) // Alle Spieler sollen einen Namen eingeben.
 		{
