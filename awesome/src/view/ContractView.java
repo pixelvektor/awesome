@@ -14,5 +14,5 @@ public interface ContractView
 	/**
 	 * Loest die Ausgabe des Spiels aus.
 	 */
-	public void show(String activePlayer, int pip);
+	public void show();
 }

@@ -64,7 +64,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 		}
 	}
 	
-	public void show(final String activePlayer, final int pip) {
+	public void show() {
 		int diff = 0;
 		for(int i=0; i<13; i++) {
 			if(i%4==0) {
@@ -74,7 +74,6 @@ public class View implements ContractView, ActionListener, ContainerListener
 			else
 				printNumbers(i-diff);
 		}
-		printPlayer(activePlayer, pip);
 		
 	}
 	

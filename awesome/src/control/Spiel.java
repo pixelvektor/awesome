@@ -90,7 +90,7 @@ public class Spiel
 		System.out.println(activePlayer.getName() + " faengt an!");
 		
 		// Testaufruf der View
-		view.show(activePlayer.getName(),activePlayer.wuerfeln());
+		view.show();
 		
 		gameLoop();		// Die Hauptschleife des Spiels wird aufgerufen.
 	}
