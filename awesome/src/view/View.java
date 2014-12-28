@@ -24,32 +24,33 @@ import data.Spieler;
  */
 public class View implements ContractView, ActionListener, ContainerListener
 {
-	CustomButton[] buttons = new CustomButton[81];
+	private CustomButton[] buttons = new CustomButton[81];
+	private JFrame frame;
 	
 	@SuppressWarnings("deprecation")
-	public void showWindow(Kasten[] kaesten, Spieler[] spieler)
+	public void show(Kasten[] kaesten, Spieler[] spieler)
 	{
-		JFrame frame = new JFrame();	// Das Fenster selbst
+		frame = new JFrame();	// Das Fenster selbst
 		Container contentPane = frame.getContentPane();	// Die ContentPane fuer das Spielfeld (evtl. nochmal ueberdenken).
 		Container[] kastenContainer = new Container[9];	// Ein Container fuer die einzelnen Kaesten, damit diese richtig angeordnet werden.
 
-		new NameDialog(frame, spieler);
+		new NameDialog(frame, spieler);		// Der EingabeDialog wird als modaler Dialog aufgerufen.
 		
-		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();	// Die Aufloesung des Bildschirms wird erfasst.
 		int x, y, width, height;
 		
-		width = 500;
-		height = 500;
-		x = (screensize.width / 2) - (width / 2);
-		y = (screensize.height / 2) - (height / 2);
+		width = 500;	// Fensterbreite
+		height = 500;	// Fensterhoehe
+		x = (screensize.width / 2) - (width / 2); 		// Fenster horizontal mittig ausrichten.
+		y = (screensize.height / 2) - (height / 2);		// Fenster vertikal mittig ausrichten.
 		
-		frame.setTitle("AWESOME");
-		frame.setBounds(x, y, width, height);
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("AWESOME");				// Fenstertitel angegeben.
+		frame.setBounds(x, y, width, height);	// Fenstergroesse und Position festlegen.
+		frame.setResizable(false);		// Das Fenster kann nicht vom Benutzer skaliert werden.
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// Das Fenster wird mit einem Klick auf das X geschlossen.
 		
 		contentPane.setLayout(new GridLayout(3,3,10,10));	// Das Layout fuer das gesamte Spielfeld.
-		contentPane.setBackground(Color.GRAY);
+		contentPane.setBackground(Color.GRAY);	// Hintergrundfarbe einstellen.
 		
 		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
 		{
@@ -61,6 +62,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 			contentPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
 		}
 		
+		// Testen der Methoden zum Hervorheben der setzbaren Felder und rueckgaengig machen der Hervorhebung.
 		CustomButton b1 = (CustomButton) kastenContainer[4].getComponent(4);
 		b1.setHighlight();
 		CustomButton b2 = (CustomButton) kastenContainer[2].getComponent(7);
@@ -68,7 +70,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 		CustomButton b3 = (CustomButton) kastenContainer[1].getComponent(2);
 		b3.setNormal();
 		
-		frame.show();
+		frame.show();	// Fenster anzeigen.
 	}
 	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern
 	 * 
@@ -82,31 +84,6 @@ public class View implements ContractView, ActionListener, ContainerListener
 			buttons[x] = new CustomButton("", k.getFelder()[x]);	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
 			c.add(buttons[x]);	// Der neue Button wird dem Container hinzugefuegt.
 		}
-	}
-	
-	public void show() {
-		int diff = 0;
-		for(int i=0; i<13; i++) {
-			if(i%4==0) {
-				printLine();
-				diff++;
-			}
-			else
-				printNumbers(i-diff);
-		}
-		
-	}
-	
-	private void printLine() {
-		System.out.println("----------------------------");
-	}
-	
-	private void printNumbers(final int i) {
-		System.out.println("| 3  9 11| 3  9 11| 3  9 11|");
-	}
-	
-	private void printPlayer(final String player, final int pip) {
-		System.out.println("\n" + player + " wuerfelt die " + pip);
 	}
 	
 	/**

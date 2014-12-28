@@ -60,12 +60,13 @@ public class Kasten
 				feld[y] = new Feld(shuffleListe.get(y));
 		}
 		
+		/*
 		for (int z = 0; z < 9; z++)
 		{
 			System.out.println("Feld " + z + ": " + feld[z].getFeldNummer());
 		}
 		System.out.println();
-		
+		*/
 		return feld;
 	}
 	

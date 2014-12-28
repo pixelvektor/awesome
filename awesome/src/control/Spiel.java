@@ -8,7 +8,6 @@ package control;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import view.NameDialog;
 import view.View;
 import data.Kasten;
 import data.Spieler;
@@ -37,14 +36,14 @@ public class Spiel
 		
 		for (int x = 3; x < 12; x++)
 		{
-			System.out.println("Kasten " + (x-3) + ":");
-			System.out.println("---------");
+			//System.out.println("Kasten " + (x-3) + ":");
+			//System.out.println("---------");
 			
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
 		
-		view.showWindow(kaesten, spieler);	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
+		view.show(kaesten, spieler);	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		System.out.println("Name Spieler 1: " + spieler[0].getName());	// Die Namen werden ausgegeben.
 		System.out.println("Name Spieler 2: " + spieler[1].getName());
@@ -70,9 +69,6 @@ public class Spiel
 		// Umbau fuer die View
 		activePlayer = spieler[0].getWuerfelErgebnis() > spieler[1].getWuerfelErgebnis() ? spieler[0] : spieler[1];
 		System.out.println(activePlayer.getName() + " faengt an!");
-		
-		// Testaufruf der View
-		view.show();
 		
 		gameLoop();		// Die Hauptschleife des Spiels wird aufgerufen.
 	}
