@@ -7,6 +7,8 @@ package control;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
+import view.NameDialog;
 import view.View;
 import data.Kasten;
 import data.Spieler;
@@ -42,27 +44,7 @@ public class Spiel
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
 		
-		view.showWindow(kaesten);	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
-		
-		for (int y = 0; y < spieler.length; y++) // Alle Spieler sollen einen Namen eingeben.
-		{
-			String eingabe;
-			
-			do
-			{
-				eingabe = input("Geben Sie bitte Ihren Namen ein Spieler " + (y+1) + ": ");
-				
-				if (!(eingabe.length() == 0))	// Eine leere Eingabe wird nicht akzeptiert.
-				{
-					spieler[y] = new Spieler(eingabe);	// Der Spieler wird erzeugt und bekommt den eingegebenen Namen als Parameter mit.
-				}
-				else
-				{
-					System.out.println("Sie muessen einen Namen eingeben!");	// Fehlerausgabe, wenn kein Name eingegeben wurde.
-				}
-			} while ((eingabe.length() == 0));	// Wenn ein Spieler keinen Namen eingegeben hat, dann wird er nochmal dazu aufgefordert.
-			System.out.println();
-		}
+		view.showWindow(kaesten, spieler);	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		System.out.println("Name Spieler 1: " + spieler[0].getName());	// Die Namen werden ausgegeben.
 		System.out.println("Name Spieler 2: " + spieler[1].getName());

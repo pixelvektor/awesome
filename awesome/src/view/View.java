@@ -8,12 +8,15 @@ package view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
 
 import data.Kasten;
+import data.Spieler;
 
 /**
  * @author 
@@ -21,17 +24,27 @@ import data.Kasten;
  */
 public class View implements ContractView, ActionListener, ContainerListener
 {
-	JButton[] buttons = new JButton[81];
+	CustomButton[] buttons = new CustomButton[81];
 	
 	@SuppressWarnings("deprecation")
-	public void showWindow(Kasten[] kaesten)
+	public void showWindow(Kasten[] kaesten, Spieler[] spieler)
 	{
 		JFrame frame = new JFrame();	// Das Fenster selbst
 		Container contentPane = frame.getContentPane();	// Die ContentPane fuer das Spielfeld (evtl. nochmal ueberdenken).
 		Container[] kastenContainer = new Container[9];	// Ein Container fuer die einzelnen Kaesten, damit diese richtig angeordnet werden.
+
+		new NameDialog(frame, spieler);
+		
+		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+		int x, y, width, height;
+		
+		width = 500;
+		height = 500;
+		x = (screensize.width / 2) - (width / 2);
+		y = (screensize.height / 2) - (height / 2);
 		
 		frame.setTitle("AWESOME");
-		frame.setSize(500, 500);
+		frame.setBounds(x, y, width, height);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -48,6 +61,13 @@ public class View implements ContractView, ActionListener, ContainerListener
 			contentPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
 		}
 		
+		CustomButton b1 = (CustomButton) kastenContainer[4].getComponent(4);
+		b1.setHighlight();
+		CustomButton b2 = (CustomButton) kastenContainer[2].getComponent(7);
+		b2.setHighlight();
+		CustomButton b3 = (CustomButton) kastenContainer[1].getComponent(2);
+		b3.setNormal();
+		
 		frame.show();
 	}
 	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern
@@ -59,7 +79,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 	{
 		for (int x = 0; x < 9; x++)		// Diese Schleife durchlaeuft den gesamten Kasten.
 		{
-			buttons[x] = new JButton("" + k.getFelder()[x].getFeldNummer());	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
+			buttons[x] = new CustomButton("", k.getFelder()[x]);	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
 			c.add(buttons[x]);	// Der neue Button wird dem Container hinzugefuegt.
 		}
 	}
