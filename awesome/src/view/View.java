@@ -33,9 +33,9 @@ public class View implements ContractView, ActionListener, ContainerListener
 		frame = new JFrame();	// Das Fenster selbst
 		Container contentPane = frame.getContentPane();	// Die ContentPane fuer das Spielfeld (evtl. nochmal ueberdenken).
 		Container[] kastenContainer = new Container[9];	// Ein Container fuer die einzelnen Kaesten, damit diese richtig angeordnet werden.
-
-		new NameDialog(frame, spieler);		// Der EingabeDialog wird als modaler Dialog aufgerufen.
 		
+		new NameDialog(frame, spieler);		// Der EingabeDialog wird als modaler Dialog aufgerufen.
+			
 		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();	// Die Aufloesung des Bildschirms wird erfasst.
 		int x, y, width, height;
 		
@@ -62,6 +62,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 			contentPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
 		}
 		
+		/*
 		// Testen der Methoden zum Hervorheben der setzbaren Felder und rueckgaengig machen der Hervorhebung.
 		CustomButton b1 = (CustomButton) kastenContainer[4].getComponent(4);
 		b1.setHighlight();
@@ -69,6 +70,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 		b2.setHighlight();
 		CustomButton b3 = (CustomButton) kastenContainer[1].getComponent(2);
 		b3.setNormal();
+		*/
 		
 		frame.show();	// Fenster anzeigen.
 	}
@@ -79,10 +81,13 @@ public class View implements ContractView, ActionListener, ContainerListener
 	 */
 	public void fillContainer(Container c, Kasten k)
 	{
+		int multiplikator = k.getKastenNummer() - 3;	// 
+		int offset = multiplikator * 9;
+		
 		for (int x = 0; x < 9; x++)		// Diese Schleife durchlaeuft den gesamten Kasten.
 		{
-			buttons[x] = new CustomButton("", k.getFelder()[x]);	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
-			c.add(buttons[x]);	// Der neue Button wird dem Container hinzugefuegt.
+			buttons[x + offset] = new CustomButton("", k.getFelder()[x]);	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
+			c.add(buttons[x + offset]);	// Der neue Button wird dem Container hinzugefuegt.
 		}
 	}
 	
@@ -124,5 +129,13 @@ public class View implements ContractView, ActionListener, ContainerListener
         	JButton b = (JButton) c;
         	b.removeActionListener(this);
         }
+	}
+	
+	public void updateButtons()
+	{
+		for (CustomButton button : buttons)
+		{
+			button.highlightButton();
+		}
 	}
 }

@@ -5,7 +5,9 @@
  */
 package data;
 
+import java.awt.Color;
 import java.util.ArrayList;
+
 import control.Spiel;
 
 /**
@@ -17,11 +19,18 @@ public class Spieler
 	private final String name;
 	private int punkte;
 	private int wuerfelErgebnis;
+	private Color farbe;
 	
 	/**
 	 * @param name
 	 */
-	public Spieler(final String name)
+	public Spieler(final String name, final Color farbe)
+	{
+		this.name = name;
+		this.farbe = farbe;
+	}
+	
+	public Spieler (final String name)
 	{
 		this.name = name;
 	}
@@ -198,9 +207,12 @@ public class Spieler
 			{
 				for (Feld feld : k.getFelder())	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
 				{
+					feld.setHighlight(false);	// Setze die Variable vor der Pruefung zurueck
+					
 					if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
 					{
 						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+						feld.setHighlight(true);	// Die Variable highlight wird im Feld auf true gesetzt, damit das Feld in der View gehighlightet werden kann.
 						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 					}
 					else if ((wuerfelErgebnis == feld.getFeldNummer()) && (feld.getPin() == null) || ((wuerfelErgebnis == k.getKastenNummer()) && (feld.getPin() == null)))
@@ -209,11 +221,13 @@ public class Spieler
 						if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
 						{
 							angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+							feld.setHighlight(true);	// Die Variable highlight wird im Feld auf true gesetzt, damit das Feld in der View gehighlightet werden kann.
 							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 						}
 						else if ((wuerfelErgebnis == 7) && (feld.getFeldNummer() == 7))	// ...es sei denn es wurde die 7 gewuerfelt.
 						{
 							angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+							feld.setHighlight(true);	// Die Variable highlight wird im Feld auf true gesetzt, damit das Feld in der View gehighlightet werden kann.
 							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
 						}
 					}
@@ -425,5 +439,10 @@ public class Spieler
 			}
 		}
 		return spielGewonnen;
+	}
+	
+	public Color getColor()
+	{
+		return farbe;
 	}
 }

@@ -50,7 +50,7 @@ public class CustomButton extends JButton
 	/**
 	 * Diese Methode aendert den Rahmen des Buttons, um ihn hervorzuheben.
 	 */
-	public void setHighlight()
+	private void setHighlight()
 	{
 		Border highlight = BorderFactory.createLineBorder(java.awt.Color.ORANGE, 3);	// Hier wird die Farbe und Dicke des Rahmens eingestellt.
 		this.setBorder(highlight);	// Hier wird der Rahmen uebernommen.
@@ -59,8 +59,16 @@ public class CustomButton extends JButton
 	/**
 	 * Hiermit wird der Standardrahmen des Buttons wiederhergestellt.
 	 */
-	public void setNormal()
+	private void setNormal()
 	{
 		this.setBorder(defaultBorder);
+	}
+	
+	public void highlightButton()
+	{
+		if (feld.getHighlight() == true)
+			setHighlight();
+		else
+			setNormal();
 	}
 }

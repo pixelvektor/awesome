@@ -12,6 +12,7 @@ public class Feld
 {
 	private Pin pin;
 	private int feldNummer;
+	private boolean highlight = false;
 	
 	public Feld(int feldNummer)
 	{
@@ -31,5 +32,21 @@ public class Feld
 	public int getFeldNummer()
 	{
 		return feldNummer;
+	}
+
+	/**
+	 * @return the highlight
+	 */
+	public boolean getHighlight()
+	{
+		return highlight;
+	}
+
+	/**
+	 * @param highlight the highlight to set
+	 */
+	public void setHighlight(boolean highlight)
+	{
+		this.highlight = highlight;
 	}
 }

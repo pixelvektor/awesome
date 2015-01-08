@@ -1,10 +1,12 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.color.*;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -189,8 +191,8 @@ public class NameDialog
 			}
 			else	// Stimmen die Namen nicht ueberein werden die Namen in die Spieler geschrieben.
 			{
-				spieler[0] = new Spieler(txtName1.getText());
-				spieler[1] = new Spieler(txtName2.getText());
+				spieler[0] = new Spieler(txtName1.getText(), Color.BLUE);
+				spieler[1] = new Spieler(txtName2.getText(), Color.RED);
 			
 				dialog.dispose();	// Das Dialogfenster wird geschlossen.
 			}
