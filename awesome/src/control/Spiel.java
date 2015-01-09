@@ -7,6 +7,7 @@ package control;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import view.View;
 import data.Kasten;
@@ -90,9 +91,12 @@ public class Spiel
 			
 			System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
 			
-			spielBeenden = activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
+			// spielBeenden = activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
 				
+			ArrayList<String> angebote = activePlayer.bieteFelderAn(kaesten);
 			view.updateButtons();
+			
+			activePlayer.pinSetzen(kaesten, angebote);
 			
 			if ((loopCount >= 3) && (activePlayer.getWuerfelErgebnis() != 2))
 				spielBeenden = true;	// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.

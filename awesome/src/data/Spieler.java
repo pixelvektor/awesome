@@ -44,7 +44,7 @@ public class Spieler
 	 * 
 	 * @param kaesten Das Spielfeld
 	 */
-	public boolean pinSetzen(Kasten[] kaesten)
+	public boolean pinSetzen(Kasten[] kaesten, ArrayList<String> angebote)
 	{
 		boolean kastenGewonnen = false;
 		boolean spielGewonnen = false;
@@ -52,10 +52,8 @@ public class Spieler
 		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
 		{
 			String eingabe = null;
-			boolean falscheEingabe = false;			
-			ArrayList<String> angebote = new ArrayList<String>();	// ArrayList erstellen, die die angebotenen Felder enthalten soll.
+			boolean falscheEingabe = false;
 			
-			angebote = bieteFelderAn(kaesten);	// Angegbote durch die Methode einholen.
 			System.out.println(angebote.size() + " Elemente: " + angebote);
 			
 			do
@@ -192,7 +190,7 @@ public class Spieler
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
-	private ArrayList<String> bieteFelderAn(Kasten[] kaesten)
+	public ArrayList<String> bieteFelderAn(Kasten[] kaesten)
 	{
 		ArrayList<String> angebote = new ArrayList<String>();	// Diese Liste wird spaeter mit den Indizes gefuellt und ist der Rueckgabewert.
 		int kastenIndex = 0;
