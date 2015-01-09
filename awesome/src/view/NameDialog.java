@@ -111,46 +111,35 @@ public class NameDialog
 		
 		bottomPane.setLayout(new FlowLayout());
 		
-		btnOK.addActionListener(new OKButtonListener());	// Den Button dem ActionListener hinzufuegen, um Mausklicks zu erfassen.
+		btnOK.addActionListener(new ActionListener() // Den Button dem ActionListener hinzufuegen, um Mausklicks zu erfassen.
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verifyNames();
+				
+			}
+		});
+		
 		btnOK.addKeyListener(new EnterKeyListener());		// Den Button dem KeyListener hinzufuegen, um den Tastendruck auf Enter zu erfassen.
 		bottomPane.add(btnOK);		// den Button der untersten Ebene hinzufuegen.
 		
-		btnAbort.addActionListener(new AbortButtonListener());
+		btnAbort.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);		// Wird der Abbrechen-Button geklickt, wird das Programm beendet.
+				
+			}
+		});
+		
 		btnAbort.addKeyListener(new EnterKeyListener());
 		bottomPane.add(btnAbort);
 
 		contentPane.add(bottomPane, BorderLayout.SOUTH);	// Die unterste Ebene der Hiintergrundebene im unteren Teil (SOUTH) hinzufuegen.
 		
-		dialog.show();	// Das Dialogfenster anzeigen.
-	}
-	
-	/**
-	 * Ein ActionListener fuer den OK-Button.
-	 * @author Matthias
-	 *
-	 */
-	class OKButtonListener implements ActionListener	//  als innere Klasse implementiert
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			verifyNames();
-		}
-		
-	}
-	
-	/**
-	 * Ein ActionListener fuer den Abbrechen-Button.
-	 * @author Matthias
-	 *
-	 */
-	class AbortButtonListener implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			System.exit(0);		// Wird der Abbrechen-Button geklickt, wird das Programm beendet.
-		}
+		dialog.setVisible(true);	// Das Dialogfenster anzeigen.
 	}
 	
 	/**

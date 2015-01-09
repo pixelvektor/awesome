@@ -62,18 +62,9 @@ public class View implements ContractView, ActionListener, ContainerListener
 			contentPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
 		}
 		
-		/*
-		// Testen der Methoden zum Hervorheben der setzbaren Felder und rueckgaengig machen der Hervorhebung.
-		CustomButton b1 = (CustomButton) kastenContainer[4].getComponent(4);
-		b1.setHighlight();
-		CustomButton b2 = (CustomButton) kastenContainer[2].getComponent(7);
-		b2.setHighlight();
-		CustomButton b3 = (CustomButton) kastenContainer[1].getComponent(2);
-		b3.setNormal();
-		*/
-		
-		frame.show();	// Fenster anzeigen.
+		frame.setVisible(true);	// Fenster anzeigen.
 	}
+	
 	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern
 	 * 
 	 * @param c - Der Container, der mit Buttons gefuellt werden soll. 
@@ -97,6 +88,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		//TODO kekse
 		System.out.println();
 		System.out.println("Selected: " + e.getActionCommand());
 	}
