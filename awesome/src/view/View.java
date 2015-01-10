@@ -145,6 +145,7 @@ public class View implements ContainerListener
 	{
 		for (CustomButton b : buttons)
 		{
+			b.setOpaque(true);
 			b.setEnabled(false);
 			b.setBackground(spieler.getColor());
 			b.getFeld().setPin(new Pin(spieler));
