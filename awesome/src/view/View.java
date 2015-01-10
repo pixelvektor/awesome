@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import data.Kasten;
+import data.Pin;
 import data.Spieler;
 
 /**
@@ -137,8 +138,18 @@ public class View implements ContainerListener
 				break;
 			}
 		}
-		
 		return inactive;
-		
+	}
+
+	public void fillAllButtons(Spieler spieler)
+	{
+		for (CustomButton b : buttons)
+		{
+			b.setEnabled(false);
+			b.setBackground(spieler.getColor());
+			b.getFeld().setPin(new Pin(spieler));
+			b.getFeld().setHighlight(false);
+			b.highlightButton();
+		}
 	}
 }
