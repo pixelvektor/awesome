@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 import view.CustomButton;
 import view.View;
-import data.Feld;
 import data.Kasten;
 import data.Spieler;
 
@@ -30,6 +29,8 @@ public class Spiel
 	private final View view;
 	/** true solange das Spiel laeuft. */
 	private boolean isRunning = true;
+	/** Gibt an ob das Spiel wiederholt werden soll. */
+	private boolean repeat;
 	
 	/**
 	 * Erstellt ein Spiel mit einem Spielfeld.
@@ -47,6 +48,10 @@ public class Spiel
 		view.show(kaesten, spieler, new ButtonListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		gameStart();	// Das Spiel wird gestartet.
+	}
+	
+	public boolean shouldRepeat() {
+		return repeat;
 	}
 	
 	private void gameStart()
@@ -72,7 +77,7 @@ public class Spiel
 	private void startRound(Kasten[] kaesten)
 	{
 		if (!isRunning)
-			gameEnd();
+			repeat = gameEnd();
 		else
 		{
 			do 
@@ -95,10 +100,11 @@ public class Spiel
 		
 	}
 	
-	private void gameEnd()
+	private boolean gameEnd()
 	{
 		System.out.println("Das Spiel ist zu Ende");
 		view.fillAllButtons(activePlayer);
+		return view.repeat();
 	}
 	
 	class ButtonListener implements ActionListener

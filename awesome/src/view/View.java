@@ -31,8 +31,8 @@ public class View implements ContainerListener
 	private CustomButton[] buttons = new CustomButton[81];
 	private JFrame frame;
 	private ActionListener buttonListener;
+	private boolean repeat;
 	
-	@SuppressWarnings("deprecation")
 	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener)
 	{
 		this.buttonListener = buttonListener;
@@ -69,6 +69,14 @@ public class View implements ContainerListener
 		}
 		
 		frame.setVisible(true);	// Fenster anzeigen.
+	}
+	
+	public boolean repeat() {
+		return repeat;
+	}
+	
+	public void setRepeat(boolean repeat) {
+		this.repeat = repeat;
 	}
 	
 	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern
@@ -152,5 +160,6 @@ public class View implements ContainerListener
 			b.getFeld().setHighlight(false);
 			b.highlightButton();
 		}
+		new WinDialog(frame, this, spieler);
 	}
 }
