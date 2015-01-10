@@ -17,10 +17,10 @@ public class Awesome
 	 */
 	public static void main(String[] args)
 	{
-		Spiel spiel;
+		View view;
 		do{
-			View view = new View();
-			spiel = new Spiel(view);
-		} while(spiel.shouldRepeat());
+			view = new View();
+			new Spiel(view);
+		} while(view.shouldRepeat());
 	}
 }

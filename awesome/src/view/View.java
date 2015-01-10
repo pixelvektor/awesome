@@ -71,7 +71,7 @@ public class View implements ContainerListener
 		frame.setVisible(true);	// Fenster anzeigen.
 	}
 	
-	public boolean repeat() {
+	public boolean shouldRepeat() {
 		return repeat;
 	}
 	

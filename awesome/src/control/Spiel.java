@@ -29,8 +29,6 @@ public class Spiel
 	private final View view;
 	/** true solange das Spiel laeuft. */
 	private boolean isRunning = true;
-	/** Gibt an ob das Spiel wiederholt werden soll. */
-	private boolean repeat;
 	
 	/**
 	 * Erstellt ein Spiel mit einem Spielfeld.
@@ -48,10 +46,6 @@ public class Spiel
 		view.show(kaesten, spieler, new ButtonListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		gameStart();	// Das Spiel wird gestartet.
-	}
-	
-	public boolean shouldRepeat() {
-		return repeat;
 	}
 	
 	private void gameStart()
@@ -77,7 +71,7 @@ public class Spiel
 	private void startRound(Kasten[] kaesten)
 	{
 		if (!isRunning)
-			repeat = gameEnd();
+			gameEnd();
 		else
 		{
 			do 
@@ -100,11 +94,10 @@ public class Spiel
 		
 	}
 	
-	private boolean gameEnd()
+	private void gameEnd()
 	{
 		System.out.println("Das Spiel ist zu Ende");
 		view.fillAllButtons(activePlayer);
-		return view.repeat();
 	}
 	
 	class ButtonListener implements ActionListener
@@ -124,7 +117,7 @@ public class Spiel
 			else
 			{
 				button.setDefaultBackground();
-				button.setOpaque(true);
+				button.setOpaque(false);
 				activePlayer.pinLoeschen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
 			}
 			
