@@ -333,6 +333,13 @@ public class Spieler
 			
 			if (kastenGewonnen == true)
 			{
+				k.setSpieler(this);
+
+				for (Feld f : k.getFelder())
+				{
+					f.setHighlight(false);
+				}
+				
 				System.out.println("Herzlichen Glückwunsch "  + this.getName() + "! Sie haben Kasten " + k.getKastenNummer() + " gewonnen!");
 				break;
 			}
