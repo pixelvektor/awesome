@@ -84,8 +84,6 @@ public class Spieler
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));
 		
 		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
-
-		pinLoeschen(kaesten);
 		
 		if (kastenGewonnen == true)
 			spielGewonnen = pruefeSpielfeld(kaesten);
