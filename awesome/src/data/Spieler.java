@@ -429,6 +429,10 @@ public class Spieler
 				}
 			}
 		}
+		
+		if (spielGewonnen == true)
+			System.out.println(this.getName() + " hat das Spiel gewonnen!");
+		
 		return spielGewonnen;
 	}
 }
