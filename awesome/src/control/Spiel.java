@@ -71,26 +71,31 @@ public class Spiel
 
 	private void startRound(Kasten[] kaesten)
 	{
-		do 
-		{
-			System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
-			
-			activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
-			
-			System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
-				
-			activePlayer.bieteFelderAn(kaesten);
-			
-			view.updateButtons();
-		} 
-		while (view.allInactive());
 		if (!isRunning)
 			gameEnd();
+		else
+		{
+			do 
+			{
+				System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
+				
+				activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
+				
+				System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
+					
+				activePlayer.bieteFelderAn(kaesten);
+				
+				view.updateButtons();
+			} 
+			while (view.allInactive());
+		}
+		
 	}
 	
 	private void gameEnd()
 	{
-		
+		System.out.println("Das Spiel ist zu Ende");
+		view.fillAllButtons(activePlayer);
 	}
 	
 	class ButtonListener implements ActionListener
@@ -107,15 +112,16 @@ public class Spiel
 			
 			System.out.println(e.getActionCommand());
 			
-			boolean spielBeenden = false;	// Wird erst auf true gesetzt, wenn ein Spieler gewonnen hat.
-			
-			if ((activePlayer.equals(spieler[0])) && (activePlayer.getWuerfelErgebnis() != 2))	/* Hier werden die Spieler gewechselt und geprueft, 
-																								   ob ein Spieler nochmal an der Reihe ist.*/
-				activePlayer = spieler[1];
-			else if ((activePlayer.equals(spieler[1])) && (activePlayer.getWuerfelErgebnis() != 2))
-				activePlayer = spieler[0];
-			else
-				System.out.println(activePlayer.getName() + " ist nochmal an der Reihe.");
+			if (isRunning)
+			{
+				if ((activePlayer.equals(spieler[0])) && (activePlayer.getWuerfelErgebnis() != 2))	/* Hier werden die Spieler gewechselt und geprueft, 
+																									   ob ein Spieler nochmal an der Reihe ist.*/
+					activePlayer = spieler[1];
+				else if ((activePlayer.equals(spieler[1])) && (activePlayer.getWuerfelErgebnis() != 2))
+					activePlayer = spieler[0];
+				else
+					System.out.println(activePlayer.getName() + " ist nochmal an der Reihe.");
+			}
 			
 			startRound(kaesten);
 		}
