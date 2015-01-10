@@ -71,8 +71,14 @@ public class CustomButton extends JButton
 	public void highlightButton()
 	{
 		if (feld.getHighlight() == true)
+		{
+			this.setEnabled(true);
 			setHighlight();
+		}
 		else
+		{
 			setNormal();
+			this.setEnabled(false);
+		}
 	}
 }

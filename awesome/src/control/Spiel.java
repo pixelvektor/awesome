@@ -5,11 +5,14 @@
  */
 package control;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import view.View;
+import data.Feld;
 import data.Kasten;
 import data.Spieler;
 
@@ -37,19 +40,12 @@ public class Spiel
 		
 		for (int x = 3; x < 12; x++)
 		{
-			//System.out.println("Kasten " + (x-3) + ":");
-			//System.out.println("---------");
 			
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
 		
-		view.show(kaesten, spieler);	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
-		
-		System.out.println("Name Spieler 1: " + spieler[0].getName());	// Die Namen werden ausgegeben.
-		System.out.println("Name Spieler 2: " + spieler[1].getName());
-		
-		System.out.println();
+		view.show(kaesten, spieler, new ButtonListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		gameStart();	// Das Spiel wird gestartet.
 	}
@@ -71,38 +67,37 @@ public class Spiel
 		activePlayer = spieler[0].getWuerfelErgebnis() > spieler[1].getWuerfelErgebnis() ? spieler[0] : spieler[1];
 		System.out.println(activePlayer.getName() + " faengt an!");
 		
-		gameLoop();		// Die Hauptschleife des Spiels wird aufgerufen.
+		startRound(kaesten);
 	}
-	
-	/** Die Hauptschleife des Spiels.
-	 *  Hier laeuft der ueberwiegende Teil der Spiellogik ab.
-	 */
-	private void gameLoop()
+
+	private void startRound(Kasten[] kaesten)
 	{
-		
-		boolean spielBeenden = false;	// Wird erst auf true gesetzt, wenn ein Spieler gewonnen hat.
-		int loopCount = 0;				// Zaehlt die Schleifendurchlaeufe (nur zu Testzwecken)
-		
-		do
-		{
+		do {
 			System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
 			
 			activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
 			
 			System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
-			
-			// spielBeenden = activePlayer.pinSetzen(kaesten);	// Der derzeit aktive Spieler setzt einen Pin.
 				
-			ArrayList<String> angebote = activePlayer.bieteFelderAn(kaesten);
+			activePlayer.bieteFelderAn(kaesten);
 			view.updateButtons();
+		} while (view.allInactive());
+	}
+	
+	private void gameEnd()
+	{
+		
+	}
+	
+	class ButtonListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			System.out.println(e.getActionCommand());
 			
-			activePlayer.pinSetzen(kaesten, angebote);
-			
-			if ((loopCount >= 3) && (activePlayer.getWuerfelErgebnis() != 2))
-				spielBeenden = true;	// Das Spiel wird zu Testzwecken beendet, wenn jeder Spieler ein Zug gemacht hat.
-			
-			if (activePlayer.getWuerfelErgebnis() != 2)
-				loopCount++;	// Ein Zaehler der zu Testzwecken die Durchlaeufe zaehlt und das Spiel beendet.
+			boolean spielBeenden = false;	// Wird erst auf true gesetzt, wenn ein Spieler gewonnen hat.
 			
 			if ((activePlayer.equals(spieler[0])) && (activePlayer.getWuerfelErgebnis() != 2))	/* Hier werden die Spieler gewechselt und geprueft, 
 																								   ob ein Spieler nochmal an der Reihe ist.*/
@@ -112,30 +107,8 @@ public class Spiel
 			else
 				System.out.println(activePlayer.getName() + " ist nochmal an der Reihe.");
 			
-			System.out.println("Durchlauf " + loopCount);
-			
-		} while (spielBeenden == false);	// Das Spiel laeuft, solange die Variable spielBeenden auf false steht.
-		
-		System.out.println("\r\nDas Spiel ist aus!");
-	}
-	
-	private void gameEnd()
-	{
+			startRound(kaesten);
+		}
 		
 	}
-	
-	public static String input(String ausgabe)
-    {
-        System.out.print(ausgabe);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try 
-        {
-            return br.readLine();            
-        } 
-        catch (Exception e)
-        {
-            return "";
-        }
-    }
-
 }

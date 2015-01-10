@@ -15,6 +15,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import control.Spiel;
 import data.Kasten;
 import data.Spieler;
 
@@ -22,14 +23,17 @@ import data.Spieler;
  * @author 
  *
  */
-public class View implements ContractView, ActionListener, ContainerListener
+public class View implements ContainerListener
 {
 	private CustomButton[] buttons = new CustomButton[81];
 	private JFrame frame;
+	private ActionListener buttonListener;
 	
 	@SuppressWarnings("deprecation")
-	public void show(Kasten[] kaesten, Spieler[] spieler)
+	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener)
 	{
+		this.buttonListener = buttonListener;
+		
 		frame = new JFrame();	// Das Fenster selbst
 		Container contentPane = frame.getContentPane();	// Die ContentPane fuer das Spielfeld (evtl. nochmal ueberdenken).
 		Container[] kastenContainer = new Container[9];	// Ein Container fuer die einzelnen Kaesten, damit diese richtig angeordnet werden.
@@ -85,17 +89,6 @@ public class View implements ContractView, ActionListener, ContainerListener
 	}
 	
 	/**
-	 * Das ist der ActionListener, in dem steht was bei einem Buttonklick passieren soll.
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		//TODO kekse
-		System.out.println();
-		System.out.println("Selected: " + e.getActionCommand());
-	}
-	
-	/**
 	 * Das ist eine Methode die fuer den ContainerListener implementiert werden muss.
 	 * 
 	 * Diese wird aufgerufen, wenn eine Komponente zum Container hinzugefuegt wird.
@@ -109,7 +102,7 @@ public class View implements ContractView, ActionListener, ContainerListener
         if (c instanceof JButton)	// Wenn diese Kompontente ein JButton ist...
         {
     		JButton b = (JButton) c;	// ...wird die Komponente zu einem JButton gecastet...
-    		b.addActionListener(this);	// ...um einen ActionListener zugewiesen bekommen zu koennen.
+    		b.addActionListener(buttonListener);	// ...um einen ActionListener zugewiesen bekommen zu koennen.
         }
 	}
 
@@ -121,7 +114,7 @@ public class View implements ContractView, ActionListener, ContainerListener
         if (c instanceof JButton)
         {
         	JButton b = (JButton) c;
-        	b.removeActionListener(this);
+        	b.removeActionListener(buttonListener);
         }
 	}
 	
@@ -131,5 +124,21 @@ public class View implements ContractView, ActionListener, ContainerListener
 		{
 			button.highlightButton();
 		}
+	}
+	
+	public boolean allInactive()
+	{
+		boolean inactive = true;
+		for (CustomButton b : buttons)
+		{
+			if (b.isEnabled())
+			{
+				inactive = false;
+				break;
+			}
+		}
+		
+		return inactive;
+		
 	}
 }

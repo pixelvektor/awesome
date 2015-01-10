@@ -60,8 +60,6 @@ public class Spieler
 			{
 				falscheEingabe = false;
 
-				eingabe = Spiel.input("Bitte w�hlen Sie ein freies Feld aus, in das Sie Ihren Pin setzen wollen. ('Kastennummer','Feldnummer'): ");
-				
 				if (!angebote.contains(eingabe))
 				{
 					falscheEingabe = true;
@@ -125,7 +123,6 @@ public class Spieler
 			do
 			{
 				falscheEingabe = false;
-				eingabe = Spiel.input("Bitte w�hlen Sie ein Feld aus, dass Sie l�schen m�chten('Kastennummer','Feldnummer'): ");
 				
 				if (!angebote.contains(eingabe))
 				{
