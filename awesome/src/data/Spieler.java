@@ -44,40 +44,14 @@ public class Spieler
 	 * 
 	 * @param kaesten Das Spielfeld
 	 */
-	public boolean pinSetzen(Kasten[] kaesten, ArrayList<String> angebote)
+	public boolean pinSetzen(Kasten[] kaesten, int feldIndex, int kastenIndex)
 	{
 		boolean kastenGewonnen = false;
 		boolean spielGewonnen = false;
 		
-		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
-		{
-			String eingabe = null;
-			boolean falscheEingabe = false;
-			
-			System.out.println(angebote.size() + " Elemente: " + angebote);
-			
-			do
-			{
-				falscheEingabe = false;
-
-				if (!angebote.contains(eingabe))
-				{
-					falscheEingabe = true;
-					System.out.println("Bitte �berpr�fen Sie Ihre Eingabe");
-				}
-			} while (falscheEingabe == true);
-			
-			String[] koordinaten = eingabe.split(",");
-			int kastenIndex = Integer.parseInt(koordinaten[0]);
-			int feldIndex = Integer.parseInt(koordinaten[1]);
-			System.out.println("Kasten: " + kastenIndex + ", Feld: " + feldIndex);
-			Feld[] zielFeld = kaesten[kastenIndex].getFelder();
-			zielFeld[feldIndex].setPin(new Pin(this));
-			
-			kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
-		}
-		else
-			pinLoeschen(kaesten);
+		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));
+		
+		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
 		
 		if (kastenGewonnen == true)
 			spielGewonnen = pruefeSpielfeld(kaesten);
@@ -199,8 +173,6 @@ public class Spieler
 		
 		for (Kasten k : kaesten)	// Eine Schleife durch alle Kaesten des Spielfeldes.
 		{
-			int feldIndex = 0;
-			
 			if (k.getSpieler() == null)
 			{
 				for (Feld feld : k.getFelder())	// Hier wird jedes Feld einzeln auf seinen Wert ueberprueft.
@@ -209,27 +181,26 @@ public class Spieler
 					
 					if ((wuerfelErgebnis == 12) && (feld.getPin() == null))	// Wurde die 12 gewuerfelt, soll jedes freie Feld vorgeschlagen werden.
 					{
-						angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+						angebote.add(kastenIndex + "," + feld.getFeldIndex());	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
 						feld.setHighlight(true);	// Die Variable highlight wird im Feld auf true gesetzt, damit das Feld in der View gehighlightet werden kann.
-						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feld.getFeldIndex()));
 					}
 					else if ((wuerfelErgebnis == feld.getFeldNummer()) && (feld.getPin() == null) || ((wuerfelErgebnis == k.getKastenNummer()) && (feld.getPin() == null)))
 					// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer �bereinstimmt und das Feld frei ist wird es vorgeschlagen.
 					{
 						if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
 						{
-							angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+							angebote.add(kastenIndex + "," + feld.getFeldIndex());	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
 							feld.setHighlight(true);	// Die Variable highlight wird im Feld auf true gesetzt, damit das Feld in der View gehighlightet werden kann.
-							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feld.getFeldIndex()));
 						}
 						else if ((wuerfelErgebnis == 7) && (feld.getFeldNummer() == 7))	// ...es sei denn es wurde die 7 gewuerfelt.
 						{
-							angebote.add(kastenIndex + "," + feldIndex);	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
+							angebote.add(kastenIndex + "," + feld.getFeldIndex());	// Die Indizes des Feldes werden der Liste als String hinzugefuegt.
 							feld.setHighlight(true);	// Die Variable highlight wird im Feld auf true gesetzt, damit das Feld in der View gehighlightet werden kann.
-							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feldIndex));
+							System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feld.getFeldIndex()));
 						}
 					}
-					feldIndex++;
 				}
 			}
 			kastenIndex++;

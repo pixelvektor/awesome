@@ -15,24 +15,21 @@ public class CustomButton extends JButton
 {
 	private static final long serialVersionUID = 1L;
 	private Feld feld;		// Das Feld zu dem der Button gehoert.
-	private Kasten[] kaesten;
 	private int kastenIndex;
 	private Border defaultBorder;
 	
 	/**
-	 * Ein Spezialkonstruktor, dem zusätzlich zum Text ein Feld übergeben wird.
-	 * @param string - Der Text, der auf dem Button stehen soll. Wird ein leerer String übergeben, dann steht die Feldnummer auf dem Button.
+	 * Ein Spezialkonstruktor, dem anstatt dem Text ein Feld übergeben wird.
 	 * @param feld - Das Feld, zu dem der Button gehoeren soll.
 	 * @param kaesten - Das Spielfeld
 	 * @param kastenIndex - Der Index des Kastens in dem sich das Feld befindet
 	 */
-	public CustomButton(Feld feld, Kasten[] kaesten, int kastenIndex)
+	public CustomButton(Feld feld, int kastenIndex)
 	{
 		this.feld = feld;
 		defaultBorder = this.getBorder();	// Der Standardrahmen des Buttons wird zur spaeteren Verwendung in eine Instanzvariable geschrieben.
 		
 		this.setText("" + feld.getFeldNummer());
-		this.kaesten = kaesten;
 		this.kastenIndex = kastenIndex;
 	}
 	
@@ -49,6 +46,11 @@ public class CustomButton extends JButton
 	public Feld getFeld()
 	{
 		return feld;
+	}
+	
+	public int getKastenIndex()
+	{
+		return kastenIndex;
 	}
 	
 	/**

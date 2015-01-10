@@ -57,7 +57,7 @@ public class Kasten
 		
 		for (int y = 0; y < 9; y++)
 		{
-				feld[y] = new Feld(shuffleListe.get(y));
+				feld[y] = new Feld(shuffleListe.get(y), y);
 		}
 		
 		/*

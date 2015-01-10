@@ -12,11 +12,13 @@ public class Feld
 {
 	private Pin pin;
 	private int feldNummer;
+	private int feldIndex;
 	private boolean highlight = false;
 	
-	public Feld(int feldNummer)
+	public Feld(int feldNummer, int feldIndex)
 	{
 		this.feldNummer = feldNummer;
+		this.feldIndex = feldIndex;
 	}
 	
 	public Pin getPin()
@@ -33,7 +35,12 @@ public class Feld
 	{
 		return feldNummer;
 	}
-
+	
+	public int getFeldIndex()
+	{
+		return feldIndex;
+	}
+	
 	/**
 	 * @return the highlight
 	 */

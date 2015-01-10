@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import view.CustomButton;
 import view.View;
 import data.Feld;
 import data.Kasten;
@@ -40,7 +41,6 @@ public class Spiel
 		
 		for (int x = 3; x < 12; x++)
 		{
-			
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
@@ -72,7 +72,8 @@ public class Spiel
 
 	private void startRound(Kasten[] kaesten)
 	{
-		do {
+		do 
+		{
 			System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
 			
 			activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
@@ -80,8 +81,15 @@ public class Spiel
 			System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
 				
 			activePlayer.bieteFelderAn(kaesten);
+			
 			view.updateButtons();
-		} while (view.allInactive());
+		} 
+		while (view.allInactive());
+	}
+	
+	private void placePin(Feld feld, int kastenIndex)
+	{
+		activePlayer.pinSetzen(kaesten, feld.getFeldIndex(), kastenIndex);
 	}
 	
 	private void gameEnd()
@@ -95,6 +103,11 @@ public class Spiel
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
+			CustomButton button = (CustomButton) e.getSource();
+			
+			button.setBackground(activePlayer.getColor());
+			placePin(button.getFeld(), button.getKastenIndex());
+			
 			System.out.println(e.getActionCommand());
 			
 			boolean spielBeenden = false;	// Wird erst auf true gesetzt, wenn ein Spieler gewonnen hat.
