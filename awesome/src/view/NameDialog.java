@@ -49,7 +49,6 @@ public class NameDialog
 	 * 
 	 * @param o - Das Elternfenster zu dem der Dialog gehoeren soll.
 	 */
-	@SuppressWarnings("deprecation")
 	private void showNameDialog(Frame o)
 	{
 		// Initialisierung der Ebenen (Container) und Komponenten des Dialogfensters.
@@ -179,8 +178,8 @@ public class NameDialog
 			}
 			else	// Stimmen die Namen nicht ueberein werden die Namen in die Spieler geschrieben.
 			{
-				spieler[0] = new Spieler(txtName1.getText(), Color.BLUE);
-				spieler[1] = new Spieler(txtName2.getText(), Color.RED);
+				spieler[0] = new Spieler(txtName1.getText(), new Color(22,95,242));
+				spieler[1] = new Spieler(txtName2.getText(), new Color(191,4,4));
 			
 				dialog.dispose();	// Das Dialogfenster wird geschlossen.
 			}

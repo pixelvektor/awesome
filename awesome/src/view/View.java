@@ -56,7 +56,7 @@ public class View implements ContainerListener
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// Das Fenster wird mit einem Klick auf das X geschlossen.
 		
 		contentPane.setLayout(new GridLayout(3,3,10,10));	// Das Layout fuer das gesamte Spielfeld.
-		contentPane.setBackground(Color.GRAY);	// Hintergrundfarbe einstellen.
+		contentPane.setBackground(new Color(176,176,176));	// Hintergrundfarbe einstellen.
 		
 		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
 		{

@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Color;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -16,7 +18,8 @@ public class CustomButton extends JButton
 	private static final long serialVersionUID = 1L;
 	private Feld feld;		// Das Feld zu dem der Button gehoert.
 	private int kastenIndex;
-	private Border defaultBorder;
+	private final Border defaultBorder;
+	private final Color defaultColor;
 	
 	/**
 	 * Ein Spezialkonstruktor, dem anstatt dem Text ein Feld übergeben wird.
@@ -28,6 +31,7 @@ public class CustomButton extends JButton
 	{
 		this.feld = feld;
 		defaultBorder = this.getBorder();	// Der Standardrahmen des Buttons wird zur spaeteren Verwendung in eine Instanzvariable geschrieben.
+		defaultColor = this.getBackground();	// Die Standardfarbe des Buttons wird zur spaeteren Verwendung in eine Instanzvariable geschrieben.
 		
 		this.setText("" + feld.getFeldNummer());
 		this.kastenIndex = kastenIndex;
@@ -40,6 +44,7 @@ public class CustomButton extends JButton
 	public CustomButton(String s)
 	{
 		defaultBorder = this.getBorder();
+		defaultColor = this.getBackground();
 		this.setText(s);
 	}
 	
@@ -58,8 +63,14 @@ public class CustomButton extends JButton
 	 */
 	private void setHighlight()
 	{
-		Border highlight = BorderFactory.createLineBorder(java.awt.Color.ORANGE, 3);	// Hier wird die Farbe und Dicke des Rahmens eingestellt.
+		Border highlight = BorderFactory.createLineBorder(new Color(34,166,26), 3);	// Hier wird die Farbe und Dicke des Rahmens eingestellt.
 		this.setBorder(highlight);	// Hier wird der Rahmen uebernommen.
+	}
+	
+	private void setDeleteHighlight()
+	{
+		Border deleteHighlight = BorderFactory.createLineBorder(new Color(30,36,38), 3);
+		this.setBorder(deleteHighlight);
 	}
 	
 	/**
@@ -72,15 +83,27 @@ public class CustomButton extends JButton
 	
 	public void highlightButton()
 	{
-		if (feld.getHighlight() == true)
+		if (feld.getHighlight())
 		{
 			this.setEnabled(true);
 			setHighlight();
+		}
+		else if (feld.getHighlightToDelete())
+		{
+			this.setEnabled(true);
+			setDeleteHighlight();
 		}
 		else
 		{
 			setNormal();
 			this.setEnabled(false);
 		}
+	}
+	/**
+	 * Die Standardhintergrundfarbe wird wiederhergestellt.
+	 */
+	public void setDefaultBackground()
+	{
+		this.setBackground(defaultColor);
 	}
 }
