@@ -11,11 +11,13 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
-import control.Spiel;
 import data.Kasten;
 import data.Spieler;
 
@@ -41,12 +43,11 @@ public class View implements ContainerListener
 		new NameDialog(frame, spieler);		// Der EingabeDialog wird als modaler Dialog aufgerufen.
 			
 		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();	// Die Aufloesung des Bildschirms wird erfasst.
-		int x, y, width, height;
 		
-		width = 500;	// Fensterbreite
-		height = 500;	// Fensterhoehe
-		x = (screensize.width / 2) - (width / 2); 		// Fenster horizontal mittig ausrichten.
-		y = (screensize.height / 2) - (height / 2);		// Fenster vertikal mittig ausrichten.
+		int width = 500;	// Fensterbreite
+		int height = 500;	// Fensterhoehe
+		int x = (screensize.width / 2) - (width / 2); 		// Fenster horizontal mittig ausrichten.
+		int y = (screensize.height / 2) - (height / 2);		// Fenster vertikal mittig ausrichten.
 		
 		frame.setTitle("AWESOME");				// Fenstertitel angegeben.
 		frame.setBounds(x, y, width, height);	// Fenstergroesse und Position festlegen.
@@ -73,7 +74,7 @@ public class View implements ContainerListener
 	 * 
 	 * @param c - Der Container, der mit Buttons gefuellt werden soll. 
 	 * @param k - Der Kasten, aus dem die Feldnummern geholt werden sollen.
-	 * @param i 
+	 * @param kastenIndex 
 	 * @param kaesten 
 	 */
 	private void fillContainer(Container c, Kasten kasten, int kastenIndex)
@@ -88,11 +89,11 @@ public class View implements ContainerListener
 		}
 	}
 	
-	/**
-	 * Das ist eine Methode die fuer den ContainerListener implementiert werden muss.
+	/** Das ist eine Methode die fuer den ContainerListener implementiert werden muss.
 	 * 
 	 * Diese wird aufgerufen, wenn eine Komponente zum Container hinzugefuegt wird.
-	 * Ist diese Komponente ein Button, wird ihm ein ActionListener zugeordnet. 
+	 * Ist diese Komponente ein Button, wird ihm ein ActionListener zugeordnet.
+	 * @param e
 	 */
 	@Override
 	public void componentAdded(ContainerEvent e)

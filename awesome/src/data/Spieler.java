@@ -65,9 +65,6 @@ public class Spieler
 	 * 
 	 * @param wuerfelErgebnis Zu setzendes Ergebnis.
 	 */
-<<<<<<< HEAD
-	public boolean pinSetzen(Kasten[] kaesten, int feldIndex, int kastenIndex)
-=======
 	@Deprecated
 	public void setWuerfelErgebnis(int wuerfelErgebnis)
 	{
@@ -79,47 +76,16 @@ public class Spieler
 	 * @param kaesten Das Spielfeld.
 	 * @param angebote
 	 */
-	public boolean pinSetzen(final Kasten[] kaesten, final ArrayList<String> angebote)
->>>>>>> origin/master
+	public boolean pinSetzen(final Kasten[] kaesten, final int feldIndex, final int kastenIndex)
 	{
 		boolean kastenGewonnen = false;
 		boolean spielGewonnen = false;
 		
-<<<<<<< HEAD
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));
 		
 		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
-=======
-		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
-		{
-			String eingabe = null;
-			boolean falscheEingabe = false;
-			
-			System.out.println(angebote.size() + " Elemente: " + angebote);
-			
-			do
-			{
-				falscheEingabe = false;
 
-				if (!angebote.contains(eingabe))
-				{
-					falscheEingabe = true;
-					System.out.println("Bitte ueberpruefen Sie Ihre Eingabe");
-				}
-			} while (falscheEingabe);
-			
-			String[] koordinaten = eingabe.split(",");
-			int kastenIndex = Integer.parseInt(koordinaten[0]);
-			int feldIndex = Integer.parseInt(koordinaten[1]);
-			System.out.println("Kasten: " + kastenIndex + ", Feld: " + feldIndex);
-			Feld[] zielFeld = kaesten[kastenIndex].getFelder();
-			zielFeld[feldIndex].setPin(new Pin(this));
-			
-			kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
-		}
-		else
-			pinLoeschen(kaesten);
->>>>>>> origin/master
+		pinLoeschen(kaesten);
 		
 		if (kastenGewonnen == true)
 			spielGewonnen = pruefeSpielfeld(kaesten);
