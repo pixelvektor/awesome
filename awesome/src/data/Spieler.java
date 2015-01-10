@@ -266,8 +266,8 @@ public class Spieler
 				case 0:
 				{
 					x1 = 0;
-					x2 = x1++;
-					x3 = x2++;
+					x2 = x1+1;
+					x3 = x2+1;
 					
 					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
 					{
@@ -279,8 +279,8 @@ public class Spieler
 				case 1:
 				{
 					x1 = 3;
-					x2 = x1++;
-					x3 = x2++;
+					x2 = x1+1;
+					x3 = x2+1;
 					
 					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
 					{
@@ -292,13 +292,14 @@ public class Spieler
 				case 2:
 				{
 					x1 = 6;
-					x2 = x1++;
-					x3 = x2++;
+					x2 = x1+1;
+					x3 = x2+1;
 					
 					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
 					{
 						k.setSpieler(this);
 						kastenGewonnen = true;
+						
 					}
 					break;
 				}
