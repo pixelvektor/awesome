@@ -97,7 +97,8 @@ public class Spieler
 		for (Kasten k : kaesten)
 		{
 			int feldIndex = 0;
-			
+			if (k.getSpieler() == null)
+			{
 			for (Feld f : k.getFelder())
 			{
 				if ((f.getPin() != null) && (f.getPin().getSpieler() != this))
@@ -109,7 +110,9 @@ public class Spieler
 				feldIndex++;
 			}
 			kastenIndex++;
+		   }
 		}
+	
 		
 		if (angebote.size() == 0)
 			System.out.println("Es sind leider keine gegnerischen Pins auf dem Feld.");
