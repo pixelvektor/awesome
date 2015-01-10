@@ -103,6 +103,7 @@ public class Spiel
 			CustomButton button = (CustomButton) e.getSource();
 			
 			button.setBackground(activePlayer.getColor());
+			button.setOpaque(true);
 			placePin(button.getFeld(), button.getKastenIndex());
 			
 			System.out.println(e.getActionCommand());
