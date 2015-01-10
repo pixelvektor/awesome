@@ -83,7 +83,10 @@ public class Spiel
 				
 				System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
 					
-				activePlayer.bieteFelderAn(kaesten);
+				if (activePlayer.getWuerfelErgebnis() != 2)
+					activePlayer.bieteFelderAn(kaesten);
+				else
+					activePlayer.bieteLoeschFelderAn(kaesten);
 				
 				view.updateButtons();
 			} 
@@ -106,11 +109,18 @@ public class Spiel
 		{
 			CustomButton button = (CustomButton) e.getSource();
 			
-			button.setBackground(activePlayer.getColor());
-			button.setOpaque(true);
-			isRunning = !activePlayer.pinSetzen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
-			
-			System.out.println(e.getActionCommand());
+			if (activePlayer.getWuerfelErgebnis() != 2)
+			{
+				button.setBackground(activePlayer.getColor());
+				button.setOpaque(true);
+				isRunning = !activePlayer.pinSetzen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
+			}
+			else
+			{
+				button.setDefaultBackground();
+				button.setOpaque(true);
+				activePlayer.pinLoeschen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
+			}
 			
 			if (isRunning)
 			{

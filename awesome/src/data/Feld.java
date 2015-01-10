@@ -14,6 +14,7 @@ public class Feld
 	private int feldNummer;
 	private int feldIndex;
 	private boolean highlight = false;
+	private boolean highlightToDelete = false;
 	
 	public Feld(int feldNummer, int feldIndex)
 	{
@@ -55,5 +56,21 @@ public class Feld
 	public void setHighlight(boolean highlight)
 	{
 		this.highlight = highlight;
+	}
+
+	/**
+	 * @return the highlightToDelete
+	 */
+	public boolean getHighlightToDelete()
+	{
+		return highlightToDelete;
+	}
+
+	/**
+	 * @param highlightToDelete the highlightToDelete to set
+	 */
+	public void setHighlightToDelete(boolean highlightToDelete)
+	{
+		this.highlightToDelete = highlightToDelete;
 	}
 }
