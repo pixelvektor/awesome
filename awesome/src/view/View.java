@@ -56,7 +56,7 @@ public class View implements ContractView, ActionListener, ContainerListener
 		{
 			kastenContainer[i] = new Container();			// Ein neuer Container wird erstellt.
 			kastenContainer[i].addContainerListener(this);	// Der Container wird einem Listener zugeordnet, der in dieser Klasse implementiert ist.
-			fillContainer(kastenContainer[i], kaesten[i]);
+			fillContainer(kastenContainer[i], kaesten[i], kaesten, i);
 			kastenContainer[i].setLayout(new GridLayout(3,3,5,5));	// Das Layout fuer einen einzelnen Kasten.
 			
 			contentPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
@@ -69,15 +69,17 @@ public class View implements ContractView, ActionListener, ContainerListener
 	 * 
 	 * @param c - Der Container, der mit Buttons gefuellt werden soll. 
 	 * @param k - Der Kasten, aus dem die Feldnummern geholt werden sollen.
+	 * @param i 
+	 * @param kaesten 
 	 */
-	public void fillContainer(Container c, Kasten k)
+	private void fillContainer(Container c, Kasten k, Kasten[] kaesten, int kastenIndex)
 	{
 		int multiplikator = k.getKastenNummer() - 3;	// 
 		int offset = multiplikator * 9;
 		
 		for (int x = 0; x < 9; x++)		// Diese Schleife durchlaeuft den gesamten Kasten.
 		{
-			buttons[x + offset] = new CustomButton("", k.getFelder()[x]);	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
+			buttons[x + offset] = new CustomButton(k.getFelder()[x], kaesten, kastenIndex);	// Es wird ein neuer Button erzeugt und die Feldnummer aus dem Kasten geholt.
 			c.add(buttons[x + offset]);	// Der neue Button wird dem Container hinzugefuegt.
 		}
 	}
