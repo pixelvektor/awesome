@@ -8,50 +8,118 @@ package data;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import control.Spiel;
-
-/**
- * @author
- *
- */
 public class Spieler 
 {
+	/** Name des Spielers. */
 	private final String name;
+	/** Erzielte Punkte. */
 	private int punkte;
+	/** Aktuell gewuerfelte Zahl. */
 	private int wuerfelErgebnis;
-	private Color farbe;
+	/** Farbe des Spielers. */
+	private final Color farbe;
 	
-	/**
-	 * @param name
+	/** Erstellt einen Spieler.
+	 * @param name Name des Spielers. Nicht null.
+	 * @param farbe Farbe des Spielers. Nicht null.
 	 */
 	public Spieler(final String name, final Color farbe)
 	{
 		this.name = name;
 		this.farbe = farbe;
 	}
-	
-	public Spieler (final String name)
-	{
-		this.name = name;
-	}
 
+	/** Gibt den Namen des Spielers zurueck.
+	 * @return Der Name des Spielers.
+	 */
 	public String getName()
 	{
 		return name;
 	}
 	
-	/** Die Methode setzt einen Pin auf ein freies Feld
-	 * 
-	 * @param kaesten Das Spielfeld
+	/** Gibt die erspielten Punkte zurueck.
+	 * @return Punkteanzahl.
 	 */
+	public int getPunkte()
+	{
+		return punkte;
+	}
+	
+	/** Gibt das Wuerfelergebnis zurueck.
+	 * @return Wuerfelergebnis.
+	 */
+	public int getWuerfelErgebnis()
+	{
+		return wuerfelErgebnis;
+	}
+	
+	/** Gibt die Farbe des Spielers zurueck.
+	 * @return Die Farbe des Spielers.
+	 */
+	public Color getColor()
+	{
+		return farbe;
+	}
+	
+	/** Fuer die Testmethoden, kann spaeter geloescht werden.
+	 * 
+	 * @param wuerfelErgebnis Zu setzendes Ergebnis.
+	 */
+<<<<<<< HEAD
 	public boolean pinSetzen(Kasten[] kaesten, int feldIndex, int kastenIndex)
+=======
+	@Deprecated
+	public void setWuerfelErgebnis(int wuerfelErgebnis)
+	{
+		this.wuerfelErgebnis=wuerfelErgebnis;
+	}
+	
+	/** Die Methode setzt einen Pin auf ein freies Feld.
+	 * 
+	 * @param kaesten Das Spielfeld.
+	 * @param angebote
+	 */
+	public boolean pinSetzen(final Kasten[] kaesten, final ArrayList<String> angebote)
+>>>>>>> origin/master
 	{
 		boolean kastenGewonnen = false;
 		boolean spielGewonnen = false;
 		
+<<<<<<< HEAD
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));
 		
 		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
+=======
+		if (wuerfelErgebnis != 2)	// Pruefen, ob die 2 gewuerfelt wurde.
+		{
+			String eingabe = null;
+			boolean falscheEingabe = false;
+			
+			System.out.println(angebote.size() + " Elemente: " + angebote);
+			
+			do
+			{
+				falscheEingabe = false;
+
+				if (!angebote.contains(eingabe))
+				{
+					falscheEingabe = true;
+					System.out.println("Bitte ueberpruefen Sie Ihre Eingabe");
+				}
+			} while (falscheEingabe);
+			
+			String[] koordinaten = eingabe.split(",");
+			int kastenIndex = Integer.parseInt(koordinaten[0]);
+			int feldIndex = Integer.parseInt(koordinaten[1]);
+			System.out.println("Kasten: " + kastenIndex + ", Feld: " + feldIndex);
+			Feld[] zielFeld = kaesten[kastenIndex].getFelder();
+			zielFeld[feldIndex].setPin(new Pin(this));
+			
+			kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
+		}
+		else
+			pinLoeschen(kaesten);
+>>>>>>> origin/master
 		
 		if (kastenGewonnen == true)
 			spielGewonnen = pruefeSpielfeld(kaesten);
@@ -59,7 +127,11 @@ public class Spieler
 		return spielGewonnen;
 	}
 
-	public void pinLoeschen(Kasten[] kaesten)
+	/** Loescht einen Pin falls moeglich.
+	 * 
+	 * @param kaesten Das Spielfeld. Nicht null.
+	 */
+	public void pinLoeschen(final Kasten[] kaesten)
 	{
 		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
 		
@@ -133,34 +205,16 @@ public class Spieler
 		 */
 	}
 	
-	public int getPunkte()
-	{
-		return punkte;
-	}
-	
-	/**
-	 * Wuerfelt f�r den Spieler eine Zufallszahl und 
-	 * speichert diese in der Instanzvariable wuerfelErgebnis
+	/** Wuerfelt fuer den Spieler eine Zufallszahl und speichert diese in der Instanzvariable wuerfelErgebnis.
 	 * @return Das Wuerfelergebnis als Integer
 	 */
 	public int wuerfeln()
 	{
-		double random = ((Math.random() * 11) + 2);
-		wuerfelErgebnis = (int) random;
-		return (int) random;
-	}
-	
-	public int getWuerfelErgebnis()
-	{
+		wuerfelErgebnis = (int) ((Math.random() * 11) + 2);
 		return wuerfelErgebnis;
 	}
-	public void setWuerfelErgebnis(int wuerfelErgebnis) //fuer die testmethoden, kann spaeter geloescht werden
-	{
-		this.wuerfelErgebnis=wuerfelErgebnis;
-	}
 	
-	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis
-	 * und gibt die Indizes der Kaesten und der dazugehörigen Felder zurück
+	/** Die Methode vergleicht alle Felder mit dem Wuerfelergebnis und gibt die Indizes der Kaesten und der dazugehörigen Felder zurueck.
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
@@ -208,6 +262,11 @@ public class Spieler
 		return angebote;
 	}
 	
+	/**
+	 * 
+	 * @param k zu pruefender Kasten
+	 * @return
+	 */
 	private boolean pruefeKasten(Kasten k)
 	{
 		System.out.println("pruefeKasten wurde für den Kasten " + k.getKastenNummer() + " aufgerufen.");
@@ -240,11 +299,7 @@ public class Spieler
 					x2 = x1+1;
 					x3 = x2+1;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 1:
@@ -253,11 +308,7 @@ public class Spieler
 					x2 = x1+1;
 					x3 = x2+1;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 2:
@@ -266,12 +317,7 @@ public class Spieler
 					x2 = x1+1;
 					x3 = x2+1;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-						
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 3:
@@ -280,11 +326,7 @@ public class Spieler
 					x2 = x1+3;
 					x3 = x2+3;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 4:
@@ -293,11 +335,7 @@ public class Spieler
 					x2 = x1+3;
 					x3 = x2+3;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 5:
@@ -306,11 +344,7 @@ public class Spieler
 					x2 = x1+3;
 					x3 = x2+3;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 6:
@@ -319,11 +353,7 @@ public class Spieler
 					x2 = x1+4;
 					x3 = x2+4;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 				case 7:
@@ -332,11 +362,7 @@ public class Spieler
 					x2 = x1+2;
 					x3 = x2+2;
 					
-					if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-					{
-						k.setSpieler(this);
-						kastenGewonnen = true;
-					}
+					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
 			}
@@ -350,7 +376,24 @@ public class Spieler
 		
 		return kastenGewonnen;
 	}
+
+	private boolean checkList(Kasten k, ArrayList<Integer> pruefListe,
+			int x1, int x2, int x3)
+	{
+		boolean kastenGewonnen = false;
+		if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
+		{
+			k.setSpieler(this);
+			kastenGewonnen = true;
+		}
+		return kastenGewonnen;
+	}
 	
+	/** Prueft ob der Spieler das Spiel gewonnen hat.
+	 * 
+	 * @param kaesten Das Spielfeld. Nicht null.
+	 * @return true wenn gewonnen. Sonst false.
+	 */
 	private boolean pruefeSpielfeld(Kasten[] kaesten)
 	{
 		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
@@ -370,36 +413,43 @@ public class Spieler
 				{
 					if (pruefListe.contains(3) && pruefListe.contains(4) && pruefListe.contains(5))
 						spielGewonnen = true;
+					break;
 				}
 				case 1:
 				{
 					if (pruefListe.contains(6) && pruefListe.contains(7) && pruefListe.contains(8))
 						spielGewonnen = true;
+					break;
 				}
 				case 2:
 				{
 					if (pruefListe.contains(9) && pruefListe.contains(10) && pruefListe.contains(11))
 						spielGewonnen = true;
+					break;
 				}
 				case 3:
 				{
 					if (pruefListe.contains(3) && pruefListe.contains(6) && pruefListe.contains(9))
 						spielGewonnen = true;
+					break;
 				}
 				case 4:
 				{
 					if (pruefListe.contains(4) && pruefListe.contains(7) && pruefListe.contains(10))
 						spielGewonnen = true;
+					break;
 				}
 				case 5:
 				{
 					if (pruefListe.contains(5) && pruefListe.contains(8) && pruefListe.contains(11))
 						spielGewonnen = true;
+					break;
 				}
 				case 6:
 				{
 					if (pruefListe.contains(3) && pruefListe.contains(7) && pruefListe.contains(11))
 						spielGewonnen = true;
+					break;
 				}
 				case 7:
 				{
@@ -409,10 +459,5 @@ public class Spieler
 			}
 		}
 		return spielGewonnen;
-	}
-	
-	public Color getColor()
-	{
-		return farbe;
 	}
 }
