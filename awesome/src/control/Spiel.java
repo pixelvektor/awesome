@@ -28,6 +28,8 @@ public class Spiel
 	private Spieler activePlayer;
 	/** Speichert die View. */
 	private final View view;
+	/** true solange das Spiel laeuft. */
+	private boolean isRunning = true;
 	
 	/**
 	 * Erstellt ein Spiel mit einem Spielfeld.
@@ -82,11 +84,8 @@ public class Spiel
 			view.updateButtons();
 		} 
 		while (view.allInactive());
-	}
-	
-	private void placePin(Feld feld, int kastenIndex)
-	{
-		activePlayer.pinSetzen(kaesten, feld.getFeldIndex(), kastenIndex);
+		if (!isRunning)
+			gameEnd();
 	}
 	
 	private void gameEnd()
@@ -104,7 +103,7 @@ public class Spiel
 			
 			button.setBackground(activePlayer.getColor());
 			button.setOpaque(true);
-			placePin(button.getFeld(), button.getKastenIndex());
+			isRunning = !activePlayer.pinSetzen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
 			
 			System.out.println(e.getActionCommand());
 			
