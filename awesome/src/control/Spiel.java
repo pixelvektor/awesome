@@ -7,6 +7,10 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import view.CustomButton;
 import view.View;
@@ -91,13 +95,13 @@ public class Spiel
 			} 
 			while (view.allInactive());
 		}
-		
 	}
 	
 	private void gameEnd()
 	{
 		System.out.println("Das Spiel ist zu Ende");
 		view.fillAllButtons(activePlayer);
+		restartGame();
 	}
 	
 	class ButtonListener implements ActionListener
@@ -133,7 +137,33 @@ public class Spiel
 			}
 			
 			startRound(kaesten);
+		}	
+	}
+	
+	public void restartGame() {
+		final String javaPath = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+		File file = null;
+		try
+		{
+			file = new File(Spiel.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+		} catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
+
+		final ArrayList<String> command = new ArrayList<String>();
+		command.add(javaPath);
+		command.add(file.getPath());
+		
+		final ProcessBuilder builder = new ProcessBuilder(command);
+		try
+		{
+			builder.start();
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
 		}
 		
+		System.exit(0);
 	}
 }
