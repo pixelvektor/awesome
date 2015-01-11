@@ -71,34 +71,36 @@ public class Spieler
 		this.wuerfelErgebnis=wuerfelErgebnis;
 	}
 	
-	/** Die Methode setzt einen Pin auf ein freies Feld.
-	 * 
-	 * @param kaesten Das Spielfeld.
-	 * @param angebote
+	/**
+	 * Setzt einen Pin auf ein freies Feld.
+	 * @param kaesten - Das Spielfeld
+	 * @param feldIndex - Der Feldindex des gewaehlten Feldes
+	 * @param kastenIndex - Der Kastenindex des gewaehlten Feldes
+	 * @return Gibt true zurueck, wenn das Spiel gewonnen wurde. Sonst false.
 	 */
 	public boolean pinSetzen(final Kasten[] kaesten, final int feldIndex, final int kastenIndex)
 	{
 		boolean kastenGewonnen = false;
 		boolean spielGewonnen = false;
 		
-		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));
+		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));	// Setzt den Pin in das Feld.
 		erhoehePunkte();
 		
-		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
+		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);	// Prueft, ob der Kasten gewonnen wurde.
 		
-		if (kastenGewonnen == true)
+		if (kastenGewonnen == true)		// Wenn der Kasten gewonnen wurde, wird geprueft, ob das Spiel gewonnen wurde.
 			spielGewonnen = pruefeSpielfeld(kaesten);
 		
 		return spielGewonnen;
 	}
 
-	/** Loescht einen Pin falls moeglich.
+	/** Loescht einen Pin
 	 * 
-	 * @param kaesten Das Spielfeld. Nicht null.
-	 * @param kastenIndex 
-	 * @param feldIndex 
+	 * @param kaesten - Das Spielfeld
+	 * @param kastenIndex - Der Kastenindex des gewaehlten Feldes
+	 * @param feldIndex - Der Feldindex des gewaehlten Feldes
 	 */
-	public void pinLoeschen(final Kasten[] kaesten, int feldIndex, int kastenIndex)
+	public void pinLoeschen(final Kasten[] kaesten, final int feldIndex, final int kastenIndex)
 	{
 		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
 		
@@ -106,7 +108,7 @@ public class Spieler
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(null);
 	}
 	
-	public void bieteLoeschFelderAn(Kasten[] kaesten)
+	public void bieteLoeschFelderAn(final Kasten[] kaesten)
 	{
 		for (Kasten k : kaesten)
 		{
@@ -126,11 +128,17 @@ public class Spieler
 		}
 	}
 	
+	/**
+	 * Erhoeht die Punkte um 1
+	 */
 	public void erhoehePunkte()
 	{
 		punkte++;
 	}
 	
+	/**
+	 * Verringert die Punkte um 1
+	 */
 	public void verringerePunkte()
 	{
 		punkte--;
@@ -195,37 +203,37 @@ public class Spieler
 	}
 	
 	/**
-	 * 
-	 * @param k zu pruefender Kasten
-	 * @return
+	 * Prueft, ob der Kasten gewonnen wurde
+	 * @param k - zu pruefender Kasten
+	 * @return true, wenn der Kasten gewonnen wurde. Sonst false.
 	 */
 	private boolean pruefeKasten(Kasten k)
 	{
 		System.out.println("pruefeKasten wurde für den Kasten " + k.getKastenNummer() + " aufgerufen.");
 		
-		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
-		int pruefIndex = 0;
-		boolean kastenGewonnen = false;
+		ArrayList<Integer> pruefListe = new ArrayList<Integer>();	// In diese Liste kommen die Indizes der gewonnenen Felder.
+		int pruefIndex = 0;		// Gibt den Index eines Feldes an. Wird nach jedem Durchlauf um 1 erhoeht.
+		boolean kastenGewonnen = false;		// Wird auf true gesetzt, wenn der Kasten gewonnen wurde.
 		
-		for (Feld f : k.getFelder())
+		for (Feld f : k.getFelder())	// Durchlaeuft jedes Feld im Kasten.
 		{
-			if (f.getPin() != null)
+			if (f.getPin() != null)		// Wenn das Feld eine Pin besitzt...
 			{
-				if (f.getPin().getSpieler() == this)
+				if (f.getPin().getSpieler() == this)	// ...wird geprueft, ob es der Pin des aktuellen Spielers ist.
 				{
-					pruefListe.add(pruefIndex);
+					pruefListe.add(pruefIndex);		// wenn das der Fall ist, wird der pruefIndex zur pruefListe hinzugefuegt.
 				}
 			}
-			pruefIndex++;
+			pruefIndex++;	// Nach einem Durchlauf wird der pruefIndex um 1 erhoeht.
 		}
 		
-		for (int i = 0; i <= 7; i++)
+		for (int i = 0; i <= 7; i++)	// Diese Schleife durchlaeuft (wenn noetig) alle 8 moeglichen Faelle, in denen ein Kasten gewonnen ist.
 		{
-			int x1,x2,x3;
+			int x1,x2,x3;	// Deklaration der Indexvariablien mit denen geprueft wird.
 			
 			switch (i)
 			{
-				case 0:
+				case 0:		// Waagerecht 1. Zeile.
 				{
 					x1 = 0;
 					x2 = x1+1;
@@ -234,7 +242,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 1:
+				case 1:		// Waagerecht 2. Zeile.
 				{
 					x1 = 3;
 					x2 = x1+1;
@@ -243,7 +251,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 2:
+				case 2:		// Waagerecht 3. Zeile.
 				{
 					x1 = 6;
 					x2 = x1+1;
@@ -252,7 +260,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 3:
+				case 3:		// Senkrecht linke Spalte.
 				{
 					x1 = 0;
 					x2 = x1+3;
@@ -261,7 +269,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 4:
+				case 4:		// Senkrecht mittlere Spalte.
 				{
 					x1 = 1;
 					x2 = x1+3;
@@ -270,7 +278,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 5:
+				case 5:		// Senkrecht rechte Spalte.
 				{
 					x1 = 2;
 					x2 = x1+3;
@@ -279,7 +287,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 6:
+				case 6:		// Diagonal von oben links nach unten rechts.
 				{
 					x1 = 0;
 					x2 = x1+4;
@@ -288,7 +296,7 @@ public class Spieler
 					kastenGewonnen = checkList(k, pruefListe, x1, x2, x3);
 					break;
 				}
-				case 7:
+				case 7:		// Diagonal von oben rechts nach unten links.
 				{
 					x1 = 2;
 					x2 = x1+2;
@@ -299,44 +307,52 @@ public class Spieler
 				}
 			}
 			
-			if (kastenGewonnen == true)
+			if (kastenGewonnen == true)		// Wenn ein Kasten gewonnen wurde...
 			{
-				k.setSpieler(this);
+				k.setSpieler(this);		// ...wird dem Kasten zuerst der Spieler uebergeben.
 
-				for (Feld f : k.getFelder())
+				for (Feld f : k.getFelder())	// Die Schleife durchlaeuft jeden Feld im Kasten.
 				{
-					if ((f.getPin() != null) && (f.getPin().getSpieler() != this))
+					if ((f.getPin() != null) && (f.getPin().getSpieler() != this))	// Pruefen, ob das aktuelle Feld dem Gegner gehoert.
 					{
-						f.getPin().getSpieler().verringerePunkte();
-						erhoehePunkte();
+						f.getPin().getSpieler().verringerePunkte();		// Die gegnerischen Punkte verringern.
+						erhoehePunkte();	// Die eigenen Punkte erhoehen.
 					}
 					
-					if (f.getPin() == null)
+					if (f.getPin() == null)		// Wenn das aktuelle Feld noch niemandem gehoert...
 					{
-						erhoehePunkte();
+						erhoehePunkte();		// ...werden nur die eigenen Punkte erhoeht.
 					}
 						
-					f.setHighlight(false);
-					f.setPin(new Pin(this));
+					f.setHighlight(false);		// Das Feld soll ich mehr hervorgehoben werden.
+					f.setPin(new Pin(this));	// Des Spieler setzt seinen Pin in das Feld.
 				}
 				
 				System.out.println("Herzlichen Glückwunsch "  + this.getName() + "! Sie haben Kasten " + k.getKastenNummer() + " gewonnen!");
-				break;
+				break;		// Sobald ein Kasten gewonnen wurde, wird die for-Schleife verlassen.
 			}
 		}
 		
 		return kastenGewonnen;
 	}
 
+	/**
+	 * Ausgelagerte Hilfsmethode fuer die Methode pruefeKasten().
+	 * Prueft anhand der uebergebenen Indizes, ob ein Kasten gewonnen wurde.
+	 * @param k - Der Kasten, der geprueft werden soll.
+	 * @param pruefListe - Die Liste mit den Indizes der Feld, die der Spieler gewonnen hat.
+	 * @param x1 - Index 1
+	 * @param x2 - Index 2
+	 * @param x3 - Index 3
+	 * @return true, wenn der Kasten gewonnen wurde. Sonst false.
+	 */
 	private boolean checkList(Kasten k, ArrayList<Integer> pruefListe,
 			int x1, int x2, int x3)
 	{
 		boolean kastenGewonnen = false;
-		if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))
-		{
-			k.setSpieler(this);
-			kastenGewonnen = true;
-		}
+		if ((pruefListe.contains(x1)) && (pruefListe.contains(x2)) && (pruefListe.contains(x3)))	// wenn die Liste alle 3 Indizes enthaelt...
+			kastenGewonnen = true;	// wird der Rueckgabewert auf true gesetzt.
+		
 		return kastenGewonnen;
 	}
 	
@@ -347,72 +363,75 @@ public class Spieler
 	 */
 	private boolean pruefeSpielfeld(Kasten[] kaesten)
 	{
-		ArrayList<Integer> pruefListe = new ArrayList<Integer>();
+		ArrayList<Integer> pruefListe = new ArrayList<Integer>();	// Eine Liste, der die Nummern der gewonnenen Kaesten hinzugefuegt werden. 
 		boolean spielGewonnen = false;
 		
-		for (Kasten k : kaesten)
+		for (Kasten k : kaesten)	// Die Schleife durchlaeuft jeden Kasten im Spielfeld.
 		{
-			if (k.getSpieler() == this)
-				pruefListe.add(k.getKastenNummer());
+			if (k.getSpieler() == this)		// Wenn dem Spieler der Kasten gehoert...
+				pruefListe.add(k.getKastenNummer());	// ...wird die Nummer des Kastens zur Liste hinzugefuegt.
 		}
 		
-		for (int i = 0; i <= 7; i++)
+		for (int i = 0; i <= 7; i++)	// Es werden (wenn noetig) alle 8 moeglichen Faelle zum gewinnen des Spiels geprueft.
 		{
 			switch (i)
 			{
-				case 0:
+				case 0:		// Waagerecht 1. Zeile.
 				{
 					if (pruefListe.contains(3) && pruefListe.contains(4) && pruefListe.contains(5))
 						spielGewonnen = true;
 					break;
 				}
-				case 1:
+				case 1:		// Waagerecht 2. Zeile.
 				{
 					if (pruefListe.contains(6) && pruefListe.contains(7) && pruefListe.contains(8))
 						spielGewonnen = true;
 					break;
 				}
-				case 2:
+				case 2:		// Waagerecht 2. Zeile.
 				{
 					if (pruefListe.contains(9) && pruefListe.contains(10) && pruefListe.contains(11))
 						spielGewonnen = true;
 					break;
 				}
-				case 3:
+				case 3:		// Senkrecht linke Spalte.
 				{
 					if (pruefListe.contains(3) && pruefListe.contains(6) && pruefListe.contains(9))
 						spielGewonnen = true;
 					break;
 				}
-				case 4:
+				case 4:		// Senkrecht mittlere Spalte.
 				{
 					if (pruefListe.contains(4) && pruefListe.contains(7) && pruefListe.contains(10))
 						spielGewonnen = true;
 					break;
 				}
-				case 5:
+				case 5:		// Senkrecht rechte Spalte.
 				{
 					if (pruefListe.contains(5) && pruefListe.contains(8) && pruefListe.contains(11))
 						spielGewonnen = true;
 					break;
 				}
-				case 6:
+				case 6:		// Diagonal von oben links nach unten rechts.
 				{
 					if (pruefListe.contains(3) && pruefListe.contains(7) && pruefListe.contains(11))
 						spielGewonnen = true;
 					break;
 				}
-				case 7:
+				case 7:		// Diagonal von oben rechts nach unten links.
 				{
 					if (pruefListe.contains(5) && pruefListe.contains(7) && pruefListe.contains(9))
 						spielGewonnen = true;
 				}
 			}
+			
+			if (spielGewonnen == true)
+			{
+				System.out.println(this.getName() + " hat das Spiel gewonnen!");
+				break;
+			}
 		}
-		
-		if (spielGewonnen == true)
-			System.out.println(this.getName() + " hat das Spiel gewonnen!");
-		
+
 		return spielGewonnen;
 	}
 }

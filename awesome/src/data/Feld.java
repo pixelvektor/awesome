@@ -5,6 +5,7 @@
  */
 package data;
 /**
+ * Ein Feld, dass der Spieler gewinnnen kann.
  * @author
  *
  */

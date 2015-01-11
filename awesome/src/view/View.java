@@ -30,15 +30,22 @@ import data.Spieler;
  */
 public class View implements ContainerListener
 {
-	private CustomButton[] buttons = new CustomButton[81];
+	private CustomButton[] buttons = new CustomButton[81];	// Dieses Array haelt alle Buttons fuer das Spielfeld.
 	private JLabel lblPlayerName = new JLabel();
 	private JLabel lblErgebnisAusgabe = new JLabel();
 	private JLabel lbl_player1Points = new JLabel();
 	private JLabel lbl_player2Points = new JLabel();
 	private JFrame frame;
-	private ActionListener buttonListener;
+	private ActionListener buttonListener;					// Der ActionListener fuer die Buttons auf dem Spielfeld.
 	private boolean repeat;
 	
+	/**
+	 * Initialisiert das Hauptfenster und zeigt den Dialog fuer die Namenseingabe an.
+	 * @param kaesten - Das Spielfeld.
+	 * @param spieler - Die Spieler.
+	 * @param buttonListener - Der ActionListener fuer die Buttons des Spielfeldes.
+	 * @param restartListener - Der ActionListener fuer den Neustart-Button.
+	 */
 	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener, ActionListener restartListener)
 	{
 		this.buttonListener = buttonListener;
@@ -107,6 +114,7 @@ public class View implements ContainerListener
 		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
 		fieldPane.setBounds(15, 15, 500, 500);
 		
+		// Die Komponenten werden der ContenPane hinzugefuegt.
 		contentPane.add(lbl_player1Points);
 		contentPane.add(lbl_player2Points);
 		contentPane.add(lblPlayerName);
@@ -186,52 +194,79 @@ public class View implements ContainerListener
         }
 	}
 	
+	/**
+	 * Das Aussehen der Buttons wird aktualisiert.
+	 * Nicht moegliche Felder werden deaktiviert, mögliche Felder werden hervorgehoben.
+	 */
 	public void updateButtons()
 	{
-		for (CustomButton button : buttons)
+		for (CustomButton button : buttons)		// Fuer alle Buttons wird die Methode highlightButton() aufgerufen.
 		{
 			button.highlightButton();
 		}
 	}
 	
+	/**
+	 * Der aktuelle Punktestand der Spieler wird mit der View synchronisiert.
+	 * @param spieler - Die beiden Spieler
+	 */
 	public void updatePoints(Spieler[] spieler)
 	{
 		lbl_player1Points.setText("" + spieler[0].getPunkte());
 		lbl_player2Points.setText("" + spieler[1].getPunkte());
 	}
 	
+	/**
+	 * Es wird geprueft, ob alle Buttons des Spielfeldes deaktiviert sind.
+	 * @return Gibt true zurueck, wenn alle Buttons inaktiv sind.
+	 */
 	public boolean allInactive()
 	{
-		boolean inactive = true;
+		boolean inactive = true;		// Der Rueckgabewert wird mit true initialisiert.
 		for (CustomButton b : buttons)
 		{
-			if (b.isEnabled())
+			if (b.isEnabled())		// Sobald ein Button aktiv ist...
 			{
-				inactive = false;
-				break;
+				inactive = false;	// ...wird der Rueckgabewert auf false gesetzt...
+				break;				// ...und die Schleife wird verlassen.
 			}
 		}
 		return inactive;
 	}
 	
+	/**
+	 * Der Text des PlayerLabels wird auf den Namen des aktuellen Spieler gesetzt.
+	 * @param spielerName - Der Name des aktuellen Spielers.
+	 */
 	public void setPlayerLabel(String spielerName)
 	{
 		lblPlayerName.setText(spielerName);
 	}
 	
+	/**
+	 * Der Text des WuerfelLabels wird auf die aktuell gewuerfelte Zahl gesetzt.
+	 * @param wuerfelErgebnis - Das aktuelle wuerfelErgebnis.
+	 */
 	public void setWuerfelLabel(int wuerfelErgebnis)
 	{
 		lblErgebnisAusgabe.setText("" + wuerfelErgebnis);
 	}
 	
-	public void fuelleKasten(int kastenIndex, int feldIndex, Color color)
+	/**
+	 * Alle Buttons in einem gewonnenen Kasten werden mit der Farbe des Spielers gefuellt, der ihn gewonnen hat. 
+	 * @param kastenIndex - Der Index des gewonnenen Kastens.
+	 * @param color - Die Farbe des Spieler.
+	 */
+	public void fuelleKasten(int kastenIndex, Color color)
 	{
-		int startValue = kastenIndex * 9;
+		int startValue = kastenIndex * 9;	// Als Startwert wird der kastenIndex mit der Anzahl der Buttons im Kasten multipliziert.
+											// Da kastenIndex die Werte 0 bis 8 annehmen kann ergibt sich hierbei fuer startValue
+											// als minimaler Wert 0 und als maximaler Wert 72.
 		
-		for (int x = startValue; x < (startValue + 9); x++)
+		for (int x = startValue; x < (startValue + 9); x++)	// Eine Schleife vom Startwert an ueber die 8 naechsten Felder 
 		{
-			buttons[x].setBackground(color);
-			buttons[x].setOpaque(true);
+			buttons[x].setBackground(color);	// Die Farbe des Buttons wird auf die Spielerfarbe gesetzt.
+			buttons[x].setOpaque(true);			// Dieser Wert muss auf true gesetzt werden, sonst gibt es Anzeigeprobleme auf MacOS
 		}
 	}
 	

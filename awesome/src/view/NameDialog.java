@@ -24,7 +24,7 @@ import data.Spieler;
 
 /**
  * Das Dialogfenster, in dem die Spieler ihre Namen eingeben muessen bevor das Spiel beginnt. 
- * @author Matthias
+ * @author
  *
  */
 public class NameDialog

@@ -10,7 +10,7 @@ import data.Kasten;
 
 /**
  * Ein spezieller JButton, der das Feld speichern kann zu dem er gehoert.
- * @author Matthias
+ * @author
  *
  */
 public class CustomButton extends JButton
@@ -58,7 +58,7 @@ public class CustomButton extends JButton
 	}
 	
 	/**
-	 * Diese Methode aendert den Rahmen des Buttons, um ihn hervorzuheben.
+	 * Aendert den Rahmen des Buttons, um ihn zum setzen hervorzuheben.
 	 */
 	private void setHighlight()
 	{
@@ -66,6 +66,9 @@ public class CustomButton extends JButton
 		this.setBorder(highlight);	// Hier wird der Rahmen uebernommen.
 	}
 	
+	/**
+	 * Aendert den Rahmen des Buttons, um ihn zum loeschen hervorzuheben.
+	 */
 	private void setDeleteHighlight()
 	{
 		Border deleteHighlight = BorderFactory.createLineBorder(new Color(30,36,38), 3);
@@ -80,22 +83,28 @@ public class CustomButton extends JButton
 		this.setBorder(defaultBorder);
 	}
 	
+	/**
+	 * Es wird geprueft, ob der Button hervorgehoben werden soll und wenn ja in welcher Form.
+	 */
 	public void highlightButton()
 	{
-		if (feld.getHighlight())
+		if (feld != null)	// Es wird zur Sicherheit abgefragt, ob der Button ein Feld kennt.
 		{
-			this.setEnabled(true);
-			setHighlight();
-		}
-		else if (feld.getHighlightToDelete())
-		{
-			this.setEnabled(true);
-			setDeleteHighlight();
-		}
-		else
-		{
-			setNormal();
-			this.setEnabled(false);
+			if (feld.getHighlight())	// Wenn der Button zum setzen hervorgehoben werden soll.
+			{
+				this.setEnabled(true);	// Macht den Button klickbar.
+				setHighlight();
+			}
+			else if (feld.getHighlightToDelete())	// Wenn der Button zum loeschen hervorgehoben werden soll.
+			{
+				this.setEnabled(true);
+				setDeleteHighlight();
+			}
+			else	// Wenn der Button nicht hervorgehoben werden soll.
+			{
+				this.setEnabled(false);		// Deaktiviert den Button, um eine falsche Auswahl automatisch zu verhindern.
+				setNormal();
+			}
 		}
 	}
 	/**
