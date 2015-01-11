@@ -28,7 +28,7 @@ public class Feld
 		return pin;
 	}
 	
-	public void setPin(Pin pin)
+	public void setPin(final Pin pin)
 	{
 		this.pin = pin;
 	}
@@ -54,7 +54,7 @@ public class Feld
 	/**
 	 * @param highlight the highlight to set
 	 */
-	public void setHighlight(boolean highlight)
+	public void setHighlight(final boolean highlight)
 	{
 		this.highlight = highlight;
 	}
@@ -70,7 +70,7 @@ public class Feld
 	/**
 	 * @param highlightToDelete the highlightToDelete to set
 	 */
-	public void setHighlightToDelete(boolean highlightToDelete)
+	public void setHighlightToDelete(final boolean highlightToDelete)
 	{
 		this.highlightToDelete = highlightToDelete;
 	}

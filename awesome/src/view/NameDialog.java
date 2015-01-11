@@ -39,7 +39,7 @@ public class NameDialog
 	 * @param frame - Das Elternfenster zu dem der Dialog gehoeren soll.
 	 * @param spieler - Die Spieler
 	 */
-	public NameDialog(Frame frame, Spieler[] spieler)
+	public NameDialog(final Frame frame, final Spieler[] spieler)
 	{
 		this.spieler = spieler;
 		showNameDialog(frame);
@@ -49,7 +49,7 @@ public class NameDialog
 	 * 
 	 * @param o - Das Elternfenster zu dem der Dialog gehoeren soll.
 	 */
-	private void showNameDialog(Frame o)
+	private void showNameDialog(final Frame o)
 	{
 		// Initialisierung der Ebenen (Container) und Komponenten des Dialogfensters.
 		dialog = new JDialog(o, true);	// Der Dialog wird modal erzeugt.

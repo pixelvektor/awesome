@@ -46,7 +46,7 @@ public class View implements ContainerListener
 	 * @param buttonListener - Der ActionListener fuer die Buttons des Spielfeldes.
 	 * @param restartListener - Der ActionListener fuer den Neustart-Button.
 	 */
-	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener, ActionListener restartListener)
+	public void show(final Kasten[] kaesten, final Spieler[] spieler, final ActionListener buttonListener, final ActionListener restartListener)
 	{
 		this.buttonListener = buttonListener;
 		
@@ -152,7 +152,7 @@ public class View implements ContainerListener
 	 * @param k - Der Kasten, aus dem die Feldnummern geholt werden sollen.
 	 * @param kastenIndex 
 	 */
-	private void fillContainer(Container c, Kasten kasten, int kastenIndex)
+	private void fillContainer(final Container c, Kasten kasten, int kastenIndex)
 	{
 		int multiplikator = kasten.getKastenNummer() - 3;	// 
 		int offset = multiplikator * 9;
@@ -210,7 +210,7 @@ public class View implements ContainerListener
 	 * Der aktuelle Punktestand der Spieler wird mit der View synchronisiert.
 	 * @param spieler - Die beiden Spieler
 	 */
-	public void updatePoints(Spieler[] spieler)
+	public void updatePoints(final Spieler[] spieler)
 	{
 		lbl_player1Points.setText("" + spieler[0].getPunkte());
 		lbl_player2Points.setText("" + spieler[1].getPunkte());
@@ -238,7 +238,7 @@ public class View implements ContainerListener
 	 * Der Text des PlayerLabels wird auf den Namen des aktuellen Spieler gesetzt.
 	 * @param spielerName - Der Name des aktuellen Spielers.
 	 */
-	public void setPlayerLabel(String spielerName)
+	public void setPlayerLabel(final String spielerName)
 	{
 		lblPlayerName.setText(spielerName);
 	}
@@ -247,7 +247,7 @@ public class View implements ContainerListener
 	 * Der Text des WuerfelLabels wird auf die aktuell gewuerfelte Zahl gesetzt.
 	 * @param wuerfelErgebnis - Das aktuelle wuerfelErgebnis.
 	 */
-	public void setWuerfelLabel(int wuerfelErgebnis)
+	public void setWuerfelLabel(final int wuerfelErgebnis)
 	{
 		lblErgebnisAusgabe.setText("" + wuerfelErgebnis);
 	}
@@ -257,7 +257,7 @@ public class View implements ContainerListener
 	 * @param kastenIndex - Der Index des gewonnenen Kastens.
 	 * @param color - Die Farbe des Spieler.
 	 */
-	public void fuelleKasten(int kastenIndex, Color color)
+	public void fuelleKasten(final int kastenIndex, final Color color)
 	{
 		int startValue = kastenIndex * 9;	// Als Startwert wird der kastenIndex mit der Anzahl der Buttons im Kasten multipliziert.
 											// Da kastenIndex die Werte 0 bis 8 annehmen kann ergibt sich hierbei fuer startValue
@@ -274,7 +274,7 @@ public class View implements ContainerListener
 	 * Wird bei einem Gewinn benoetigt.
 	 * @param spieler Aktueller Spieler.
 	 */
-	public void fillAllButtons(Spieler spieler)
+	public void fillAllButtons(final Spieler spieler)
 	{
 		for (CustomButton b : buttons)
 		{

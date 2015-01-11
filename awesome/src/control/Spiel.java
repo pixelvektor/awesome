@@ -15,8 +15,6 @@ import data.Spieler;
 
 /**
  * Das Spiel selbst
- * @author 
- *
  */
 public class Spiel 
 {	
@@ -83,7 +81,7 @@ public class Spiel
 	 * Startet den Zug, wuerfelt fuer den aktuellen Spieler und bietet ihm die moeglichen Felder an.
 	 * @param kaesten - Das Spielfeld
 	 */
-	private void startRound(Kasten[] kaesten)
+	private void startRound(final Kasten[] kaesten)
 	{
 		if (!isRunning)		// Wenn ein Spieler gewonnen hat, dann wird gameEnd() aufgerufen.
 			gameEnd();

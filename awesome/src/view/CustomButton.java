@@ -26,7 +26,7 @@ public class CustomButton extends JButton
 	 * @param feld - Das Feld, zu dem der Button gehoeren soll.
 	 * @param kastenIndex - Der Index des Kastens in dem sich das Feld befindet
 	 */
-	public CustomButton(Feld feld, int kastenIndex)
+	public CustomButton(final Feld feld, final int kastenIndex)
 	{
 		this.feld = feld;
 		defaultBorder = this.getBorder();	// Der Standardrahmen des Buttons wird zur spaeteren Verwendung in eine Instanzvariable geschrieben.

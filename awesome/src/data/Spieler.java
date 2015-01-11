@@ -8,6 +8,9 @@ package data;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+ * Der Spieler
+ */
 public class Spieler 
 {
 	/** Name des Spielers. */
@@ -157,7 +160,7 @@ public class Spieler
 	 * @param kaesten Das Spielfeld
 	 * @return String-ArrayList mit den Indizes der freien Felder
 	 */
-	public ArrayList<String> bieteFelderAn(Kasten[] kaesten)
+	public ArrayList<String> bieteFelderAn(final Kasten[] kaesten)
 	{
 		ArrayList<String> angebote = new ArrayList<String>();	// Diese Liste wird spaeter mit den Indizes gefuellt und ist der Rueckgabewert.
 		int kastenIndex = 0;
@@ -207,7 +210,7 @@ public class Spieler
 	 * @param k - zu pruefender Kasten
 	 * @return true, wenn der Kasten gewonnen wurde. Sonst false.
 	 */
-	private boolean pruefeKasten(Kasten k)
+	private boolean pruefeKasten(final Kasten k)
 	{
 		System.out.println("pruefeKasten wurde für den Kasten " + k.getKastenNummer() + " aufgerufen.");
 		
@@ -346,7 +349,7 @@ public class Spieler
 	 * @param x3 - Index 3
 	 * @return true, wenn der Kasten gewonnen wurde. Sonst false.
 	 */
-	private boolean checkList(Kasten k, ArrayList<Integer> pruefListe,
+	private boolean checkList(final Kasten k, final ArrayList<Integer> pruefListe,
 			int x1, int x2, int x3)
 	{
 		boolean kastenGewonnen = false;
@@ -361,7 +364,7 @@ public class Spieler
 	 * @param kaesten Das Spielfeld. Nicht null.
 	 * @return true wenn gewonnen. Sonst false.
 	 */
-	private boolean pruefeSpielfeld(Kasten[] kaesten)
+	private boolean pruefeSpielfeld(final Kasten[] kaesten)
 	{
 		ArrayList<Integer> pruefListe = new ArrayList<Integer>();	// Eine Liste, der die Nummern der gewonnenen Kaesten hinzugefuegt werden. 
 		boolean spielGewonnen = false;

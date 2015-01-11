@@ -6,8 +6,7 @@
 package data;
 
 /**
- * @author
- *
+ * Ein Pin, der einen Spieler halten kann.
  */
 public class Pin 
 {
