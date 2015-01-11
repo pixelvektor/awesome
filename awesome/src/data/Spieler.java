@@ -312,6 +312,7 @@ public class Spieler
 				for (Feld f : k.getFelder())
 				{
 					f.setHighlight(false);
+					f.setPin(new Pin(this));
 				}
 				
 				System.out.println("Herzlichen Glückwunsch "  + this.getName() + "! Sie haben Kasten " + k.getKastenNummer() + " gewonnen!");

@@ -209,6 +209,17 @@ public class View implements ContainerListener
 		lbl_ergebnisAusgabe.setText("" + wuerfelErgebnis);
 	}
 	
+	public void fuelleKasten(int kastenIndex, int feldIndex, Color color)
+	{
+		int startValue = kastenIndex * 9;
+		
+		for (int x = startValue; x < (startValue + 9); x++)
+		{
+			buttons[x].setBackground(color);
+			buttons[x].setOpaque(true);
+		}
+	}
+	
 	public void fillAllButtons(Spieler spieler)
 	{
 		for (CustomButton b : buttons)

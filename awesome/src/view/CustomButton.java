@@ -24,7 +24,6 @@ public class CustomButton extends JButton
 	/**
 	 * Ein Spezialkonstruktor, dem anstatt dem Text ein Feld übergeben wird.
 	 * @param feld - Das Feld, zu dem der Button gehoeren soll.
-	 * @param kaesten - Das Spielfeld
 	 * @param kastenIndex - Der Index des Kastens in dem sich das Feld befindet
 	 */
 	public CustomButton(Feld feld, int kastenIndex)

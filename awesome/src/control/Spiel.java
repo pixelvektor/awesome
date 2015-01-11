@@ -131,6 +131,11 @@ public class Spiel
 				button.setBackground(activePlayer.getColor());
 				button.setOpaque(true);
 				isRunning = !activePlayer.pinSetzen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
+				
+				if (kaesten[button.getKastenIndex()].getSpieler() != null)
+				{
+					view.fuelleKasten(button.getKastenIndex(), button.getFeld().getFeldIndex(), activePlayer.getColor());
+				}
 			}
 			else
 			{
