@@ -32,7 +32,9 @@ public class View implements ContainerListener
 {
 	private CustomButton[] buttons = new CustomButton[81];
 	private JLabel lblPlayerName = new JLabel();
-	private JLabel lblErgebnisAusgabe = new JLabel();;
+	private JLabel lblErgebnisAusgabe = new JLabel();
+	private JLabel lbl_player1Points = new JLabel();
+	private JLabel lbl_player2Points = new JLabel();
 	private JFrame frame;
 	private ActionListener buttonListener;
 	private boolean repeat;
@@ -94,11 +96,19 @@ public class View implements ContainerListener
 		lblPlayerName.setBounds(550, 220, 130, 35);
 		lblPlayerName.setText("Spieler 1");
 		lblPlayerName.setHorizontalAlignment(JLabel.CENTER);
+		lbl_player1Points.setBounds(550, 150, 65, 35);
+		lbl_player1Points.setText("0");
+		lbl_player1Points.setHorizontalAlignment(JLabel.CENTER);
+		lbl_player2Points.setBounds(615, 150, 65, 35);
+		lbl_player2Points.setText("0");
+		lbl_player2Points.setHorizontalAlignment(JLabel.CENTER);
 		
 		fieldPane.setLayout(new GridLayout(3, 3, 10, 10));	// Das Layout fuer das gesamte Spielfeld.
 		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
 		fieldPane.setBounds(15, 15, 500, 500);
 		
+		contentPane.add(lbl_player1Points);
+		contentPane.add(lbl_player2Points);
 		contentPane.add(lblPlayerName);
 		contentPane.add(lbl_activePlayer);
 		contentPane.add(lbl_wuerfelErgebnis);
@@ -182,6 +192,12 @@ public class View implements ContainerListener
 		{
 			button.highlightButton();
 		}
+	}
+	
+	public void updatePoints(Spieler[] spieler)
+	{
+		lbl_player1Points.setText("" + spieler[0].getPunkte());
+		lbl_player2Points.setText("" + spieler[1].getPunkte());
 	}
 	
 	public boolean allInactive()

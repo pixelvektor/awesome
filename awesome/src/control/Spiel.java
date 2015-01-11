@@ -154,6 +154,8 @@ public class Spiel
 					System.out.println(activePlayer.getName() + " ist nochmal an der Reihe.");
 			}
 			
+			view.updatePoints(spieler);
+			
 			startRound(kaesten);
 		}	
 	}

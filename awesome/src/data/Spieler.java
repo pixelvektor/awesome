@@ -13,7 +13,7 @@ public class Spieler
 	/** Name des Spielers. */
 	private final String name;
 	/** Erzielte Punkte. */
-	private int punkte;
+	private int punkte = 0;
 	/** Aktuell gewuerfelte Zahl. */
 	private int wuerfelErgebnis;
 	/** Farbe des Spielers. */
@@ -82,6 +82,7 @@ public class Spieler
 		boolean spielGewonnen = false;
 		
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(new Pin(this));
+		erhoehePunkte();
 		
 		kastenGewonnen = pruefeKasten(kaesten[kastenIndex]);
 		
@@ -101,6 +102,7 @@ public class Spieler
 	{
 		System.out.println("pinLoeschen wurde aufgerufen.\r\n");
 		
+		kaesten[kastenIndex].getFelder()[feldIndex].getPin().getSpieler().verringerePunkte();
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(null);
 	}
 	
@@ -126,20 +128,12 @@ public class Spieler
 	
 	public void erhoehePunkte()
 	{
-		/*
-		  bei jedem gesetzten Pin Counter+1
-		  wenn Kasten gewonnen 
-		       dann entferne gegnerische Pins
-		            Counter+dazugewonneneFelder
-		 */
+		punkte++;
 	}
 	
 	public void verringerePunkte()
 	{
-		/*
-		  wenn (pin geloescht)
-		   dann Counter-1
-		 */
+		punkte--;
 	}
 	
 	/** Wuerfelt fuer den Spieler eine Zufallszahl und speichert diese in der Instanzvariable wuerfelErgebnis.
@@ -311,6 +305,17 @@ public class Spieler
 
 				for (Feld f : k.getFelder())
 				{
+					if ((f.getPin() != null) && (f.getPin().getSpieler() != this))
+					{
+						f.getPin().getSpieler().verringerePunkte();
+						erhoehePunkte();
+					}
+					
+					if (f.getPin() == null)
+					{
+						erhoehePunkte();
+					}
+						
 					f.setHighlight(false);
 					f.setPin(new Pin(this));
 				}
