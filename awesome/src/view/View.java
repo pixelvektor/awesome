@@ -11,12 +11,14 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import data.Kasten;
 import data.Pin;
@@ -29,6 +31,8 @@ import data.Spieler;
 public class View implements ContainerListener
 {
 	private CustomButton[] buttons = new CustomButton[81];
+	private JLabel lbl_playerName = new JLabel();
+	private JLabel lbl_ergebnisAusgabe = new JLabel();;
 	private JFrame frame;
 	private ActionListener buttonListener;
 	private boolean repeat;
@@ -38,15 +42,16 @@ public class View implements ContainerListener
 		this.buttonListener = buttonListener;
 		
 		frame = new JFrame();	// Das Fenster selbst
-		Container contentPane = frame.getContentPane();	// Die ContentPane fuer das Spielfeld (evtl. nochmal ueberdenken).
+		Container contentPane = frame.getContentPane();
+		Container fieldPane = new Container();	// Die ContentPane fuer das Spielfeld (evtl. nochmal ueberdenken).
 		Container[] kastenContainer = new Container[9];	// Ein Container fuer die einzelnen Kaesten, damit diese richtig angeordnet werden.
 		
 		new NameDialog(frame, spieler);		// Der EingabeDialog wird als modaler Dialog aufgerufen.
 			
 		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();	// Die Aufloesung des Bildschirms wird erfasst.
 		
-		int width = 500;	// Fensterbreite
-		int height = 500;	// Fensterhoehe
+		int width = 720;	// Fensterbreite
+		int height = 560;	// Fensterhoehe
 		int x = (screensize.width / 2) - (width / 2); 		// Fenster horizontal mittig ausrichten.
 		int y = (screensize.height / 2) - (height / 2);		// Fenster vertikal mittig ausrichten.
 		
@@ -55,8 +60,47 @@ public class View implements ContainerListener
 		frame.setResizable(false);		// Das Fenster kann nicht vom Benutzer skaliert werden.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// Das Fenster wird mit einem Klick auf das X geschlossen.
 		
-		contentPane.setLayout(new GridLayout(3,3,10,10));	// Das Layout fuer das gesamte Spielfeld.
-		contentPane.setBackground(new Color(176,176,176));	// Hintergrundfarbe einstellen.
+		contentPane.setLayout(null);
+		contentPane.setBackground(new Color(90, 90, 90));
+		
+		JButton closeButton = new JButton("Beenden");
+		JLabel lbl_wuerfelErgebnis = new JLabel();
+		JLabel lbl_activePlayer = new JLabel();
+		
+		closeButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);		// Wird der Beenden-Button geklickt, wird das Programm beendet.
+				
+			}
+		});
+		
+		closeButton.setBounds(550, 472, 130, 35);
+		lbl_wuerfelErgebnis.setBounds(550, 275, 130, 35);
+		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
+		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);
+		lbl_ergebnisAusgabe.setBounds(550, 295, 130, 35);
+		lbl_ergebnisAusgabe.setText("4");
+		lbl_ergebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
+		lbl_activePlayer.setBounds(550, 200, 130, 35);
+		lbl_activePlayer.setText("Aktueller Spieler:");
+		lbl_activePlayer.setHorizontalAlignment(JLabel.CENTER);
+		lbl_playerName.setBounds(550, 220, 130, 35);
+		lbl_playerName.setText("Spieler 1");
+		lbl_playerName.setHorizontalAlignment(JLabel.CENTER);
+		
+		fieldPane.setLayout(new GridLayout(3, 3, 10, 10));	// Das Layout fuer das gesamte Spielfeld.
+		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
+		fieldPane.setBounds(15, 15, 500, 500);
+		
+		contentPane.add(lbl_playerName);
+		contentPane.add(lbl_activePlayer);
+		contentPane.add(lbl_wuerfelErgebnis);
+		contentPane.add(lbl_ergebnisAusgabe);
+		contentPane.add(closeButton);
+		contentPane.add(fieldPane);
 		
 		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
 		{
@@ -65,7 +109,7 @@ public class View implements ContainerListener
 			fillContainer(kastenContainer[i], kaesten[i], i);
 			kastenContainer[i].setLayout(new GridLayout(3,3,5,5));	// Das Layout fuer einen einzelnen Kasten.
 			
-			contentPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
+			fieldPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
 		}
 		
 		frame.setVisible(true);	// Fenster anzeigen.
@@ -148,7 +192,17 @@ public class View implements ContainerListener
 		}
 		return inactive;
 	}
-
+	
+	public void setPlayerLabel(String spielerName)
+	{
+		lbl_playerName.setText(spielerName);
+	}
+	
+	public void setWuerfelLabel(int wuerfelErgebnis)
+	{
+		lbl_ergebnisAusgabe.setText("" + wuerfelErgebnis);
+	}
+	
 	public void fillAllButtons(Spieler spieler)
 	{
 		for (CustomButton b : buttons)

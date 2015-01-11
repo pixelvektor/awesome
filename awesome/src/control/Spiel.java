@@ -80,10 +80,12 @@ public class Spiel
 		{
 			do 
 			{
+				view.setPlayerLabel(activePlayer.getName());
 				System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
 				
 				activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
 				
+				view.setWuerfelLabel(activePlayer.getWuerfelErgebnis());
 				System.out.println("Ergebnis: " + activePlayer.getWuerfelErgebnis() + "\r\n");
 					
 				if (activePlayer.getWuerfelErgebnis() != 2)
@@ -106,7 +108,6 @@ public class Spiel
 	
 	class ButtonListener implements ActionListener
 	{
-
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
@@ -121,7 +122,6 @@ public class Spiel
 			else
 			{
 				button.setDefaultBackground();
-				button.setOpaque(false);
 				activePlayer.pinLoeschen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
 			}
 			
