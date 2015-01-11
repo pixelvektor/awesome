@@ -158,8 +158,8 @@ public class Spiel
 		}	
 	}
 	
-	public void restartGame() {
-		kaesten = new Kasten[9];
+	private void restartGame() {
+		kaesten = new Kasten[9];	// Erstellen der neuen Kaesten fuer ein neues Spiel
 		initGame();
 		view.closeWindow();
 	}

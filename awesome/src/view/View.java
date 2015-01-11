@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,8 +31,8 @@ import data.Spieler;
 public class View implements ContainerListener
 {
 	private CustomButton[] buttons = new CustomButton[81];
-	private JLabel lbl_playerName = new JLabel();
-	private JLabel lbl_ergebnisAusgabe = new JLabel();;
+	private JLabel lblPlayerName = new JLabel();
+	private JLabel lblErgebnisAusgabe = new JLabel();;
 	private JFrame frame;
 	private ActionListener buttonListener;
 	private boolean repeat;
@@ -86,24 +85,24 @@ public class View implements ContainerListener
 		lbl_wuerfelErgebnis.setBounds(550, 275, 130, 35);
 		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
 		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);
-		lbl_ergebnisAusgabe.setBounds(550, 295, 130, 35);
-		lbl_ergebnisAusgabe.setText("4");
-		lbl_ergebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
+		lblErgebnisAusgabe.setBounds(550, 295, 130, 35);
+		lblErgebnisAusgabe.setText("4");
+		lblErgebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
 		lbl_activePlayer.setBounds(550, 200, 130, 35);
 		lbl_activePlayer.setText("Aktueller Spieler:");
 		lbl_activePlayer.setHorizontalAlignment(JLabel.CENTER);
-		lbl_playerName.setBounds(550, 220, 130, 35);
-		lbl_playerName.setText("Spieler 1");
-		lbl_playerName.setHorizontalAlignment(JLabel.CENTER);
+		lblPlayerName.setBounds(550, 220, 130, 35);
+		lblPlayerName.setText("Spieler 1");
+		lblPlayerName.setHorizontalAlignment(JLabel.CENTER);
 		
 		fieldPane.setLayout(new GridLayout(3, 3, 10, 10));	// Das Layout fuer das gesamte Spielfeld.
 		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
 		fieldPane.setBounds(15, 15, 500, 500);
 		
-		contentPane.add(lbl_playerName);
+		contentPane.add(lblPlayerName);
 		contentPane.add(lbl_activePlayer);
 		contentPane.add(lbl_wuerfelErgebnis);
-		contentPane.add(lbl_ergebnisAusgabe);
+		contentPane.add(lblErgebnisAusgabe);
 		contentPane.add(closeButton);
 		contentPane.add(restartButton);
 		contentPane.add(fieldPane);
@@ -201,12 +200,12 @@ public class View implements ContainerListener
 	
 	public void setPlayerLabel(String spielerName)
 	{
-		lbl_playerName.setText(spielerName);
+		lblPlayerName.setText(spielerName);
 	}
 	
 	public void setWuerfelLabel(int wuerfelErgebnis)
 	{
-		lbl_ergebnisAusgabe.setText("" + wuerfelErgebnis);
+		lblErgebnisAusgabe.setText("" + wuerfelErgebnis);
 	}
 	
 	public void fuelleKasten(int kastenIndex, int feldIndex, Color color)
@@ -220,6 +219,10 @@ public class View implements ContainerListener
 		}
 	}
 	
+	/** Fuellen aller Felder mit der Farbe des aktuellen Spielers.
+	 * Wird bei einem Gewinn benoetigt.
+	 * @param spieler Aktueller Spieler.
+	 */
 	public void fillAllButtons(Spieler spieler)
 	{
 		for (CustomButton b : buttons)
@@ -234,6 +237,9 @@ public class View implements ContainerListener
 		new WinDialog(frame, this, spieler);
 	}
 	
+	/** Schliessen des Frame.
+	 * 
+	 */
 	public void closeWindow() {
 		frame.setVisible(false);
 		frame.dispose();
