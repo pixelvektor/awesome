@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import control.Spiel.RestartListener;
 import data.Kasten;
 import data.Pin;
 import data.Spieler;
@@ -35,11 +36,13 @@ public class View implements ContainerListener
 	private JLabel lbl_ergebnisAusgabe = new JLabel();;
 	private JFrame frame;
 	private ActionListener buttonListener;
+	private ActionListener restartListener;
 	private boolean repeat;
 	
-	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener)
+	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener, ActionListener restartListener)
 	{
 		this.buttonListener = buttonListener;
+		this.restartListener = restartListener;
 		
 		frame = new JFrame();	// Das Fenster selbst
 		Container contentPane = frame.getContentPane();
@@ -64,6 +67,7 @@ public class View implements ContainerListener
 		contentPane.setBackground(new Color(90, 90, 90));
 		
 		JButton closeButton = new JButton("Beenden");
+		JButton restartButton = new JButton("Neustart");
 		JLabel lbl_wuerfelErgebnis = new JLabel();
 		JLabel lbl_activePlayer = new JLabel();
 		
@@ -77,7 +81,10 @@ public class View implements ContainerListener
 			}
 		});
 		
+		restartButton.addActionListener(restartListener);
+		
 		closeButton.setBounds(550, 472, 130, 35);
+		restartButton.setBounds(550, 420, 130, 35);
 		lbl_wuerfelErgebnis.setBounds(550, 275, 130, 35);
 		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
 		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);
@@ -100,6 +107,7 @@ public class View implements ContainerListener
 		contentPane.add(lbl_wuerfelErgebnis);
 		contentPane.add(lbl_ergebnisAusgabe);
 		contentPane.add(closeButton);
+		contentPane.add(restartButton);
 		contentPane.add(fieldPane);
 		
 		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
