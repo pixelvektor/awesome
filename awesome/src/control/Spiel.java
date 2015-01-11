@@ -114,7 +114,7 @@ public class Spiel
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			System.out.println(e.getActionCommand());
+			restartGame();
 		}
 		
 	}
