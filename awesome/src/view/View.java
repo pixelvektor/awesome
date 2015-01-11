@@ -164,7 +164,7 @@ public class View implements ContainerListener
 		return repeat;
 	}
 	
-	public void setRepeat(boolean repeat) {
+	public void setRepeat(final boolean repeat) {
 		this.repeat = repeat;
 	}
 	
@@ -174,7 +174,7 @@ public class View implements ContainerListener
 	 * @param k - Der Kasten, aus dem die Feldnummern geholt werden sollen.
 	 * @param kastenIndex 
 	 */
-	private void fillContainer(final Container c, Kasten kasten, int kastenIndex)
+	private void fillContainer(final Container c, final Kasten kasten, final int kastenIndex)
 	{
 		int multiplikator = kasten.getKastenNummer() - 3;	// 
 		int offset = multiplikator * 9;
