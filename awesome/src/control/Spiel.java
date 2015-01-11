@@ -26,7 +26,7 @@ public class Spiel
 	/** Fuer den Zug aktiver Spieler. */
 	private Spieler activePlayer;
 	/** Speichert die View. */
-	private final View view;
+	private View view;
 	/** true solange das Spiel laeuft. */
 	private boolean isRunning = true;
 	
@@ -38,8 +38,6 @@ public class Spiel
 		this.view = view;
 		
 		initGame();
-		
-		gameStart();	// Das Spiel wird gestartet.
 	}
 
 	private void initGame()
@@ -51,6 +49,8 @@ public class Spiel
 		}
 		
 		view.show(kaesten, spieler, new ButtonListener(), new RestartListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
+		
+		gameStart();	// Das Spiel wird gestartet.
 	}
 	
 	private void gameStart()
@@ -156,5 +156,6 @@ public class Spiel
 	public void restartGame() {
 		kaesten = new Kasten[9];
 		initGame();
+		view.closeWindow();
 	}
 }

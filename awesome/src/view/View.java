@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -220,5 +221,10 @@ public class View implements ContainerListener
 			b.highlightButton();
 		}
 		new WinDialog(frame, this, spieler);
+	}
+	
+	public void closeWindow() {
+		frame.setVisible(false);
+		frame.dispose();
 	}
 }
