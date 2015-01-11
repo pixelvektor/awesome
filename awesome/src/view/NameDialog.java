@@ -210,7 +210,7 @@ public class NameDialog
 			String text = textField.getText();
 			String sizedText = text.substring(0, maxLenght);
 			
-			txtName1.setText(sizedText);
+			textField.setText(sizedText);
 		}
 	}
 }
