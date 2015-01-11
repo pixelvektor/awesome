@@ -20,7 +20,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import control.Spiel.RestartListener;
 import data.Kasten;
 import data.Pin;
 import data.Spieler;
@@ -36,13 +35,11 @@ public class View implements ContainerListener
 	private JLabel lbl_ergebnisAusgabe = new JLabel();;
 	private JFrame frame;
 	private ActionListener buttonListener;
-	private ActionListener restartListener;
 	private boolean repeat;
 	
 	public void show(Kasten[] kaesten, Spieler[] spieler, ActionListener buttonListener, ActionListener restartListener)
 	{
 		this.buttonListener = buttonListener;
-		this.restartListener = restartListener;
 		
 		frame = new JFrame();	// Das Fenster selbst
 		Container contentPane = frame.getContentPane();
