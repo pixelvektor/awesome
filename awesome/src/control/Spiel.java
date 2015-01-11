@@ -47,7 +47,7 @@ public class Spiel
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
 		
-		view.show(kaesten, spieler, new ButtonListener(), new RestartListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
+		view.show(kaesten, spieler, new ButtonListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
 		
 		gameStart();	// Das Spiel wird gestartet.
 	}
@@ -104,17 +104,6 @@ public class Spiel
 		System.out.println("Das Spiel ist zu Ende");
 		view.fillAllButtons(activePlayer);
 		restartGame();
-	}
-	
-	public class RestartListener implements ActionListener
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			System.out.println(e.getActionCommand());
-		}
-		
 	}
 	
 	class ButtonListener implements ActionListener
