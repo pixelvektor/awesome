@@ -60,8 +60,8 @@ public class WinDialog
 		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();		// Die Bildschirmaufloesung wird erfasst.
 		int x, y, width, height;
 		
-		width = 400;	// Fensterbreite
-		height = 175;	// Fensterhoehe
+		width = 300;	// Fensterbreite
+		height = 125;	// Fensterhoehe
 		x = (screensize.width / 2) - (width / 2);		// Fenster horizontal mittig auf dem Bildschirm ausrichten.
 		y = (screensize.height / 2) - (height / 2);		// Fenster vertikal mittig auf dem Bildschirm ausrichten.
 				
