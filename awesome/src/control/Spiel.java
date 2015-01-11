@@ -7,10 +7,6 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import view.CustomButton;
 import view.View;
@@ -41,6 +37,13 @@ public class Spiel
 	{
 		this.view = view;
 		
+		initGame();
+		
+		gameStart();	// Das Spiel wird gestartet.
+	}
+
+	private void initGame()
+	{
 		for (int x = 3; x < 12; x++)
 		{
 			kaesten[x-3] = new Kasten(x);	// Erzeugt die 9 Kaesten mit den jeweiligen Nummern von 3 bis 11
@@ -48,8 +51,6 @@ public class Spiel
 		}
 		
 		view.show(kaesten, spieler, new ButtonListener());	// Das Fenster wird dargestellt und bekommt das Spielfeld als Parameter mit.
-		
-		gameStart();	// Das Spiel wird gestartet.
 	}
 	
 	private void gameStart()
@@ -103,7 +104,8 @@ public class Spiel
 	{
 		System.out.println("Das Spiel ist zu Ende");
 		view.fillAllButtons(activePlayer);
-		restartGame();
+		if(view.shouldRepeat())
+			restartGame();
 	}
 	
 	class ButtonListener implements ActionListener
@@ -141,29 +143,7 @@ public class Spiel
 	}
 	
 	public void restartGame() {
-		final String javaPath = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-		File file = null;
-		try
-		{
-			file = new File(Spiel.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-		} catch (URISyntaxException e)
-		{
-			e.printStackTrace();
-		}
-
-		final ArrayList<String> command = new ArrayList<String>();
-		command.add(javaPath);
-		command.add(file.getPath());
-		
-		final ProcessBuilder builder = new ProcessBuilder(command);
-		try
-		{
-			builder.start();
-		} catch (IOException e1)
-		{
-			e1.printStackTrace();
-		}
-		
-		System.exit(0);
+		kaesten = new Kasten[9];
+		initGame();
 	}
 }
