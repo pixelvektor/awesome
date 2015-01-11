@@ -16,9 +16,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 import data.Kasten;
 import data.Pin;
@@ -31,8 +35,8 @@ import data.Spieler;
 public class View implements ContainerListener
 {
 	private CustomButton[] buttons = new CustomButton[81];	// Dieses Array haelt alle Buttons fuer das Spielfeld.
-	private JLabel lblPlayerName = new JLabel();
-	private JLabel lblErgebnisAusgabe = new JLabel();
+	private JLabel lbl_PlayerName = new JLabel();
+	private JLabel lbl_ErgebnisAusgabe = new JLabel();
 	private JLabel lbl_player1Points = new JLabel();
 	private JLabel lbl_player2Points = new JLabel();
 	private JFrame frame;
@@ -70,7 +74,7 @@ public class View implements ContainerListener
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// Das Fenster wird mit einem Klick auf das X geschlossen.
 		
 		contentPane.setLayout(null);
-		contentPane.setBackground(new Color(90, 90, 90));
+		contentPane.setBackground(new Color(80, 80, 80));
 		
 		JButton closeButton = new JButton("Beenden");
 		JButton restartButton = new JButton("Neustart");
@@ -89,26 +93,44 @@ public class View implements ContainerListener
 		
 		restartButton.addActionListener(restartListener);
 		
+		Border buttonBorder = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
+		Border playerPointsBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.BLACK);
+		Color buttonColor = Color.LIGHT_GRAY;
+		
 		closeButton.setBounds(550, 472, 130, 35);
+		closeButton.setBackground(buttonColor);
+		closeButton.setBorder(buttonBorder);
 		restartButton.setBounds(550, 420, 130, 35);
-		lbl_wuerfelErgebnis.setBounds(550, 275, 130, 35);
+		restartButton.setBackground(buttonColor);
+		restartButton.setBorder(buttonBorder);
+		lbl_wuerfelErgebnis.setBounds(550, 198, 130, 35);
 		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
+		lbl_wuerfelErgebnis.setForeground(Color.BLACK);
 		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);
-		lblErgebnisAusgabe.setBounds(550, 295, 130, 35);
-		lblErgebnisAusgabe.setText("4");
-		lblErgebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
-		lbl_activePlayer.setBounds(550, 200, 130, 35);
+		lbl_ErgebnisAusgabe.setBounds(550, 218, 130, 35);
+		lbl_ErgebnisAusgabe.setText("4");
+		lbl_ErgebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
+		lbl_activePlayer.setBounds(550, 123, 130, 35);
 		lbl_activePlayer.setText("Aktueller Spieler:");
+		lbl_activePlayer.setForeground(Color.BLACK);
 		lbl_activePlayer.setHorizontalAlignment(JLabel.CENTER);
-		lblPlayerName.setBounds(550, 220, 130, 35);
-		lblPlayerName.setText("Spieler 1");
-		lblPlayerName.setHorizontalAlignment(JLabel.CENTER);
-		lbl_player1Points.setBounds(550, 150, 65, 35);
+		lbl_PlayerName.setBounds(550, 153, 130, 20);
+		lbl_PlayerName.setText("Spieler 1");
+		lbl_PlayerName.setHorizontalAlignment(JLabel.CENTER);
+		lbl_player1Points.setBorder(playerPointsBorder);
+		lbl_player1Points.setBounds(547, 17, 65, 25);
 		lbl_player1Points.setText("0");
+		lbl_player1Points.setForeground(Color.WHITE);
+		lbl_player1Points.setBackground(spieler[0].getColor());
 		lbl_player1Points.setHorizontalAlignment(JLabel.CENTER);
-		lbl_player2Points.setBounds(615, 150, 65, 35);
+		lbl_player1Points.setOpaque(true);
+		lbl_player2Points.setBorder(playerPointsBorder);
+		lbl_player2Points.setBounds(618, 17, 65, 25);
 		lbl_player2Points.setText("0");
+		lbl_player2Points.setForeground(Color.WHITE);
+		lbl_player2Points.setBackground(spieler[1].getColor());
 		lbl_player2Points.setHorizontalAlignment(JLabel.CENTER);
+		lbl_player2Points.setOpaque(true);
 		
 		fieldPane.setLayout(new GridLayout(3, 3, 10, 10));	// Das Layout fuer das gesamte Spielfeld.
 		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
@@ -117,10 +139,10 @@ public class View implements ContainerListener
 		// Die Komponenten werden der ContenPane hinzugefuegt.
 		contentPane.add(lbl_player1Points);
 		contentPane.add(lbl_player2Points);
-		contentPane.add(lblPlayerName);
+		contentPane.add(lbl_PlayerName);
 		contentPane.add(lbl_activePlayer);
 		contentPane.add(lbl_wuerfelErgebnis);
-		contentPane.add(lblErgebnisAusgabe);
+		contentPane.add(lbl_ErgebnisAusgabe);
 		contentPane.add(closeButton);
 		contentPane.add(restartButton);
 		contentPane.add(fieldPane);
@@ -236,11 +258,17 @@ public class View implements ContainerListener
 	
 	/**
 	 * Der Text des PlayerLabels wird auf den Namen des aktuellen Spieler gesetzt.
-	 * @param spielerName - Der Name des aktuellen Spielers.
+	 * @param spieler - Der aktuelle Spieler.
 	 */
-	public void setPlayerLabel(final String spielerName)
+	public void setPlayerLabel(final Spieler spieler)
 	{
-		lblPlayerName.setText(spielerName);
+		Border border = BorderFactory.createLoweredSoftBevelBorder();
+		
+		lbl_PlayerName.setBackground(spieler.getColor());
+		lbl_PlayerName.setForeground(Color.LIGHT_GRAY);
+		lbl_PlayerName.setText(spieler.getName());
+		lbl_PlayerName.setBorder(border);
+		lbl_PlayerName.setOpaque(true);
 	}
 	
 	/**
@@ -249,7 +277,8 @@ public class View implements ContainerListener
 	 */
 	public void setWuerfelLabel(final int wuerfelErgebnis)
 	{
-		lblErgebnisAusgabe.setText("" + wuerfelErgebnis);
+		lbl_ErgebnisAusgabe.setForeground(Color.BLACK);
+		lbl_ErgebnisAusgabe.setText("" + wuerfelErgebnis);
 	}
 	
 	/**

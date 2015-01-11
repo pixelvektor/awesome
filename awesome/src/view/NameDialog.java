@@ -158,6 +158,18 @@ public class NameDialog
 					verifyNames();		// wenn nicht wird die Eingabe ueberprueft.
 			}
 		}
+		
+		@Override
+		public void keyReleased(KeyEvent e)
+		{
+			int maxLenght = 20;
+			
+			if (txtName1.getText().length() > maxLenght || txtName2.getText().length() > maxLenght)
+			{
+				cropText(txtName1, maxLenght);
+				cropText(txtName2, maxLenght);
+			}
+		}
 	}
 	
 	/**
@@ -188,6 +200,17 @@ public class NameDialog
 		{
 			message = "Sie müssen zwei Namen eingeben!";
 			JOptionPane.showMessageDialog(dialog, message, "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void cropText(JTextField textField, int maxLenght)
+	{
+		if (textField.getText().length() >= maxLenght)
+		{
+			String text = textField.getText();
+			String sizedText = text.substring(0, maxLenght);
+			
+			txtName1.setText(sizedText);
 		}
 	}
 }

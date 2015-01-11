@@ -89,7 +89,7 @@ public class Spiel
 		{
 			do 
 			{
-				view.setPlayerLabel(activePlayer.getName());
+				view.setPlayerLabel(activePlayer);
 				System.out.println("\r\n" + activePlayer.getName() + " wuerfelt.");
 				
 				activePlayer.wuerfeln();	// Der derzeit aktive Spieler wuerfelt.
