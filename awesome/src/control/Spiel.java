@@ -152,6 +152,7 @@ public class Spiel
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
+			// Es wird die Quelle des geworfenen Events erfasst und in einen CustomButton gecastet.
 			CustomButton button = (CustomButton) e.getSource();
 			
 			if (activePlayer.getWuerfelErgebnis() != 2)		// Wenn keine 2 gewuerfelt wurde wird ein Pin gesetzt.
@@ -159,12 +160,12 @@ public class Spiel
 				button.setBackground(activePlayer.getColor());	// Der Button bekommt die Farbe des Spielers.
 				button.setOpaque(true);		// Muss auf true gesetzt werden, um Anzeigefehler auf MacOS zu verhindern.
 				
-				
+				// Es wird ein Pin im geklickten Feld erstellt, isRunning wird auf false gesetzt, wenn ein Spieler das Spiel gewonnen hat.
 				isRunning = !activePlayer.pinSetzen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
 				
-				if (kaesten[button.getKastenIndex()].getSpieler() != null)
+				if (kaesten[button.getKastenIndex()].getSpieler() != null)	// Wird aufgerufen, wenn ein Kasten gewonnen wurde.
 				{
-					view.fuelleKasten(button.getKastenIndex(), activePlayer.getColor());
+					view.fuelleKasten(button.getKastenIndex(), activePlayer.getColor());	// Der Kasten wird mit der Spielerfarbe gefuellt.
 					kaestenGewonnen++;
 				}
 			}
@@ -174,7 +175,7 @@ public class Spiel
 				activePlayer.pinLoeschen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
 			}
 			
-			if (kaestenGewonnen == 9 && isRunning)
+			if (kaestenGewonnen == 9 && isRunning)	// Wenn alle Kaesten gewonnen wurden, aber noch kein Spieler gewonnen hat.
 			{
 				if (spieler[0].getPunkte() > spieler[1].getPunkte())
 					activePlayer = spieler[0];

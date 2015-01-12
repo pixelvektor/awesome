@@ -207,7 +207,7 @@ public class NameDialog
 			JOptionPane.showMessageDialog(dialog, message, "Fehler", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	
 	private void cropText(JTextField textField, int maxLenght)
 	{
 		if (textField.getText().length() >= maxLenght)

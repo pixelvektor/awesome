@@ -213,12 +213,11 @@ public class View implements ContainerListener, ContractView
 	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern.
 	 * @param c - Der Container, der mit Buttons gefuellt werden soll. 
 	 * @param k - Der Kasten, aus dem die Feldnummern geholt werden sollen.
-	 * @param kastenIndex 
+	 * @param kastenIndex - Der Index das Kastens
 	 */
 	private void fillContainer(final Container c, final Kasten kasten, final int kastenIndex)
 	{
-		int multiplikator = kasten.getKastenNummer() - 3;	// 
-		int offset = multiplikator * 9;
+		int offset = kastenIndex * 9;	// Es wird ein Startwert berechnet, damit an der richtigen Stelle begonnen wird das Array zu fuellen.
 		
 		for (int x = 0; x < 9; x++)		// Diese Schleife durchlaeuft den gesamten Kasten.
 		{
