@@ -177,12 +177,12 @@ public class Spiel
 			
 			if (kaestenGewonnen == 9 && isRunning)	// Wenn alle Kaesten gewonnen wurden, aber noch kein Spieler gewonnen hat.
 			{
-				if (spieler[0].getPunkte() > spieler[1].getPunkte())
+				if (spieler[0].getPunkte() > spieler[1].getPunkte())	// Der Spieler mit der hoechsten Punktzahl wird als aktiver Spieler gesetzt.
 					activePlayer = spieler[0];
 				else
 					activePlayer = spieler[1];
 				
-				isRunning = false;
+				isRunning = false;	// Die Spielschleife wird verlassen, sodass gameEnd() aufgerufen werden kann.
 			}
 			
 			if (isRunning)
