@@ -112,7 +112,11 @@ public class CustomButton extends JButton
 	 */
 	public void setDefaultBackground()
 	{
+		String os = System.getProperty("os.name");	// Betriebssystem auslesen.
+		
 		this.setBackground(defaultColor);
-		this.setOpaque(false);
+		
+		if (!os.contains("Windows"))	// Wenn das Betriebssystem kein Windows ist...
+			this.setOpaque(false);		// ...wird der Hintergrund des Buttons transparent.
 	}
 }
