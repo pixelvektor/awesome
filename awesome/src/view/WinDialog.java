@@ -39,21 +39,20 @@ public class WinDialog
 	private View view;
 	
 	/** Das Dialogfenster wird erstellt.
-	 * @param frame  Das Elternfenster zu dem der Dialog gehoeren soll.
-	 * @param spieler  Die Spieler.
+	 * @param frame Das Elternfenster zu dem der Dialog gehoeren soll.
+	 * @param spieler Die Spieler.
 	 */
 	public WinDialog(final Frame frame, final View view, final Spieler spieler)
 	{
 		this.spieler = spieler;
 		this.view = view;
-		showNameDialog(frame);
+		showWinDialog(frame);
 	}
 	
-	/**
-	 * 
-	 * @param o - Das Elternfenster zu dem der Dialog gehoeren soll.
+	/** Zeigt den Dialog zur Eingabe der Spielernamen an. 
+	 * @param o Das Elternfenster zu dem der Dialog gehoeren soll.
 	 */
-	private void showNameDialog(final Frame o)
+	private void showWinDialog(final Frame o)
 	{
 		// Initialisierung der Ebenen (Container) und Komponenten des Dialogfensters.
 		dialog = new JDialog(o, true);	// Der Dialog wird modal erzeugt.
@@ -114,10 +113,7 @@ public class WinDialog
 		dialog.setVisible(true);	// Das Dialogfenster anzeigen.
 	}
 	
-	/**
-	 * Ein KeyListener fuer die Enter-Taste.
-	 * @author Matthias
-	 *
+	/** Ein KeyListener fuer die Enter-Taste.
 	 */
 	class EnterKeyListener extends KeyAdapter	// implementiert mit Hilfe eines Adapters fuer das Interface KeyListener
 	{

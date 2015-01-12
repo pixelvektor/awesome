@@ -31,6 +31,7 @@ public class CustomButton extends JButton
 	 */
 	public CustomButton(final Feld feld, final int kastenIndex)
 	{
+		this.setOpaque(true);
 		this.feld = feld;
 		defaultBorder = this.getBorder();	// Der Standardrahmen des Buttons wird zur spaeteren Verwendung in eine Instanzvariable geschrieben.
 		defaultColor = this.getBackground();	// Die Standardfarbe des Buttons wird zur spaeteren Verwendung in eine Instanzvariable geschrieben.
@@ -44,6 +45,7 @@ public class CustomButton extends JButton
 	 */
 	public CustomButton(String s)
 	{
+		this.setOpaque(true);
 		defaultBorder = this.getBorder();
 		defaultColor = this.getBackground();
 		this.setText(s);
@@ -108,11 +110,6 @@ public class CustomButton extends JButton
 	 */
 	public void setDefaultBackground()
 	{
-		String os = System.getProperty("os.name");	// Betriebssystem auslesen.
-		
 		this.setBackground(defaultColor);
-		
-		if (!os.contains("Windows"))	// Wenn das Betriebssystem kein Windows ist...
-			this.setOpaque(false);		// ...wird der Hintergrund des Buttons transparent.
 	}
 }

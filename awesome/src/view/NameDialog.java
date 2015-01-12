@@ -34,15 +34,20 @@ import data.Spieler;
  */
 public class NameDialog
 {
+	/** Array mit Spielern. */
 	private Spieler[] spieler = new Spieler[2];
+	/** Textfeld fuer Name. */
 	private JTextField txtName1, txtName2;
-	private JButton btnOK, btnAbort;
+	/** OK Button im Dialog. */
+	private JButton btnOK;
+	/** Beenden Button im Dialog. */
+	private JButton btnAbort;
+	/** Dialog. */
 	private JDialog dialog;
 	
-	/**
-	 * Hiermit wird das DialogFenster erstellt.
-	 * @param frame - Das Elternfenster zu dem der Dialog gehoeren soll.
-	 * @param spieler - Die Spieler
+	/** Hiermit wird das DialogFenster erstellt.
+	 * @param frame Das Elternfenster zu dem der Dialog gehoeren soll.
+	 * @param spieler Die Spieler.
 	 */
 	public NameDialog(final Frame frame, final Spieler[] spieler)
 	{
@@ -50,9 +55,8 @@ public class NameDialog
 		showNameDialog(frame);
 	}
 	
-	/**
-	 * 
-	 * @param o - Das Elternfenster zu dem der Dialog gehoeren soll.
+	/** Zeigt den Namensdialog an.
+	 * @param o Das Elternfenster zu dem der Dialog gehoeren soll.
 	 */
 	private void showNameDialog(final Frame o)
 	{
@@ -145,13 +149,13 @@ public class NameDialog
 		dialog.setVisible(true);	// Das Dialogfenster anzeigen.
 	}
 	
-	/**
-	 * Ein KeyListener fuer die Enter-Taste.
-	 * @author Matthias
-	 *
+	/** Ein KeyListener fuer die Enter-Taste.
 	 */
 	class EnterKeyListener extends KeyAdapter	// implementiert mit Hilfe eines Adapters fuer das Interface KeyListener
 	{
+		/** Maximale Laenge der Zeichenkette bei der Namenseingabe. */
+		private final static int MAX_LENGTH = 12;
+		
 		@Override
 		public void keyPressed(KeyEvent e)
 		{
@@ -167,18 +171,16 @@ public class NameDialog
 		@Override
 		public void keyReleased(KeyEvent e)
 		{
-			int maxLenght = 20;
 			
-			if (txtName1.getText().length() > maxLenght || txtName2.getText().length() > maxLenght)
+			if (txtName1.getText().length() > MAX_LENGTH || txtName2.getText().length() > MAX_LENGTH)
 			{
-				cropText(txtName1, maxLenght);
-				cropText(txtName2, maxLenght);
+				cropText(txtName1, MAX_LENGTH);
+				cropText(txtName2, MAX_LENGTH);
 			}
 		}
 	}
 	
-	/**
-	 * Diese Methode ueberprueft die Eingabe in den beiden Textfeldern.
+	/** Diese Methode ueberprueft die Eingabe in den beiden Textfeldern.
 	 */
 	private void verifyNames()
 	{
@@ -208,6 +210,10 @@ public class NameDialog
 		}
 	}
 
+	/** Kuerzt Text in einem Textfeld auf eine maximale Laenge.
+	 * @param textField Textfeld mit den zu kuerzenden Zeichen.
+	 * @param maxLenght Maximale Zeichenlaenge.
+	 */
 	private void cropText(JTextField textField, int maxLenght)
 	{
 		if (textField.getText().length() >= maxLenght)

@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import data.Kasten;
 import data.Spieler;
 
-/** Interface der Klasse View
+/** Interface der Klasse View.
  * @author
  *
  */
