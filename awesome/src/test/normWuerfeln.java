@@ -4,6 +4,7 @@ package test;
 import data.Kasten;
 import data.Spieler;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 public class normWuerfeln
@@ -15,7 +16,10 @@ public class normWuerfeln
  public normWuerfeln()
  {
 	 String name;
+	 Color farbe;
 	 int zaehler = 0;
+	 int kastenIndex = 0;
+	 int feldIndex = 0;
 	
 	while(zaehler < 20){
 		String eingabe = input("Geben sie die Zahl ein die sie testen wollen:");
@@ -31,14 +35,15 @@ public class normWuerfeln
 			kaesten[x-3].setFelder(kaesten[x-3].erzeugeFeld());	// Erzeugt die Felder in den Kaesten
 		}
 		    name = "Erika";
+		    farbe = Color.RED;
 			
-			spieler[0] = new Spieler(name);
+			spieler[0] = new Spieler(name,farbe);
 			
 			System.out.println("Name Spieler 1: " + spieler[0].getName());
 			
 	spieler[0].setWuerfelErgebnis(tipp);
 	System.out.println(spieler[0].getWuerfelErgebnis());
-	spieler[0].pinSetzen(kaesten);
+	spieler[0].pinSetzen(kaesten,kastenIndex,feldIndex);
 	zaehler++;
 	} 
  }

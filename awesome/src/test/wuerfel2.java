@@ -1,6 +1,8 @@
 package test;
 
 
+import java.awt.Color;
+
 import data.Kasten;
 import data.Spieler;
 
@@ -14,6 +16,8 @@ public class wuerfel2
  {
 	 String name;
 	 String name2;
+	 Color farbe;
+	 Color farbe2;
 		
 	 final Spieler[] spieler = new Spieler[2];
 	  Kasten[] kaesten = new Kasten[9];
@@ -27,15 +31,17 @@ public class wuerfel2
 		}
 		    name = "Erika";
 			name2 = "Klaus";
-			spieler[0] = new Spieler(name);
-			spieler[1] = new Spieler(name2);
+			farbe = Color.RED;
+			farbe2 = Color.BLUE;
+			spieler[0] = new Spieler(name,farbe);
+			spieler[1] = new Spieler(name2,farbe2);
 			System.out.println("Name Spieler 1: " + spieler[0].getName());
 			System.out.println("Name Spieler 2: " + spieler[1].getName());
-	spieler[0].setWuerfelErgebnis(5);
+	spieler[0].setWuerfelErgebnis(3);
 	System.out.println(spieler[0].getWuerfelErgebnis());
-	spieler[0].pinSetzen(kaesten);
+	spieler[0].pinSetzen(kaesten,0,0);
 	spieler[1].setWuerfelErgebnis(2);
 	System.out.println(spieler[1].getWuerfelErgebnis());
-	spieler[1].pinSetzen(kaesten);
+	spieler[1].bieteFelderAn(kaesten);
  }
 }
