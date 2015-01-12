@@ -28,6 +28,8 @@ public class Spiel
 	private View view;
 	/** true solange das Spiel laeuft. */
 	private boolean isRunning = true;
+	/** Zaehlt, wieviele Kaesten gewonnen wurden */
+	private int kaestenGewonnen = 0;
 	
 	/**
 	 * Erstellt ein Spiel mit einem Spielfeld.
@@ -124,6 +126,7 @@ public class Spiel
 	 */
 	private void restartGame() {
 		isRunning = true;			// Die Variable wird zurueckgesetzt, um nach dem Neustart wieder in die Spielschleife zu kommen
+		kaestenGewonnen = 0;
 		view.closeWindow();			
 		kaesten = new Kasten[9];	// Erstellen der neuen Kaesten fuer ein neues Spiel
 		initGame();
@@ -134,13 +137,11 @@ public class Spiel
 	 */
 	class RestartListener implements ActionListener
 	{
-
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			restartGame();
 		}
-		
 	}
 	
 	/**
@@ -164,12 +165,23 @@ public class Spiel
 				if (kaesten[button.getKastenIndex()].getSpieler() != null)
 				{
 					view.fuelleKasten(button.getKastenIndex(), activePlayer.getColor());
+					kaestenGewonnen++;
 				}
 			}
 			else
 			{
 				button.setDefaultBackground();
 				activePlayer.pinLoeschen(kaesten, button.getFeld().getFeldIndex(), button.getKastenIndex());
+			}
+			
+			if (kaestenGewonnen == 9 && isRunning)
+			{
+				if (spieler[0].getPunkte() > spieler[1].getPunkte())
+					activePlayer = spieler[0];
+				else
+					activePlayer = spieler[1];
+				
+				isRunning = false;
 			}
 			
 			if (isRunning)

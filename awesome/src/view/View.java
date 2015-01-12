@@ -316,7 +316,10 @@ public class View implements ContainerListener, ContractView
 				+ "Darüber hinaus gibt es einige Sonderregeln:\r\n"
 				+ "2 - Sie dürfen einen gegnerischen Pin löschen, danach sind Sie noch einmal am Zug. (Gegnerische Felder werden schwarz umrandet)\r\n"
 				+ "7 - Sie dürfen Ihren Pin in alle freien Felder mit der Zahl 7 und in alle Felder im mittleren Kasten setzen.\r\n"
-				+ "12 - Sie dürfen einen Pin in ein freies Feld auf dem gesamten Spielfeld setzen";
+				+ "12 - Sie dürfen einen Pin in ein freies Feld auf dem gesamten Spielfeld setzen\r\n\r\n"
+				+ "Ein Kasten gilt als gewonnen, wenn ein Spieler 3 Felder horizontal, vertikal oder diagonal in einer Reihe gewinnt.\r\n"
+				+ "Das Spiel gewinnt der Spieler, der zuerst 3 Kästen horizontal, vertikal oder diagonal in einer Reihe gewinnt.\r\n"
+				+ "Wurden alle Kästen gewonnen, aber kein Spieler konnte eine Reihe bilden, gewinnt der Spieler mit der höchsten Punktzahl.";
 		
 		JOptionPane.showMessageDialog(frame, message, "Spielregeln", JOptionPane.DEFAULT_OPTION);
 	}
