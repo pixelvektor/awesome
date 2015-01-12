@@ -35,21 +35,28 @@ import data.Pin;
 import data.Spieler;
 
 /** Ist fuer die Darstellung des Spiels auf dem Bildschirm verantwortlich.
- * @author 
- *
+ * @author
  */
 public class View implements ContainerListener, ContractView
 {
 	/** Dieses Array haelt alle Buttons fuer das Spielfeld. */
 	private CustomButton[] buttons = new CustomButton[81];
+	/** Leinwand im Hinterdrund des Spielfelds. */
 	private PaintingComponent paintingComponent = new PaintingComponent();
+	/** Label fuer den Spielernamen. */
 	private JLabel lbl_PlayerName = new JLabel();
+	/** Label fuer die Ergebnisausgabe. */
 	private JLabel lbl_ErgebnisAusgabe = new JLabel();
+	/** Label fuer die Punkte des Spieler 1. */
 	private JLabel lbl_player1Points = new JLabel();
+	/** Label fuer die Punkte des Spieler 1. */
 	private JLabel lbl_player2Points = new JLabel();
+	/** Frame fuer die View. */
 	private JFrame frame;
-	private ActionListener buttonListener;					// Der ActionListener fuer die Buttons auf dem Spielfeld.
-	private boolean repeat;
+	/** Der ActionListener fuer die Buttons auf dem Spielfeld.*/
+	private ActionListener buttonListener;
+	/** True wenn das Spiel wiederholt werden soll. */
+	private boolean repeat = false;
 	
 	public void show(final Kasten[] kaesten, final Spieler[] spieler, final ActionListener buttonListener, final ActionListener restartListener)
 	{
@@ -365,6 +372,7 @@ public class View implements ContainerListener, ContractView
 	
 	class PaintingComponent extends JComponent
 	{
+		private static final long serialVersionUID = 1L;
 		private Shape shape;
 		private Color color;
 		
