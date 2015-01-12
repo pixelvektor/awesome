@@ -18,8 +18,10 @@ import java.awt.event.ContainerListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -78,6 +80,7 @@ public class View implements ContainerListener
 		
 		JButton closeButton = new JButton("Beenden");
 		JButton restartButton = new JButton("Neustart");
+		JButton rulesButton = new JButton("Spielregeln");
 		JLabel lbl_wuerfelErgebnis = new JLabel();
 		JLabel lbl_activePlayer = new JLabel();
 		
@@ -91,18 +94,34 @@ public class View implements ContainerListener
 			}
 		});
 		
+		rulesButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				showRulesDialog();
+			}
+		});
+		
 		restartButton.addActionListener(restartListener);
 		
+		// Steuer- und Anzeigeelemente initialisieren
 		Border buttonBorder = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
 		Border playerPointsBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.BLACK);
 		Color buttonColor = Color.LIGHT_GRAY;
 		
 		closeButton.setBounds(550, 472, 130, 35);
 		closeButton.setBackground(buttonColor);
+		closeButton.setForeground(Color.BLACK);
 		closeButton.setBorder(buttonBorder);
 		restartButton.setBounds(550, 420, 130, 35);
 		restartButton.setBackground(buttonColor);
+		restartButton.setForeground(Color.BLACK);
 		restartButton.setBorder(buttonBorder);
+		rulesButton.setBounds(550, 368, 130, 35);
+		rulesButton.setBackground(buttonColor);
+		rulesButton.setForeground(Color.BLACK);
+		rulesButton.setBorder(buttonBorder);
 		lbl_wuerfelErgebnis.setBounds(550, 198, 130, 35);
 		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
 		lbl_wuerfelErgebnis.setForeground(Color.BLACK);
@@ -145,6 +164,7 @@ public class View implements ContainerListener
 		contentPane.add(lbl_ErgebnisAusgabe);
 		contentPane.add(closeButton);
 		contentPane.add(restartButton);
+		contentPane.add(rulesButton);
 		contentPane.add(fieldPane);
 		
 		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
@@ -315,6 +335,23 @@ public class View implements ContainerListener
 			b.highlightButton();
 		}
 		new WinDialog(frame, this, spieler);
+	}
+	
+	private void showRulesDialog()
+	{
+		String message = "Dies sind die Spielregeln\r\n\r\n"
+				+ "Das Spiel wird mit zwei Spielern gespielt. Zu Anfang wird ausgewürfelt, welcher Spieler anfängt.\r\n"
+				+ "Es beginnt der Spieler mit dem höchsten Ergebnis. Zu Beginn jedes Zuges wird eine Zahl zwischen 2 und 12 gewürfelt.\r\n"
+				+ "Die gewürfelte Zahl bestimmt darüber, wo Sie einen Pin setzen bzw. löschen dürfen.\r\n"
+				+ "Wenn Sie beispielsweise eine 3 würfeln, dürfen Sie Ihren Pin in jedes Feld mit der Zahl 3 setzen,\r\n"
+				+ "sowie in alle Felder im Kasten 3 außer dem mittleren.\r\n"
+				+ "Die Kästen sind von links oben nach rechts unten von 3 bis 11 durchnummeriert.\r\n\r\n"
+				+ "Darüber hinaus gibt es einige Sonderregeln:\r\n"
+				+ "2 - Sie dürfen einen gegnerischen Pin löschen, danach sind Sie noch einmal am Zug. (Gegnerische Felder werden schwarz umrandet)\r\n"
+				+ "7 - Sie dürfen Ihren Pin in alle freien Felder mit der Zahl 7 und in alle Felder im mittleren Kasten setzen.\r\n"
+				+ "12 - Sie dürfen einen Pin in ein freies Feld auf dem gesamten Spielfeld setzen";
+		
+		JOptionPane.showMessageDialog(frame, message, "Spielregeln", JOptionPane.DEFAULT_OPTION);
 	}
 	
 	/** Schliessen des Frame.
