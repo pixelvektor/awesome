@@ -81,8 +81,8 @@ public class View implements ContainerListener, ContractView
 		frame.setResizable(false);		// Das Fenster kann nicht vom Benutzer skaliert werden.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// Das Fenster wird mit einem Klick auf das X geschlossen.
 		
-		contentPane.setLayout(null);
-		contentPane.setBackground(new Color(80, 80, 80));
+		contentPane.setLayout(null);	// Ein Null-Layout festlegen, um die Komponenten frei positionieren und skalieren zu koennen.
+		contentPane.setBackground(new Color(80, 80, 80));	// Die Hintergrundfarbe einstellen.
 		
 		JButton closeButton = new JButton("Beenden");
 		JButton restartButton = new JButton("Neustart");
@@ -105,7 +105,7 @@ public class View implements ContainerListener, ContractView
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				showRulesDialog();
+				showRulesDialog();	// Wird dieser Button geklickt wird das Dialogfenster mit den Spielregeln geoeffnet.
 			}
 		});
 		
@@ -117,12 +117,13 @@ public class View implements ContainerListener, ContractView
 		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
 		fieldPane.setBounds(15, 15, 500, 500);
 		
+		// Ein neues abgerundetes Rechteck erzeugen und Groesse und Position festlegen.
 		RoundRectangle2D rahmen = new RoundRectangle2D.Float(8f, 8f, 514f, 514f, 10f, 10f);
 		
-		paintingComponent.setSize(new Dimension(600, 600));
-		paintingComponent.setColor(new Color(50, 50, 50));
-		paintingComponent.setShape(rahmen);
-		paintingComponent.repaint();
+		paintingComponent.setSize(new Dimension(600, 600));	// Die Groesse der Zeichenflaeche festlegen.
+		paintingComponent.setColor(new Color(50, 50, 50));	// Farbe des Rechtecks festlegen.
+		paintingComponent.setShape(rahmen);	// Das Rechteck an die Zeichenflaeche uebergeben.
+		paintingComponent.repaint();	// Java zum neu zeichnen zwingen.
 		
 		// Die Komponenten werden der ContenPane hinzugefuegt.
 		contentPane.add(lbl_player1Points);
@@ -167,10 +168,10 @@ public class View implements ContainerListener, ContractView
 		Border playerPointsBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.BLACK);
 		Color buttonColor = Color.LIGHT_GRAY;
 		
-		closeButton.setBounds(550, 472, 130, 35);
-		closeButton.setBackground(buttonColor);
-		closeButton.setForeground(Color.BLACK);
-		closeButton.setBorder(buttonBorder);
+		closeButton.setBounds(550, 472, 130, 35);	// Groesse und Position festlegen.
+		closeButton.setBackground(buttonColor);		// Hintergrundfarbe festlegen.
+		closeButton.setForeground(Color.BLACK);		// Textfarbe festlegen. (Effekt dieser Methode kann je nach Komponente varieren).
+		closeButton.setBorder(buttonBorder);		// Den Rahmen festlegen.
 		restartButton.setBounds(550, 420, 130, 35);
 		restartButton.setBackground(buttonColor);
 		restartButton.setForeground(Color.BLACK);
@@ -182,7 +183,7 @@ public class View implements ContainerListener, ContractView
 		lbl_wuerfelErgebnis.setBounds(550, 198, 130, 35);
 		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
 		lbl_wuerfelErgebnis.setForeground(Color.BLACK);
-		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);
+		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);	// Den Text des Labels horizontal zentrieren.
 		lbl_ErgebnisAusgabe.setBounds(590, 228, 50, 20);
 		lbl_ErgebnisAusgabe.setText("4");
 		lbl_ErgebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
@@ -199,7 +200,7 @@ public class View implements ContainerListener, ContractView
 		lbl_player1Points.setForeground(Color.WHITE);
 		lbl_player1Points.setBackground(spieler[0].getColor());
 		lbl_player1Points.setHorizontalAlignment(JLabel.CENTER);
-		lbl_player1Points.setOpaque(true);
+		lbl_player1Points.setOpaque(true);		// Wird auf true gesetzt, damit das Label mit der Hintergrundfarbe ausgefuellt wird.
 		lbl_player2Points.setBorder(playerPointsBorder);
 		lbl_player2Points.setBounds(618, 17, 65, 25);
 		lbl_player2Points.setText("0");
@@ -344,6 +345,9 @@ public class View implements ContainerListener, ContractView
 		new WinDialog(frame, this, spieler);
 	}
 	
+	/**
+	 * Erstellt ein Dialogfenster mit den Spielregeln in Textform
+	 */
 	private void showRulesDialog()
 	{
 		String message = "Dies sind die Spielregeln\r\n\r\n"
@@ -370,30 +374,45 @@ public class View implements ContainerListener, ContractView
 		frame.dispose();
 	}
 	
+	/**
+	 * Zum Zeichnen von geometrischen Formen
+	 */
 	class PaintingComponent extends JComponent
 	{
 		private static final long serialVersionUID = 1L;
 		private Shape shape;
 		private Color color;
 		
+		/**
+		 * Darf nicht vom Programmierer aufgerufen werden! Java ruft diese Methode bei bedarf selbst auf.
+		 */
 		@Override
 		protected void paintComponent(Graphics g)
 		{
-			super.paintComponent(g);
+			super.paintComponent(g);	// Bevor gezeichnet wird, wird die Zeichenfläche geleert.
 			
-			if (shape != null && color != null)
+			// Da die Methode automatisch aufgerufen wird muss ueberprueft werden, ob die Instanzvariablen gefuellt wurden.
+			if (shape != null && color != null) 
 			{
-				Graphics2D g2d = (Graphics2D) g;
-				g2d.setColor(color);
-				g2d.fill(shape);
+				Graphics2D g2d = (Graphics2D) g;	// Das Graphics-Objekt wird in ein Graphics2D Objekt gecastet, um mehr zu ermoeglichen.
+				g2d.setColor(color);	// Die Farbe des zu zeichnenden Objekts festlegen.
+				g2d.fill(shape);	// Die Form gefuellt zeichnen.
 			}
 		}
 		
+		/**
+		 * Die Form bestimmen
+		 * @param shape - Die geometrische Grundform
+		 */
 		public void setShape (Shape shape)
 		{
 			this.shape = shape;
 		}
 		
+		/**
+		 * Die Farbe bestimmen
+		 * @param color - Die Farbe, die das Objekt haben soll
+		 */
 		public void setColor (Color color)
 		{
 			this.color = color;

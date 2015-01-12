@@ -171,7 +171,7 @@ public class NameDialog
 		@Override
 		public void keyReleased(KeyEvent e)
 		{
-			
+			// Wenn in einem der Textfelder zu viele Zeichen eingegeben wurden, wird der eingegebene Text auf die Maximallaenge gekuerzt.
 			if (txtName1.getText().length() > MAX_LENGTH || txtName2.getText().length() > MAX_LENGTH)
 			{
 				cropText(txtName1, MAX_LENGTH);
@@ -216,12 +216,12 @@ public class NameDialog
 	 */
 	private void cropText(JTextField textField, int maxLenght)
 	{
-		if (textField.getText().length() >= maxLenght)
+		if (textField.getText().length() >= maxLenght)	// Pruefen, ob das Textfeld zu viele Zeichen enthaelt.
 		{
-			String text = textField.getText();
-			String sizedText = text.substring(0, maxLenght);
+			String text = textField.getText();	// Text aus dem Textfeld in eine Variable speichern.
+			String sizedText = text.substring(0, maxLenght);	// String kuerzen.
 			
-			textField.setText(sizedText);
+			textField.setText(sizedText);	// Gekuerzten String wieder in das Textfeld schreiben. 
 		}
 	}
 }
