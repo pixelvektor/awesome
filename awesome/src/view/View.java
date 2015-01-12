@@ -97,7 +97,50 @@ public class View implements ContainerListener, ContractView
 		
 		restartButton.addActionListener(restartListener);
 		
-		// Steuer- und Anzeigeelemente initialisieren
+		generateControlElements(spieler, closeButton, restartButton, rulesButton, lbl_wuerfelErgebnis, lbl_activePlayer);
+		
+		fieldPane.setLayout(new GridLayout(3, 3, 10, 10));	// Das Layout fuer das gesamte Spielfeld.
+		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
+		fieldPane.setBounds(15, 15, 500, 500);
+		
+		// Die Komponenten werden der ContenPane hinzugefuegt.
+		contentPane.add(lbl_player1Points);
+		contentPane.add(lbl_player2Points);
+		contentPane.add(lbl_PlayerName);
+		contentPane.add(lbl_activePlayer);
+		contentPane.add(lbl_wuerfelErgebnis);
+		contentPane.add(lbl_ErgebnisAusgabe);
+		contentPane.add(closeButton);
+		contentPane.add(restartButton);
+		contentPane.add(rulesButton);
+		contentPane.add(fieldPane);
+		
+		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
+		{
+			kastenContainer[i] = new Container();			// Ein neuer Container wird erstellt.
+			kastenContainer[i].addContainerListener(this);	// Der Container wird einem Listener zugeordnet, der in dieser Klasse implementiert ist.
+			fillContainer(kastenContainer[i], kaesten[i], i);
+			kastenContainer[i].setLayout(new GridLayout(3,3,5,5));	// Das Layout fuer einen einzelnen Kasten.
+			
+			fieldPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
+		}
+		
+		frame.setVisible(true);	// Fenster anzeigen.
+	}
+
+	/** Initialisiert die Steuer und Anzeigeelemente.
+	 * @param spieler Array mit den Spielern.
+	 * @param closeButton Schliessen Button.
+	 * @param restartButton Neustart Button.
+	 * @param rulesButton Regel Button.
+	 * @param lbl_wuerfelErgebnis Das Label des Wuerfelergebnis.
+	 * @param lbl_activePlayer Das Label des aktiven Spielers.
+	 */
+	private void generateControlElements(final Spieler[] spieler,
+			final JButton closeButton, final JButton restartButton,
+			final JButton rulesButton, final JLabel lbl_wuerfelErgebnis,
+			final JLabel lbl_activePlayer)
+	{
 		Border buttonBorder = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
 		Border playerPointsBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.BLACK);
 		Color buttonColor = Color.LIGHT_GRAY;
@@ -142,34 +185,6 @@ public class View implements ContainerListener, ContractView
 		lbl_player2Points.setBackground(spieler[1].getColor());
 		lbl_player2Points.setHorizontalAlignment(JLabel.CENTER);
 		lbl_player2Points.setOpaque(true);
-		
-		fieldPane.setLayout(new GridLayout(3, 3, 10, 10));	// Das Layout fuer das gesamte Spielfeld.
-		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
-		fieldPane.setBounds(15, 15, 500, 500);
-		
-		// Die Komponenten werden der ContenPane hinzugefuegt.
-		contentPane.add(lbl_player1Points);
-		contentPane.add(lbl_player2Points);
-		contentPane.add(lbl_PlayerName);
-		contentPane.add(lbl_activePlayer);
-		contentPane.add(lbl_wuerfelErgebnis);
-		contentPane.add(lbl_ErgebnisAusgabe);
-		contentPane.add(closeButton);
-		contentPane.add(restartButton);
-		contentPane.add(rulesButton);
-		contentPane.add(fieldPane);
-		
-		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
-		{
-			kastenContainer[i] = new Container();			// Ein neuer Container wird erstellt.
-			kastenContainer[i].addContainerListener(this);	// Der Container wird einem Listener zugeordnet, der in dieser Klasse implementiert ist.
-			fillContainer(kastenContainer[i], kaesten[i], i);
-			kastenContainer[i].setLayout(new GridLayout(3,3,5,5));	// Das Layout fuer einen einzelnen Kasten.
-			
-			fieldPane.add(kastenContainer[i]);	// Der Kasten wird dem Spielfeld hinzugefuegt.
-		}
-		
-		frame.setVisible(true);	// Fenster anzeigen.
 	}
 	
 	public boolean shouldRepeat() {

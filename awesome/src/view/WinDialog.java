@@ -22,22 +22,25 @@ import javax.swing.JLabel;
 
 import data.Spieler;
 
-/**
- * Das Dialogfenster, in dem die Spieler ihre Namen eingeben muessen bevor das Spiel beginnt. 
+/** Das Dialogfenster, in dem die Spieler ihre Namen eingeben muessen bevor das Spiel beginnt. 
  * @author 
- *
  */
 public class WinDialog
 {
+	/** Der Spieler der gewonnen hat. */
 	private Spieler spieler;
-	private JButton btnRestart, btnExit;
+	/** Neustart Button im Dialog. */
+	private JButton btnRestart;
+	/** Beenden Button im Dialog. */
+	private JButton btnExit;
+	/** Dialog. */
 	private JDialog dialog;
+	/** Die View des Spiels. */
 	private View view;
 	
-	/**
-	 * Hiermit wird das DialogFenster erstellt.
-	 * @param frame - Das Elternfenster zu dem der Dialog gehoeren soll.
-	 * @param spieler - Die Spieler
+	/** Das Dialogfenster wird erstellt.
+	 * @param frame  Das Elternfenster zu dem der Dialog gehoeren soll.
+	 * @param spieler  Die Spieler.
 	 */
 	public WinDialog(final Frame frame, final View view, final Spieler spieler)
 	{

@@ -2,29 +2,32 @@ package view;
 
 import java.awt.Color;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.border.Border;
 
 import data.Feld;
-import data.Kasten;
 
-/**
- * Ein spezieller JButton, der das Feld speichern kann zu dem er gehoert.
+/** Ein spezieller JButton, der das Feld speichern kann zu dem er gehoert.
  * @author
  *
  */
 public class CustomButton extends JButton
 {
+	/** UID, welche Java haben moechte. */
 	private static final long serialVersionUID = 1L;
-	private Feld feld;		// Das Feld zu dem der Button gehoert.
+	/** Das Feld zu dem der Button gehoert. */
+	private Feld feld;
+	/** Index des Kasten zu dem der Button gehoert. */
 	private int kastenIndex;
+	/** Speichert die Standardborder. */
 	private final Border defaultBorder;
+	/** Speichert die Standardfarbe. */
 	private final Color defaultColor;
 	
-	/**
-	 * Ein Spezialkonstruktor, dem anstatt dem Text ein Feld �bergeben wird.
-	 * @param feld - Das Feld, zu dem der Button gehoeren soll.
-	 * @param kastenIndex - Der Index des Kastens in dem sich das Feld befindet
+	/** Ein Spezialkonstruktor, dem anstatt dem Text ein Feld uebergeben wird.
+	 * @param feld Das Feld, zu dem der Button gehoeren soll.
+	 * @param kastenIndex Der Index des Kastens in dem sich das Feld befindet.
 	 */
 	public CustomButton(final Feld feld, final int kastenIndex)
 	{
@@ -36,9 +39,8 @@ public class CustomButton extends JButton
 		this.kastenIndex = kastenIndex;
 	}
 	
-	/**
-	 *  Der Standardkonstruktor eines Buttons.
-	 * @param s - Der Text, den der Button haben soll.
+	/** Der Standardkonstruktor eines Buttons.
+	 * @param s Der Text, den der Button haben soll.
 	 */
 	public CustomButton(String s)
 	{
@@ -47,18 +49,23 @@ public class CustomButton extends JButton
 		this.setText(s);
 	}
 	
+	/** Gibt das Feld des Button zurueck.
+	 * @return Das Feld des Button.
+	 */
 	public Feld getFeld()
 	{
 		return feld;
 	}
 	
+	/** Gibt den Index des Kasten zurueck in dem das Feld des Button ist.
+	 * @return Des Kastenindex zum Button.
+	 */
 	public int getKastenIndex()
 	{
 		return kastenIndex;
 	}
 	
-	/**
-	 * Aendert den Rahmen des Buttons, um ihn zum setzen hervorzuheben.
+	/** Aendert den Rahmen des Buttons, um ihn zum Setzen hervorzuheben.
 	 */
 	private void setHighlight()
 	{
@@ -66,8 +73,7 @@ public class CustomButton extends JButton
 		this.setBorder(highlight);	// Hier wird der Rahmen uebernommen.
 	}
 	
-	/**
-	 * Aendert den Rahmen des Buttons, um ihn zum loeschen hervorzuheben.
+	/** Aendert den Rahmen des Buttons, um ihn zum loeschen hervorzuheben.
 	 */
 	private void setDeleteHighlight()
 	{
@@ -75,16 +81,7 @@ public class CustomButton extends JButton
 		this.setBorder(deleteHighlight);
 	}
 	
-	/**
-	 * Hiermit wird der Standardrahmen des Buttons wiederhergestellt.
-	 */
-	private void setNormal()
-	{
-		this.setBorder(defaultBorder);
-	}
-	
-	/**
-	 * Es wird geprueft, ob der Button hervorgehoben werden soll und wenn ja in welcher Form.
+	/** Es wird geprueft, ob der Button hervorgehoben werden soll und wenn ja in welcher Form.
 	 */
 	public void highlightButton()
 	{
@@ -103,12 +100,11 @@ public class CustomButton extends JButton
 			else	// Wenn der Button nicht hervorgehoben werden soll.
 			{
 				this.setEnabled(false);		// Deaktiviert den Button, um eine falsche Auswahl automatisch zu verhindern.
-				setNormal();
+				this.setBorder(defaultBorder);
 			}
 		}
 	}
-	/**
-	 * Die Standardhintergrundfarbe wird wiederhergestellt.
+	/** Die Standardhintergrundfarbe wird wiederhergestellt.
 	 */
 	public void setDefaultBackground()
 	{
