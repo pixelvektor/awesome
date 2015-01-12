@@ -79,7 +79,7 @@ public class CustomButton extends JButton
 	 */
 	private void setDeleteHighlight()
 	{
-		Border deleteHighlight = BorderFactory.createLineBorder(new Color(30,36,38), 3);
+		Border deleteHighlight = BorderFactory.createLineBorder(new Color(212, 165, 32), 3);
 		this.setBorder(deleteHighlight);
 	}
 	

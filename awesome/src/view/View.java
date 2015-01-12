@@ -358,7 +358,7 @@ public class View implements ContainerListener, ContractView
 				+ "sowie in alle Felder im Kasten 3 außer dem Mittleren.\r\n"
 				+ "Die Kästen sind von links oben nach rechts unten von 3 bis 11 durchnummeriert.\r\n\r\n"
 				+ "Darüber hinaus gibt es einige Sonderregeln:\r\n"
-				+ "2 - Sie dürfen einen gegnerischen Pin löschen, danach sind Sie noch einmal am Zug. (Gegnerische Felder werden schwarz umrandet)\r\n"
+				+ "2 - Sie dürfen einen gegnerischen Pin löschen, danach sind Sie noch einmal am Zug. (Gegnerische Felder werden golden umrandet)\r\n"
 				+ "7 - Sie dürfen einen Pin in ein freies Feld mit der Zahl 7 oder im mittleren Kasten setzen.\r\n"
 				+ "12 - Sie dürfen einen Pin in ein freies Feld auf dem gesamten Spielfeld setzen\r\n\r\n"
 				+ "Ein Kasten gilt als gewonnen, wenn ein Spieler 3 Felder horizontal, vertikal oder diagonal in einer Reihe gewinnt.\r\n"
