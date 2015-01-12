@@ -7,9 +7,10 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Collections;
-/**
+
+/** Kasten, der gewonnen werden kann.
+ * Drei Kaesten in Reihe fuer einen Spieler gewinnen das Spiel.
  * @author
- *
  */
 public class Kasten
 {
@@ -20,16 +21,25 @@ public class Kasten
 	/** Diese Variable wird gesetzt sobald ein Spieler einen Kasten für sich entschieden hat. */
 	private Spieler spieler = null;
 	
+	/** Erstellt einen Kasten.
+	 * @param kastenNummer Nummer des Kastens im Spiel.
+	 */
 	public Kasten(int kastenNummer)
 	{
 		this.kastenNummer = kastenNummer;
 	}
 	
+	/** Gibt die beinhalteten Felder des Kastens zurueck.
+	 * @return Gibt die Felder zurueck.
+	 */
 	public Feld[] getFelder()
 	{
 		return felder;
 	}
 	
+	/** Setzt die Felder eines Kastens.
+	 * @param felder Felder gesetzt werden sollen. Muessen genau neun (9) sein.
+	 */
 	public void setFelder(final Feld[] felder)
 	{
 		if (felder.length == 9)
@@ -37,8 +47,32 @@ public class Kasten
 			this.felder = felder;
 		}
 	}
-	/**
-	 * Erzeugt ein Feld[] mit Zufallszahlen und gibt es zurueck
+	
+	/** Gibt die Kastennummer zurueck.
+	 * @return Die Kastennummer.
+	 */
+	public int getKastenNummer()
+	{
+		return kastenNummer;
+	}
+
+	/** Gibt den Spieler zurueck welchem der Kasten gehoert.
+	 * @return Spieler, dem der Kasten gehoert.
+	 */
+	public Spieler getSpieler()
+	{
+		return spieler;
+	}
+
+	/** Setzt den Spieler der Kasten gewonnen hat.
+	 * @param spieler Der Spieler, der den Kasten gewonnen hat.
+	 */
+	public void setSpieler(final Spieler spieler)
+	{
+		this.spieler = spieler;
+	}
+	
+	/** Erzeugt ein Feld[] mit Zufallszahlen und gibt es zurueck.
 	 */
 	public Feld[] erzeugeFeld()
 	{
@@ -68,26 +102,5 @@ public class Kasten
 		System.out.println();
 		*/
 		return feld;
-	}
-	
-	public int getKastenNummer()
-	{
-		return kastenNummer;
-	}
-
-	/**
-	 * @return Den spieler
-	 */
-	public Spieler getSpieler()
-	{
-		return spieler;
-	}
-
-	/**
-	 * @param spieler Der Spieler, der den Kasten gewonnen hat.
-	 */
-	public void setSpieler(final Spieler spieler)
-	{
-		this.spieler = spieler;
 	}
 }

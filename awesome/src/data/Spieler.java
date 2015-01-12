@@ -8,8 +8,7 @@ package data;
 import java.awt.Color;
 import java.util.ArrayList;
 
-/**
- * Der Spieler
+/** Der Spieler
  */
 public class Spieler 
 {
@@ -64,8 +63,7 @@ public class Spieler
 		return farbe;
 	}
 	
-	/** Fuer die Testmethoden, kann spaeter geloescht werden.
-	 * 
+	/** Setter zu Testzwecken.
 	 * @param wuerfelErgebnis Zu setzendes Ergebnis.
 	 */
 	@Deprecated
@@ -74,11 +72,10 @@ public class Spieler
 		this.wuerfelErgebnis=wuerfelErgebnis;
 	}
 	
-	/**
-	 * Setzt einen Pin auf ein freies Feld.
-	 * @param kaesten - Das Spielfeld
-	 * @param feldIndex - Der Feldindex des gewaehlten Feldes
-	 * @param kastenIndex - Der Kastenindex des gewaehlten Feldes
+	/** Setzt einen Pin auf ein freies Feld.
+	 * @param kaesten Das Spielfeld
+	 * @param feldIndex Der Feldindex des gewaehlten Feldes
+	 * @param kastenIndex Der Kastenindex des gewaehlten Feldes
 	 * @return Gibt true zurueck, wenn das Spiel gewonnen wurde. Sonst false.
 	 */
 	public boolean pinSetzen(final Kasten[] kaesten, final int feldIndex, final int kastenIndex)
@@ -98,10 +95,9 @@ public class Spieler
 	}
 
 	/** Loescht einen Pin
-	 * 
-	 * @param kaesten - Das Spielfeld
-	 * @param kastenIndex - Der Kastenindex des gewaehlten Feldes
-	 * @param feldIndex - Der Feldindex des gewaehlten Feldes
+	 * @param kaesten Das Spielfeld
+	 * @param kastenIndex Der Kastenindex des gewaehlten Feldes
+	 * @param feldIndex Der Feldindex des gewaehlten Feldes
 	 */
 	public void pinLoeschen(final Kasten[] kaesten, final int feldIndex, final int kastenIndex)
 	{
@@ -111,6 +107,9 @@ public class Spieler
 		kaesten[kastenIndex].getFelder()[feldIndex].setPin(null);
 	}
 	
+	/** Markiert die loeschbaren Felder des Gegners. 
+	 * @param kaesten Das Spielfeld.
+	 */
 	public void bieteLoeschFelderAn(final Kasten[] kaesten)
 	{
 		for (Kasten k : kaesten)
@@ -131,16 +130,14 @@ public class Spieler
 		}
 	}
 	
-	/**
-	 * Erhoeht die Punkte um 1
+	/** Erhoeht die Punkte um 1.
 	 */
 	public void erhoehePunkte()
 	{
 		punkte++;
 	}
 	
-	/**
-	 * Verringert die Punkte um 1
+	/** Verringert die Punkte um 1.
 	 */
 	public void verringerePunkte()
 	{
@@ -183,7 +180,7 @@ public class Spieler
 						System.out.println("Kasten: " + (kastenIndex) + ", Feld: " + (feld.getFeldIndex()));
 					}
 					else if ((wuerfelErgebnis == feld.getFeldNummer()) && (feld.getPin() == null) || ((wuerfelErgebnis == k.getKastenNummer()) && (feld.getPin() == null)))
-					// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer �bereinstimmt und das Feld frei ist wird es vorgeschlagen.
+					// Wenn das Wuerfelergebnis mit der Feldnummer oder der kastenNummer uebereinstimmt und das Feld frei ist wird es vorgeschlagen.
 					{
 						if (feld.getFeldNummer() != 7)	// Das Feld 7 soll nicht vorgeschlagen werden...
 						{
@@ -205,9 +202,8 @@ public class Spieler
 		return angebote;
 	}
 	
-	/**
-	 * Prueft, ob der Kasten gewonnen wurde
-	 * @param k - zu pruefender Kasten
+	/** Prueft, ob der Kasten gewonnen wurde
+	 * @param k zu pruefender Kasten
 	 * @return true, wenn der Kasten gewonnen wurde. Sonst false.
 	 */
 	private boolean pruefeKasten(final Kasten k)
@@ -339,14 +335,13 @@ public class Spieler
 		return kastenGewonnen;
 	}
 
-	/**
-	 * Ausgelagerte Hilfsmethode fuer die Methode pruefeKasten().
+	/** Ausgelagerte Hilfsmethode fuer die Methode pruefeKasten().
 	 * Prueft anhand der uebergebenen Indizes, ob ein Kasten gewonnen wurde.
-	 * @param k - Der Kasten, der geprueft werden soll.
-	 * @param pruefListe - Die Liste mit den Indizes der Feld, die der Spieler gewonnen hat.
-	 * @param x1 - Index 1
-	 * @param x2 - Index 2
-	 * @param x3 - Index 3
+	 * @param k Der Kasten, der geprueft werden soll.
+	 * @param pruefListe Die Liste mit den Indizes der Feld, die der Spieler gewonnen hat.
+	 * @param x1 Index 1
+	 * @param x2 Index 2
+	 * @param x3 Index 3
 	 * @return true, wenn der Kasten gewonnen wurde. Sonst false.
 	 */
 	private boolean checkList(final Kasten k, final ArrayList<Integer> pruefListe,
@@ -360,7 +355,6 @@ public class Spieler
 	}
 	
 	/** Prueft ob der Spieler das Spiel gewonnen hat.
-	 * 
 	 * @param kaesten Das Spielfeld. Nicht null.
 	 * @return true wenn gewonnen. Sonst false.
 	 */
