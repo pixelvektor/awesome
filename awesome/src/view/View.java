@@ -118,7 +118,7 @@ public class View implements ContainerListener, ContractView
 		lbl_wuerfelErgebnis.setText("Würfelergebnis:");
 		lbl_wuerfelErgebnis.setForeground(Color.BLACK);
 		lbl_wuerfelErgebnis.setHorizontalAlignment(JLabel.CENTER);
-		lbl_ErgebnisAusgabe.setBounds(550, 218, 130, 35);
+		lbl_ErgebnisAusgabe.setBounds(590, 228, 50, 20);
 		lbl_ErgebnisAusgabe.setText("4");
 		lbl_ErgebnisAusgabe.setHorizontalAlignment(JLabel.CENTER);
 		lbl_activePlayer.setBounds(550, 123, 130, 35);
@@ -272,8 +272,13 @@ public class View implements ContainerListener, ContractView
 	
 	public void setWuerfelLabel(final int wuerfelErgebnis)
 	{
+		Border border = BorderFactory.createLoweredSoftBevelBorder();
+		
+		lbl_ErgebnisAusgabe.setBackground(Color.LIGHT_GRAY);
 		lbl_ErgebnisAusgabe.setForeground(Color.BLACK);
 		lbl_ErgebnisAusgabe.setText("" + wuerfelErgebnis);
+		lbl_ErgebnisAusgabe.setBorder(border);
+		lbl_ErgebnisAusgabe.setOpaque(true);
 	}
 	
 	public void fuelleKasten(final int kastenIndex, final Color color)
