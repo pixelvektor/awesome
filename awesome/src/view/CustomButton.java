@@ -22,7 +22,7 @@ public class CustomButton extends JButton
 	private final Color defaultColor;
 	
 	/**
-	 * Ein Spezialkonstruktor, dem anstatt dem Text ein Feld übergeben wird.
+	 * Ein Spezialkonstruktor, dem anstatt dem Text ein Feld ï¿½bergeben wird.
 	 * @param feld - Das Feld, zu dem der Button gehoeren soll.
 	 * @param kastenIndex - Der Index des Kastens in dem sich das Feld befindet
 	 */
@@ -113,5 +113,6 @@ public class CustomButton extends JButton
 	public void setDefaultBackground()
 	{
 		this.setBackground(defaultColor);
+		this.setOpaque(false);
 	}
 }
