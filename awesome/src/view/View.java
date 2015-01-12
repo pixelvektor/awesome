@@ -30,11 +30,11 @@ import data.Kasten;
 import data.Pin;
 import data.Spieler;
 
-/**
+/** Ist fuer die Darstellung des Spiels auf dem Bildschirm verantwortlich.
  * @author 
  *
  */
-public class View implements ContainerListener
+public class View implements ContainerListener, ContractView
 {
 	private CustomButton[] buttons = new CustomButton[81];	// Dieses Array haelt alle Buttons fuer das Spielfeld.
 	private JLabel lbl_PlayerName = new JLabel();
@@ -45,13 +45,6 @@ public class View implements ContainerListener
 	private ActionListener buttonListener;					// Der ActionListener fuer die Buttons auf dem Spielfeld.
 	private boolean repeat;
 	
-	/**
-	 * Initialisiert das Hauptfenster und zeigt den Dialog fuer die Namenseingabe an.
-	 * @param kaesten - Das Spielfeld.
-	 * @param spieler - Die Spieler.
-	 * @param buttonListener - Der ActionListener fuer die Buttons des Spielfeldes.
-	 * @param restartListener - Der ActionListener fuer den Neustart-Button.
-	 */
 	public void show(final Kasten[] kaesten, final Spieler[] spieler, final ActionListener buttonListener, final ActionListener restartListener)
 	{
 		this.buttonListener = buttonListener;
@@ -188,8 +181,7 @@ public class View implements ContainerListener
 		this.repeat = repeat;
 	}
 	
-	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern
-	 * 
+	/** Fuellt einen Container mit 9 Buttons und den entsprechenden Feldnummern.
 	 * @param c - Der Container, der mit Buttons gefuellt werden soll. 
 	 * @param k - Der Kasten, aus dem die Feldnummern geholt werden sollen.
 	 * @param kastenIndex 
@@ -207,10 +199,9 @@ public class View implements ContainerListener
 	}
 	
 	/** Das ist eine Methode die fuer den ContainerListener implementiert werden muss.
-	 * 
 	 * Diese wird aufgerufen, wenn eine Komponente zum Container hinzugefuegt wird.
 	 * Ist diese Komponente ein Button, wird ihm ein ActionListener zugeordnet.
-	 * @param e
+	 * @param e Das zu uebergebende ContainerEvent.
 	 */
 	@Override
 	public void componentAdded(ContainerEvent e)
@@ -224,6 +215,11 @@ public class View implements ContainerListener
         }
 	}
 
+	/** Das ist eine Methode die fuer den ContainerListener implementiert werden muss.
+	 * Diese wird aufgerufen, wenn eine Komponente vom Container entfernt wird.
+	 * Ist diese Komponente ein Button, wird ihm ein ActionListener entfernt.
+	 * @param e Das zu uebergebende ContainerEvent.
+	 */
 	@Override
 	public void componentRemoved(ContainerEvent e)
 	{
@@ -236,10 +232,6 @@ public class View implements ContainerListener
         }
 	}
 	
-	/**
-	 * Das Aussehen der Buttons wird aktualisiert.
-	 * Nicht moegliche Felder werden deaktiviert, mögliche Felder werden hervorgehoben.
-	 */
 	public void updateButtons()
 	{
 		for (CustomButton button : buttons)		// Fuer alle Buttons wird die Methode highlightButton() aufgerufen.
@@ -248,20 +240,12 @@ public class View implements ContainerListener
 		}
 	}
 	
-	/**
-	 * Der aktuelle Punktestand der Spieler wird mit der View synchronisiert.
-	 * @param spieler - Die beiden Spieler
-	 */
 	public void updatePoints(final Spieler[] spieler)
 	{
 		lbl_player1Points.setText("" + spieler[0].getPunkte());
 		lbl_player2Points.setText("" + spieler[1].getPunkte());
 	}
 	
-	/**
-	 * Es wird geprueft, ob alle Buttons des Spielfeldes deaktiviert sind.
-	 * @return Gibt true zurueck, wenn alle Buttons inaktiv sind.
-	 */
 	public boolean allInactive()
 	{
 		boolean inactive = true;		// Der Rueckgabewert wird mit true initialisiert.
@@ -276,10 +260,6 @@ public class View implements ContainerListener
 		return inactive;
 	}
 	
-	/**
-	 * Der Text des PlayerLabels wird auf den Namen des aktuellen Spieler gesetzt.
-	 * @param spieler - Der aktuelle Spieler.
-	 */
 	public void setPlayerLabel(final Spieler spieler)
 	{
 		Border border = BorderFactory.createLoweredSoftBevelBorder();
@@ -291,21 +271,12 @@ public class View implements ContainerListener
 		lbl_PlayerName.setOpaque(true);
 	}
 	
-	/**
-	 * Der Text des WuerfelLabels wird auf die aktuell gewuerfelte Zahl gesetzt.
-	 * @param wuerfelErgebnis - Das aktuelle wuerfelErgebnis.
-	 */
 	public void setWuerfelLabel(final int wuerfelErgebnis)
 	{
 		lbl_ErgebnisAusgabe.setForeground(Color.BLACK);
 		lbl_ErgebnisAusgabe.setText("" + wuerfelErgebnis);
 	}
 	
-	/**
-	 * Alle Buttons in einem gewonnenen Kasten werden mit der Farbe des Spielers gefuellt, der ihn gewonnen hat. 
-	 * @param kastenIndex - Der Index des gewonnenen Kastens.
-	 * @param color - Die Farbe des Spieler.
-	 */
 	public void fuelleKasten(final int kastenIndex, final Color color)
 	{
 		int startValue = kastenIndex * 9;	// Als Startwert wird der kastenIndex mit der Anzahl der Buttons im Kasten multipliziert.
@@ -319,10 +290,6 @@ public class View implements ContainerListener
 		}
 	}
 	
-	/** Fuellen aller Felder mit der Farbe des aktuellen Spielers.
-	 * Wird bei einem Gewinn benoetigt.
-	 * @param spieler Aktueller Spieler.
-	 */
 	public void fillAllButtons(final Spieler spieler)
 	{
 		for (CustomButton b : buttons)
@@ -354,10 +321,8 @@ public class View implements ContainerListener
 		JOptionPane.showMessageDialog(frame, message, "Spielregeln", JOptionPane.DEFAULT_OPTION);
 	}
 	
-	/** Schliessen des Frame.
-	 * 
-	 */
-	public void closeWindow() {
+	public void closeWindow()
+	{
 		frame.setVisible(false);
 		frame.dispose();
 	}
