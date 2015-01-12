@@ -18,7 +18,6 @@ import java.awt.event.ContainerListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -311,11 +310,11 @@ public class View implements ContainerListener, ContractView
 				+ "Es beginnt der Spieler mit dem höchsten Ergebnis. Zu Beginn jedes Zuges wird eine Zahl zwischen 2 und 12 gewürfelt.\r\n"
 				+ "Die gewürfelte Zahl bestimmt darüber, wo Sie einen Pin setzen bzw. löschen dürfen.\r\n"
 				+ "Wenn Sie beispielsweise eine 3 würfeln, dürfen Sie Ihren Pin in jedes Feld mit der Zahl 3 setzen,\r\n"
-				+ "sowie in alle Felder im Kasten 3 außer dem mittleren.\r\n"
+				+ "sowie in alle Felder im Kasten 3 außer dem Mittleren.\r\n"
 				+ "Die Kästen sind von links oben nach rechts unten von 3 bis 11 durchnummeriert.\r\n\r\n"
 				+ "Darüber hinaus gibt es einige Sonderregeln:\r\n"
 				+ "2 - Sie dürfen einen gegnerischen Pin löschen, danach sind Sie noch einmal am Zug. (Gegnerische Felder werden schwarz umrandet)\r\n"
-				+ "7 - Sie dürfen Ihren Pin in alle freien Felder mit der Zahl 7 und in alle Felder im mittleren Kasten setzen.\r\n"
+				+ "7 - Sie dürfen einen Pin in ein freies Feld mit der Zahl 7 oder im mittleren Kasten setzen.\r\n"
 				+ "12 - Sie dürfen einen Pin in ein freies Feld auf dem gesamten Spielfeld setzen\r\n\r\n"
 				+ "Ein Kasten gilt als gewonnen, wenn ein Spieler 3 Felder horizontal, vertikal oder diagonal in einer Reihe gewinnt.\r\n"
 				+ "Das Spiel gewinnt der Spieler, der zuerst 3 Kästen horizontal, vertikal oder diagonal in einer Reihe gewinnt.\r\n"
