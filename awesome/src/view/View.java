@@ -18,7 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.BorderFactory;
@@ -41,7 +40,8 @@ import data.Spieler;
  */
 public class View implements ContainerListener, ContractView
 {
-	private CustomButton[] buttons = new CustomButton[81];	// Dieses Array haelt alle Buttons fuer das Spielfeld.
+	/** Dieses Array haelt alle Buttons fuer das Spielfeld. */
+	private CustomButton[] buttons = new CustomButton[81];
 	private PaintingComponent paintingComponent = new PaintingComponent();
 	private JLabel lbl_PlayerName = new JLabel();
 	private JLabel lbl_ErgebnisAusgabe = new JLabel();
@@ -110,6 +110,13 @@ public class View implements ContainerListener, ContractView
 		fieldPane.setBackground(new Color(176, 176, 176));	// Hintergrundfarbe einstellen.
 		fieldPane.setBounds(15, 15, 500, 500);
 		
+		RoundRectangle2D rahmen = new RoundRectangle2D.Float(8f, 8f, 514f, 514f, 10f, 10f);
+		
+		paintingComponent.setSize(new Dimension(600, 600));
+		paintingComponent.setColor(new Color(50, 50, 50));
+		paintingComponent.setShape(rahmen);
+		paintingComponent.repaint();
+		
 		// Die Komponenten werden der ContenPane hinzugefuegt.
 		contentPane.add(lbl_player1Points);
 		contentPane.add(lbl_player2Points);
@@ -121,6 +128,7 @@ public class View implements ContainerListener, ContractView
 		contentPane.add(restartButton);
 		contentPane.add(rulesButton);
 		contentPane.add(fieldPane);
+		contentPane.add(paintingComponent);
 		
 		for (int i = 0; i < 9; i++)		// Eine Schleife, um jeden der 9 Container zu fuellen.
 		{
