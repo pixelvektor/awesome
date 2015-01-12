@@ -5,9 +5,9 @@
  */
 import control.Spiel;
 import view.View;
-/**
+
+/** Hauptklasse des Spiels.
  * @author 
- *
  */
 public class Awesome 
 {
